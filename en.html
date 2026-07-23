@@ -1,0 +1,1050 @@
+<meta charset="utf-8">
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ding-dong! Welcome to the Database | NCCU Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#23281F;--ink2:#4C5344;--paper:#EAE7DC;--card:#FBFAF4;--line:#CFcBBb;--muted:#83806F;
+  --red:#D23B2E;--green:#0E7A3D;--accent:#0E7A3D;
+  --receipt:#FBFAF4;
+  --shadow:0 1px 0 rgba(35,40,31,.04),0 6px 18px rgba(35,40,31,.06);
+}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:var(--paper);
+  background-image:radial-gradient(circle at 1px 1px, rgba(35,40,31,.05) 1px, transparent 0);
+  background-size:22px 22px;
+  color:var(--ink);font-family:"Inter","Noto Sans TC",system-ui,sans-serif;font-size:16px;line-height:1.8;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px 100px}
+
+.bar{position:sticky;top:0;z-index:30;background:#fff;color:var(--ink);margin:0 -20px 30px;padding:10px 20px 13px;display:flex;gap:12px;align-items:center;justify-content:space-between;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.04em;font-weight:600;box-shadow:0 4px 14px rgba(30,42,51,.06)}
+.bar::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:6px;
+  background:radial-gradient(circle at 6px -1px, transparent 6px, #fff 6px);
+  background-size:12px 6px}
+.stripes{height:7px;border-radius:4px;margin:0 0 18px;
+  background:linear-gradient(90deg,#00A44E 0 25%,#0072CE 25% 50%,#F58220 50% 75%,#E03C31 75% 100%)}
+.stripes--thin{height:5px;margin:22px 0 14px}
+.stickers{display:flex;gap:6px;align-items:center}
+
+.sticker{position:relative;width:27px;height:27px;border-radius:50%;border:2px dashed var(--line);display:grid;place-items:center;font-size:11px;font-weight:700;color:#AEB9B3;background:#fff;transition:.2s}
+.sticker::after{content:"";position:absolute;inset:3px;border-radius:50%;border:1px dotted transparent}
+.sticker.got::after{border-color:rgba(255,255,255,.55)}
+.sticker.now{border-style:solid;border-color:var(--ink);color:var(--ink)}
+.sticker.got{border:2px solid #fff;color:#fff;font-weight:800;box-shadow:0 2px 6px rgba(30,42,51,.25);animation:stamp .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes stamp{0%{transform:scale(2.2) rotate(-14deg);opacity:0}60%{transform:scale(.92) rotate(4deg);opacity:1}100%{transform:none}}
+.bar b{color:var(--ink);font-weight:700}
+
+h1{font-size:clamp(36px,8vw,64px);font-weight:900;line-height:1.06;letter-spacing:-.03em;margin:26px 0 6px}
+.sub{font-size:clamp(16px,3vw,20px);font-weight:700;color:var(--muted);margin:0 0 16px}
+h2{font-size:clamp(23px,4.4vw,32px);font-weight:900;line-height:1.24;letter-spacing:-.02em;margin:0 0 8px}
+.eyebrow{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;background:transparent;color:var(--ink);border:1px dashed var(--ink);padding:3px 12px;border-radius:2px;margin-bottom:12px}
+.lede{font-size:17px;color:var(--ink2);max-width:60ch}
+.hint{font-size:13.5px;color:var(--muted);margin-top:10px}
+hr.rule{border:0;border-top:2px dotted var(--line);margin:36px 0}
+
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:22px;margin:20px 0;box-shadow:var(--shadow)}
+.card--a{border-top:none}
+.card--a::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;border-radius:4px 4px 0 0;
+  background:repeating-linear-gradient(90deg,var(--accent) 0 10px,transparent 10px 16px)}
+.src{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted);letter-spacing:.05em;display:block;margin-bottom:12px;text-transform:uppercase}
+
+.thesis{background:#123B2A;color:#EAF5EF;border-radius:14px;padding:22px;margin:22px 0;font-size:clamp(17px,3.2vw,22px);font-weight:500;line-height:1.65;min-height:104px;display:flex;align-items:center}
+.slot{border-bottom:2px dashed #4E7A64;padding:0 7px;margin:0 2px;color:#8FBFA5;transition:.3s}
+.slot.filled{color:#123B2A;background:#F5A800;border-bottom-color:#F5A800;border-radius:4px;animation:pop .36s cubic-bezier(.3,1.5,.5,1)}
+@keyframes pop{0%{opacity:.2;transform:translateY(4px) scale(.94)}100%{opacity:1;transform:none}}
+
+.opts{display:grid;gap:11px;margin-top:16px}
+.opt{text-align:left;font:inherit;color:inherit;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--line);border-radius:3px;padding:14px 16px;cursor:pointer;display:flex;gap:13px;align-items:flex-start;transition:.12s}
+.opt:hover{border-left-color:var(--ink);background:#fff}
+.opt:disabled{cursor:default}
+.k{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;flex:none;margin-top:1px;width:26px;height:26px;border-radius:3px;display:grid;place-items:center;background:#E4E1D4;color:var(--ink2)}
+.opt.good{border-color:var(--green);background:#EBFAF4}.opt.good .k{background:var(--green);color:#fff}
+.opt.bad{border-color:var(--red);background:#FEEFF3}.opt.bad .k{background:var(--red);color:#fff}
+.opt.warn{border-color:#E39A16;background:#FFF7E6}.opt.warn .k{background:#E39A16;color:#fff}
+.opt.on{border-color:var(--ink);background:#EDF4EF}.opt.on .k{background:var(--ink);color:#fff}
+
+.exp{display:flex;gap:13px;align-items:flex-start;padding:14px 0;border-bottom:1px dotted var(--line)}
+.exp:last-child{border-bottom:0;padding-bottom:0}
+.exp .k{margin-top:2px}.exp .body{font-size:15px}
+.exp .quo{display:block;font-weight:700;margin-bottom:3px;line-height:1.55}
+.verdict{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.06em;padding:2px 8px;border-radius:20px;margin-left:7px;white-space:nowrap;vertical-align:2px}
+.v-ok{background:var(--green);color:#fff}.v-no{background:var(--red);color:#fff}.v-warn{background:#E39A16;color:#fff}
+
+.need{border:1.5px solid var(--ink);border-radius:12px;padding:15px 17px;background:var(--card);box-shadow:-3px 4px 0 var(--ink)}
+.fams{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:16px}
+.fam{text-align:left;font:inherit;color:inherit;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:12px 13px;cursor:pointer;transition:.15s}
+.fam:hover{border-color:var(--ink);transform:translateY(-3px);box-shadow:0 4px 0 var(--ink)}
+.fam:disabled{cursor:default;transform:none;box-shadow:none;opacity:.42}
+.fam strong{display:block;font-size:14.5px;font-weight:700}
+.fam span{display:block;font-size:12px;color:var(--muted);margin-top:3px;line-height:1.5}
+.fam.good{border-color:var(--green);background:#EBFAF4;opacity:1}
+.fam.bad{border-color:var(--red);background:#FEEFF3;opacity:1}
+
+.offgrid{background:#123B2A;color:#EAF5EF;border-radius:12px;padding:16px 18px;margin-top:14px;font-size:15px;line-height:1.8}
+.offgrid .lb{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.1em;background:#F5A800;color:#123B2A;padding:2px 9px;border-radius:20px;margin-bottom:8px}
+
+/* 檢索式 */
+.query{background:#123B2A;color:#C9EFD8;border-radius:12px;padding:16px 18px;min-height:78px;font-family:"IBM Plex Mono",monospace;font-size:14.5px;line-height:2.1;word-break:break-word;margin:16px 0}
+.query .ph{color:#5E8A72}
+.query .tk{background:#1E5A41;padding:2px 8px;border-radius:4px;margin:0 3px;display:inline-block}
+.query .tk.op{background:transparent;color:#F5A800;font-weight:600}
+.chipset h4{margin:16px 0 7px;font-size:11.5px;font-family:"IBM Plex Mono",monospace;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font:inherit;font-size:14px;background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:5px 14px;cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--ink);background:#fff;transform:translateY(-2px)}
+.chip.op{border-radius:6px;font-family:"IBM Plex Mono",monospace;font-weight:600;color:var(--ink)}
+.rule-row{display:flex;gap:11px;align-items:flex-start;padding:10px 0;border-bottom:1px dotted var(--line);font-size:14.5px}
+.rule-row:last-child{border-bottom:0}
+.rule-row .mk{font-family:"IBM Plex Mono",monospace;font-weight:700;flex:none;width:22px;font-size:16px}
+.rule-row.hit .mk{color:var(--green)}.rule-row.no .mk{color:var(--red)}
+.rule-row small{display:block;color:var(--muted);font-size:13px;line-height:1.7}
+
+/* 文獻卡 */
+.papers{display:grid;gap:11px;margin-top:16px}
+.paper{text-align:left;font:inherit;color:inherit;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:15px 17px;cursor:pointer;transition:.15s}
+.paper:hover{border-color:var(--ink);transform:translate(2px,-2px);box-shadow:-2px 3px 0 var(--ink)}
+.paper:disabled{cursor:default;transform:none;box-shadow:none}
+.paper .ti{font-weight:700;font-size:15.5px;line-height:1.5;display:block}
+.paper .au{font-size:13.5px;color:var(--ink2);display:block;margin-top:3px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.meta span{font-family:"IBM Plex Mono",monospace;font-size:11.5px;background:#E8EEEA;color:var(--ink2);border-radius:20px;padding:2px 9px}
+.meta .hot{background:var(--ink);color:#fff}
+.paper.on{border-color:var(--ink);background:#EDF4EF}
+.paper.good{border-color:var(--green);background:#EBFAF4}
+.paper.bad{border-color:var(--red);background:#FEEFF3}
+.paper.warn{border-color:#E39A16;background:#FFF7E6}
+
+/* 資源檔案卡 */
+.prof{background:var(--card);border:1.5px solid var(--line);border-top:5px solid var(--fc,var(--accent));border-radius:12px;padding:18px 20px;margin-top:16px;box-shadow:var(--shadow)}
+.prof-h{display:flex;gap:12px;align-items:center;padding-bottom:13px;margin-bottom:4px;border-bottom:2px dotted var(--line)}
+.prof-i{width:38px;height:38px;flex:none;border-radius:10px;background:var(--fc,var(--accent));color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px}
+.prof-h b{display:block;font-size:17px;font-weight:900;line-height:1.35}
+.prof-h small{display:block;font-size:12.5px;color:var(--muted);font-family:"IBM Plex Mono",monospace}
+.prof-r{padding:11px 0;border-bottom:1px dotted var(--line);font-size:14.5px;color:var(--ink2);line-height:1.8}
+.prof-r:last-child{border-bottom:0;padding-bottom:0}
+.prof-r .lb{display:block;font-size:12.5px;font-weight:700;color:var(--ink);margin-bottom:2px;letter-spacing:.02em}
+.profs{display:grid;gap:14px;margin-top:18px}
+
+/* 大張集點卡 */
+.loyalty{background:var(--receipt);border:1px solid var(--line);border-radius:6px;padding:0;margin-top:20px;box-shadow:var(--shadow);overflow:hidden}
+.loyalty-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:16px 18px 14px;background:#123B2A;color:#EAF5EF}
+.loyalty-brand{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:14px;letter-spacing:.06em}
+.loyalty-sub{font-size:12.5px;color:#9FC4AF;margin-top:3px}
+.loyalty-no{font-family:"IBM Plex Mono",monospace;font-size:10px;color:#9FC4AF;text-align:right;line-height:1.5;letter-spacing:.05em}
+.loyalty-no b{color:#F5A800;font-size:15px}
+.loyalty-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:4px;background:
+  repeating-linear-gradient(0deg,transparent 0 33.33%,var(--line) 33.33% calc(33.33% + 1px)),
+  repeating-linear-gradient(90deg,transparent 0 25%,var(--line) 25% calc(25% + 1px))}
+@media(min-width:600px){.loyalty-grid{grid-template-columns:repeat(4,1fr)}}
+.cell{position:relative;aspect-ratio:1.15;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:var(--receipt);margin:0}
+.cell-nm{font-size:10.5px;color:var(--muted);font-weight:600;text-align:center;line-height:1.25;padding:0 4px}
+.ink-empty{width:38px;height:38px;border-radius:50%;border:2px dashed var(--line);display:grid;place-items:center;font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:15px;color:#BFBBAB}
+.ink{position:relative;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+  color:var(--c);border:2.5px solid var(--c);
+  animation:drop .5s cubic-bezier(.2,1.5,.4,1) both}
+.ink::before{content:"";position:absolute;inset:3px;border-radius:50%;border:1px solid var(--c);opacity:.5}
+.ink b{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:18px;line-height:1}
+.ink i{font-style:normal;font-size:8px;font-weight:700;letter-spacing:.05em}
+.ink b,.ink i{display:block;text-align:center}
+@keyframes drop{0%{transform:scale(2.4) rotate(-18deg);opacity:0}55%{transform:scale(.9) rotate(5deg);opacity:1}100%{transform:none}}
+.cell.reward .ink-reward{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:22px;border:2px dashed var(--line);background:#fff}
+.cell.reward.win .ink-reward{border:2.5px solid #F5A800;background:#FFF6DF;animation:drop .5s cubic-bezier(.2,1.5,.4,1) both}
+.cell.reward.win .cell-nm{color:#B8860B;font-weight:800}
+.loyalty-foot{display:flex;justify-content:space-between;align-items:center;padding:11px 18px;border-top:1px dashed var(--line);font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted);letter-spacing:.04em}
+.gift{background:#123B2A;color:#EAF5EF;border-radius:16px;padding:22px;margin-top:20px}
+.gift .tag{display:inline-block;background:#F5A800;color:#123B2A;font-weight:800;font-size:12px;letter-spacing:.1em;padding:3px 11px;border-radius:20px;margin-bottom:10px;font-family:"IBM Plex Mono",monospace}
+.gift h3{margin:0 0 10px;font-size:25px;font-weight:900;line-height:1.25}
+.gift p{margin:0 0 10px;font-size:15px;line-height:1.85;color:#CFE6DA}
+.gift p:last-child{margin-bottom:0}
+.gift b{color:#fff}
+.gift .rx{background:rgba(255,255,255,.07);border-left:3px solid #F5A800;border-radius:0 8px 8px 0;padding:13px 15px;margin-top:12px}
+.cta{display:block;text-align:center;text-decoration:none;background:#E03C31;color:#fff;font-weight:900;font-size:19px;padding:18px 24px;border-radius:14px;box-shadow:0 5px 0 #A82A22;margin:22px 0 6px;transition:.15s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 7px 0 #A82A22}
+.cta small{display:block;font-size:13px;font-weight:500;opacity:.92;margin-top:4px}
+
+/* 工具介紹卡 */
+.tool{background:#F3F7FF;border:2px solid #3D6BD6;border-radius:14px;padding:18px 20px;margin-top:16px}
+.tool .lb{display:block;font-weight:900;font-size:16px;margin-bottom:8px;color:#1F3F8F}
+.tool p{margin:0 0 10px;font-size:15px;color:var(--ink2);line-height:1.85}
+.tool p:last-child{margin-bottom:0}
+.tool .warn-h{display:block;font-weight:900;color:#B23A2E;margin:14px 0 6px;font-size:15.5px}
+.tool ol{margin:8px 0 0;padding-left:1.3em;font-size:15px;color:var(--ink2)}
+.tool ol li{margin-bottom:7px}
+.tool ol li b{color:var(--ink)}
+
+/* 彩蛋 */
+.egg{background:#FFF9EA;border:2px dashed #F5A800;border-radius:14px;padding:17px 19px;margin-top:16px}
+.egg .lb{display:block;font-weight:900;font-size:15.5px;margin-bottom:6px}
+.egg p{margin:0 0 8px;font-size:15px;color:var(--ink2);line-height:1.85}
+.egg p:last-child{margin-bottom:0}
+.egg .go{font-weight:700;color:var(--ink)}
+
+.orig{background:#FAFCFB;border:1.5px solid var(--line);border-left:5px solid var(--muted);border-radius:0 12px 12px 0;padding:18px 20px;font-size:15.5px;line-height:2}
+.stmt{display:block;width:100%;text-align:left;font:inherit;color:inherit;border:0;border-bottom:1.5px solid transparent;background:linear-gradient(var(--accent),var(--accent)) no-repeat left center;background-size:0% 90%;padding:9px 7px;margin:3px -7px;cursor:pointer;border-radius:4px;transition:background-size .4s cubic-bezier(.4,.9,.3,1)}
+.stmt:hover{border-bottom-color:var(--line)}
+.stmt.marked{background-size:100% 90%}
+.stmt:disabled{cursor:default}
+.stmt.miss{background-image:linear-gradient(#FBD3DF,#FBD3DF);text-decoration:line-through;text-decoration-color:var(--red)}
+.stmt.missed{background-image:linear-gradient(#CFEEE2,#CFEEE2);background-size:100% 90%}
+
+.fb{background:var(--card);border:1.5px solid var(--line);border-left:6px solid var(--accent);border-radius:0 12px 12px 0;padding:17px 19px;margin-top:20px;box-shadow:var(--shadow)}
+.fb.good{border-left-color:var(--green)}.fb.bad{border-left-color:var(--red)}
+.fb p{margin:0 0 9px;font-size:15px;color:var(--ink2)}.fb p:last-child{margin-bottom:0}
+.lesson{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;letter-spacing:.09em;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
+
+.links{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+.links a{background:#fff;border:1.5px solid var(--ink);border-radius:20px;padding:6px 15px;font-size:14px;font-weight:500;text-decoration:none;color:var(--ink);transition:.15s}
+.links a:hover{background:var(--accent);color:#fff;border-color:var(--accent);transform:translateY(-2px)}
+.links-t{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;letter-spacing:.09em;color:var(--muted);text-transform:uppercase;margin-top:22px}
+
+.btn{font:inherit;font-weight:700;letter-spacing:.02em;background:var(--ink);color:var(--receipt);border:0;border-radius:4px;padding:13px 26px;cursor:pointer;margin-top:22px;transition:.12s;position:relative}
+.btn::after{content:"";position:absolute;inset:3px;border:1px solid rgba(251,250,244,.35);border-radius:2px;pointer-events:none}
+.btn:hover{background:#0E7A3D}
+.btn:active{transform:translateY(1px)}
+.btn[disabled]{background:var(--line);color:#9A9686;cursor:not-allowed}
+.btn[disabled]::after{display:none}
+.btn--ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+
+.stamp{display:inline-block;background:var(--accent);color:#fff;font-weight:900;font-size:25px;padding:10px 26px;border-radius:14px;transform:rotate(-2.5deg);margin:10px 0 22px}
+.score{font-family:"IBM Plex Mono",monospace;font-size:58px;font-weight:600;line-height:1}
+.score small{font-size:16px;color:var(--muted)}
+.list{padding-left:1.2em;color:var(--ink2);font-size:15px}
+.list li{margin-bottom:8px}
+.note{background:#FFF9EA;border:1.5px dashed #E3B65C;border-radius:12px;padding:13px 15px;font-size:13.5px;color:#7A5A12;margin-top:16px}
+.tally{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.tally span{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:5px 13px;font-size:13.5px;font-weight:500}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+</style>
+
+<div class="bar">
+  <span>STAMPS</span>
+  <span class="stickers" id="stk"></span>
+  <span><b id="scoreBar">0</b>／140</span>
+</div>
+
+<div class="wrap"><div id="screen"></div></div>
+
+<script>
+const HUE=["#00A44E","#F58220","#E03C31","#0072CE","#009E9E","#F5A800","#3A4CA8"];
+
+/* ========== Library links ========== */
+const LK={
+  lib101 :{t:"🏫 Library 101: A Quick Start Guide",u:"https://sites.google.com/view/nccugraduate/library101"},
+  roadmap:{t:"🧭 A Practical Research Roadmap",u:"https://sites.google.com/view/nccugraduate/Research"},
+  r1     :{t:"🧭 Roadmap: Start with a Question, Not Just a Topic",u:"https://sites.google.com/view/nccugraduate/Research#h.any4xq54ie3m"},
+  r2     :{t:"🧭 Roadmap: Think About the Evidence You Need",u:"https://sites.google.com/view/nccugraduate/Research#h.gjuujjlnwq02"},
+  r3     :{t:"🧭 Roadmap: Search with Concepts, Not Full Questions",u:"https://sites.google.com/view/nccugraduate/Research#h.iqatsxszuqb3"},
+  rstuck :{t:"🧭 Roadmap: When You Get Stuck",u:"https://sites.google.com/view/nccugraduate/Research#h.t7nwi15piyxj"},
+  r4     :{t:"🧭 Roadmap: Let Useful Sources Lead You Further",u:"https://sites.google.com/view/nccugraduate/Research#h.h6oj56rq13jg"},
+  rauth  :{t:"🧭 Roadmap: Evaluate Authority in Context",u:"https://sites.google.com/view/nccugraduate/Research#h.6qafdfir6h02"},
+  r6     :{t:"🧭 Roadmap: Make the Sources Work Together",u:"https://sites.google.com/view/nccugraduate/Research#h.4zuc4ou0azys"},
+  r7     :{t:"🧭 Roadmap: Recognize That Information Has Value",u:"https://sites.google.com/view/nccugraduate/Research#h.biyniq9a7nj1"},
+  videos :{t:"🎬 NCCU Library Resources Guides (video series)",u:"https://lib.video.nccu.edu.tw/p/onlineeng"},
+  vtopic :{t:"🎬 Video: Selecting a Research Topic",u:"https://lib.video.nccu.edu.tw/media/318"},
+  vdb    :{t:"🎬 Video: Commonly Used Databases",u:"https://lib.video.nccu.edu.tw/media/310"},
+  vsearch:{t:"🎬 Video: Search Strategy",u:"https://lib.video.nccu.edu.tw/media/301"},
+  vbiblio:{t:"🎬 Video: Bibliographic Identification",u:"https://lib.video.nccu.edu.tw/media/302"},
+  vint   :{t:"🎬 Video: Academic Integrity",u:"https://lib.video.nccu.edu.tw/media/324"},
+  aiguide:{t:"🤖 NCCU Library Guide to Generative AI",u:"https://sites.google.com/view/ncculibaiguideen/basics"},
+  aiwork :{t:"🤖 AI Guide: Using AI in Research and Assignments",u:"https://sites.google.com/view/ncculibaiguideen/basics/workflow"},
+  ailib  :{t:"📖 AI Guide: AI Features in NCCU Library Resources",u:"https://sites.google.com/view/ncculibaiguideen/basics/libai"},
+  aitool :{t:"🛠️ AI Guide: AI Tools for Academic Research",u:"https://sites.google.com/view/ncculibaiguideen/basics/researchai"},
+  aiethic:{t:"⚖️ AI Guide: Academic Integrity, Disclosure, and Citing AI",u:"https://sites.google.com/view/ncculibaiguideen/basics/aiethics"},
+  aicheck:{t:"🔍 AI Guide: Verifying AI-Generated Content",u:"https://sites.google.com/view/ncculibaiguideen/basics/aicheck"},
+  db     :{t:"🔍 All Library Databases",u:"https://nccu.primo.exlibrisgroup.com/discovery/dbsearch?vid=886NCCU_INST:886NCCU_INST&lang=en"}
+};
+const linkBox=(ks,label)=>`<div class="links-t">${label||"✳️ Want to go deeper"}</div><div class="links">${
+  ks.map(k=>`<a href="${LK[k].u}" target="_blank" rel="noopener">${LK[k].t}</a>`).join("")}</div>`;
+
+/* ========== Resource families ========== */
+const FAM={
+  jour:{n:"Journal Databases",d:"Airiti, JSTOR, ProQuest, CNKI",c:"#0E7A3D",icon:"J",
+    hold:"The records, abstracts and full text of journal articles. Some are subscribed by the library (you can read them only because we pay); others are Open Access (OA), where the author or funder paid so anyone can read them free.",
+    where:"Your <b>literature review</b> and <b>discussion</b>. The first shows how far previous research has got; the second puts your own findings back into that conversation.",
+    when:"When you want to know whether anyone has studied your question before, what theories and methods they used, and whether their conclusions disagree.",
+    eg:"Airiti Library (Chinese-language), CNKI, ProQuest Central Premium, EBSCOhost, JSTOR, Cambridge Core, Oxford Academic, ScienceDirect, Taylor & Francis Online, Emerald Insight, Wiley Online Library, KRpia / DBpia (Korean)",
+    limit:"⚠️ A bias worth knowing: <b>what the open web and AI surface skews toward open-access work and preprints</b>, simply because that is what they can reach. Much of what the library pays for sits behind a paywall and stays under-represented.<br><br>💡 Quick fix: in Google Scholar, go to Settings → Library links, search for National Chengchi University and tick it. Your results will then show a Fulltext@NCCU link. It takes a minute to set up and applies to every later search.<br><br>🌏 Working on a Taiwan topic? A great deal of that research is <b>published in Chinese only</b>. Trying Chinese keywords as well, with translation help if you need it, will often widen what you find."},
+  cite:{n:"Citation Databases",d:"Scopus, Web of Science, JCR",c:"#F58220",icon:"C",
+    hold:"No full text here. What they hold is the <b>links between articles</b>: what this paper cited, who has cited it since, how many times, plus journal impact factors and subject rankings.",
+    where:"Expanding your <b>literature review</b>, and <b>judging quality</b>. They give you no new content, but they show you where to go next and how much weight a paper carries.",
+    when:"The moment you find one really useful article. Look back at what it cited (the theoretical source) and forward at who cited it (the latest developments).",
+    eg:"Scopus (incl. Scopus AI), Web of Science, Journal Citation Reports (JCR)",
+    limit:"Citation counts are shaped by age and by the habits of the field. Older papers accumulate more, and the sciences cite far more heavily than the humanities. Being cited is also not the same as being praised; sometimes you are cited so you can be argued with."},
+  thes:{n:"Theses & Dissertations",d:"NCCU ETD, PQDT, DDC",c:"#E03C31",icon:"T",
+    hold:"Full-text master's and doctoral theses, most free to download, sortable by download and citation counts.",
+    where:"Your <b>methodology</b> chapter and your <b>literature review</b>. Theses spell out their methods in far more detail than journal articles, because the author had to satisfy an examination committee.",
+    when:"Early on, when you do not yet know how to design a study. See how someone with a similar topic handled it, and inherit a ready-made reference list while you are there.",
+    eg:"NCCU Electronic Theses & Dissertations (English interface), ProQuest Dissertations & Theses Global (PQDT), DDC international dissertations",
+    limit:"Quality varies much more than in journals, so judge the argument yourself. And because theses are rarely cited, citation count is a poor quality signal here."},
+  news:{n:"News & Magazines",d:"FT, NYT, The Economist",c:"#0072CE",icon:"N",
+    hold:"Full text of newspapers and news magazines, usually searchable by date range, sometimes with scanned page images.",
+    where:"<b>Background and problem statement</b>, and current-events context in your <b>discussion</b>.",
+    when:"When you need to know when something happened, how people saw it at the time, where the controversy sat, and what happened next.",
+    eg:"Financial Times, The New York Times, The Economist",
+    limit:"Reporting has a point of view and can be wrong, so compare at least two outlets. And a newspaper is <b>a record made at the time</b>, not a settled verdict. That is what makes it valuable, and also what to watch out for ⚠️"},
+  stat:{n:"Statistical Databases",d:"Statista, OECD iLibrary",c:"#009E9E",icon:"S",
+    hold:"Cleaned data and long time series, normally with the survey method, definitions and original source attached.",
+    where:"<b>Background</b> (numbers that make the problem real) and <b>data & analysis</b>, where it is often the data itself.",
+    when:"How many? For how long? Which way is the trend going? How does it compare with other countries or cities?",
+    eg:"Statista, OECD iLibrary, National Statistics of the R.O.C. (English site, free)",
+    limit:"Always open the <b>definitions</b> and <b>methodology</b> notes. The same word can be counted differently by different agencies, and a lot of apparently contradictory data turns out to be a definition mismatch. Before comparing across years, check whether the definition changed 🔍"},
+  hist:{n:"Historical Sources",d:"Gale Primary Sources, Special Collections",c:"#F5A800",icon:"H",
+    hold:"Digitized primary documents, old newspapers, photographs and official archives. Some are keyword-searchable; some you can only browse as images.",
+    where:"<b>Background</b> over a long time span, and <b>data & analysis</b>, since historical sources can be the research material itself.",
+    when:"When you want to know what something looked like before, and when and how a phenomenon began.",
+    eg:"Gale Primary Sources (cross-national historical archives), NCCU Special Collections",
+    limit:"Only a fraction of surviving material has been digitized, and OCR is often imperfect, so keyword search alone will miss things. Browse by category as well. Older sources also use different vocabulary (old place names, older romanisations, variant characters), so try several spellings 🔎"},
+  biz:{n:"Business Databases",d:"Bloomberg, WARC, LSEG Workspace",c:"#3A4CA8",icon:"B",
+    hold:"Company financials, industry analysis, market research, marketing case studies and consumer behavior data.",
+    where:"<b>Background</b> (how the industry works) and <b>data & analysis</b> (financial figures, cases).",
+    when:"When you need to know how an industry operates, how a company makes money, how big the market is, and who the major players are.",
+    eg:"Bloomberg, WARC (marketing cases), Business Source Complete, LSEG Workspace (global financial data)",
+    limit:"Industry reports are commercial products, so check exactly what each figure counts. Annual reports are legally required disclosures, so they are reliable but conservative; for the thinking behind a strategy, marketing case studies usually say more 💡"},
+  law:{n:"Law Databases",d:"Westlaw, HeinOnline, Beck-online",c:"#8A4FBF",icon:"L",
+    hold:"Statutes and their amendment history, full-text court judgments, administrative interpretations, and legal scholarship.",
+    where:"<b>Background</b> (the regulatory framework) and <b>discussion and policy recommendations</b>.",
+    when:"When you need to know what the law says, how courts actually apply it, whether it has been amended, and how the regulator interprets it.",
+    eg:"Westlaw Classic (common law), HeinOnline (legal journal archive), Beck-online (German law), TKC Law Library (Japanese law)",
+    limit:"Statutes get amended, so check which version you are citing and when it took effect. Judgments also sit at different court levels, and a single case does not automatically generalize into a rule."},
+  book:{n:"Books & eBooks",d:"Catalogue, ProQuest Ebook, Cambridge Core",c:"#23281F",icon:"K",
+    hold:"Print holdings and full-text ebooks. Most ebook platforms let you log in with your library account, with no separate registration needed.",
+    where:"<b>Theoretical framework</b> (its strongest use), plus <b>background</b> and <b>literature review</b>.",
+    when:"When you need to understand where a concept came from, need a framework strong enough to carry a whole paper, or are stepping into a field new to you.",
+    eg:"Library catalogue (Primo), ProQuest Ebook Central, Cambridge Core eBooks, EBSCOhost eBooks",
+    limit:"The slowest publication cycle of all, so recent developments still come from journals. Watch the edition as well, since an older textbook may state things that have since been corrected."}
+};
+const profCard=k=>{
+  const f=FAM[k];
+  return `<div class="prof" style="--fc:${f.c}">
+    <div class="prof-h"><span class="prof-i">${f.icon}</span><span><b>${f.n}</b><small>${f.d}</small></span></div>
+    <div class="prof-r"><span class="lb">📦 What it holds</span>${f.hold}</div>
+    <div class="prof-r"><span class="lb">🎯 Where it fits in your paper</span>${f.where}</div>
+    <div class="prof-r"><span class="lb">✅ When to reach for it</span>${f.when}</div>
+    <div class="prof-r"><span class="lb">📚 Examples</span>${f.eg}</div>
+    <div class="prof-r"><span class="lb">⚠️ Its limits</span>${f.limit}</div>
+  </div>`;
+};
+
+/* ================= Checkpoints ================= */
+
+const L1={
+  eyebrow:"Checkpoint 1 · Focus",
+  title:"1️⃣ A topic that is too big is a common reason papers stall",
+  lede:"Your assignment topic is <i>Why does Taiwan have so many convenience stores?</i> You hand it to an AI, and three seconds later you have a tidy chapter outline where every section looks convincing.<br><br>That is the problem. It looks convincing. But you cannot start work on this topic yet: it is too big, there is nothing in it you could measure, and it says nothing about where the evidence would come from.<br><br>🔺 Let's cut it down to something you can finish this semester.",
+  tpl:["I want to study the relationship between ","of ","and ", ", using "," as evidence."],
+  rounds:[
+    {ask:"First, scope. How much do you plan to cover?",
+     opts:[
+       {frag:"convenience stores worldwide",v:"no",why:"Cross-country comparison needs cross-country data. Just pinning down how Japan and Korea each define a \"convenience store\" would eat the whole semester."},
+       {frag:"all convenience stores in Taiwan",v:"warn",why:"Better than the original, but \"all of Taiwan\" is still huge. How would you handle the gap between Penghu and Taipei?"},
+       {frag:"convenience stores across Taipei's 12 districts",v:"ok",why:"Nice. The data exists, the limits of what you can claim are clear, and there is still room to compare."}
+     ]},
+    {ask:"Next: what is related to what? \"Why so many\" is not something you can measure.",
+     opts:[
+       {frag:"store density",v:"ok",pair:"population density and household income",why:"Both sides have official figures and clear definitions. This is what a workable question looks like."},
+       {frag:"how convenient the stores are",v:"warn",pair:"quality of life",why:"Both are good questions, but \"convenience\" and \"quality of life\" take real work to define. With limited time, this is where people get stuck."},
+       {frag:"people's habit of dropping in",v:"no",pair:"the Taiwanese character",why:"That is a conversation, not a study. \"National character\" cannot be measured or disproved."}
+     ]},
+    {ask:"Finally, where does the evidence come from? This decides whether you finish.",
+     opts:[
+       {frag:"a city-wide survey",v:"no",why:"Sampling, distribution, collection, cleaning: you will not finish in a semester. And your variable is store density, which a survey cannot measure anyway."},
+       {frag:"existing official statistics plus historical newspapers",v:"ok",why:"Smart. Someone has already compiled the time series, newspapers supply the historical context, and both sit in the library databases waiting for you."},
+       {frag:"interviews with 8 to 10 store managers",v:"ok",why:"Manageable, and it gets you what statistics cannot: the reasoning behind where a store gets opened."}
+     ]}
+  ],
+  lesson:"AI does not know how many weeks you have left",
+  debrief:"AI is good at producing research directions, because sentences like those are all over its training data. What it cannot know is <b>who you can actually reach, how many weeks you have left, and what data you can get hold of</b>. Those are the three things that decide whether a topic can be written.",
+  links:["r1","vtopic"],
+  egg:{title:"🍙 Bonus: \"one of the highest in the world\" — but which rank exactly?",
+       body:"People constantly say Taiwan has one of the highest convenience-store densities on earth. But which rank, exactly? Counted per ten thousand people, or per square kilometre? Data from which year?<br><br>You will find the claim repeated everywhere online and almost never with a source 😅 This is exactly the kind of question a statistical database can answer and an AI will only answer with an unsourced adjective.",
+       go:"👉 Look it up sometime. Different agencies produce different rankings."}
+};
+
+const L2={
+  eyebrow:"Checkpoint 2 · Evidence",
+  title:"2️⃣ Nine questions, scattered across nine different places",
+  lede:"Your topic is set: <b>the relationship between convenience-store density across Taipei's districts and population density and household income</b>.<br><br>Turning that into a convincing paper takes nine kinds of evidence, and they live in nine different places.<br><br>🔺 Match each question to the family of resources that holds its answer.",
+  needs:[
+    {q:"Has anyone run a similar analysis? What methods did they use and what did they find?",
+     right:"jour",
+     ok:"Journal databases are where the scholarly conversation happens. Airiti covers Chinese-language work, Scopus and Web of Science cover international journals.",
+     off:"The full text of most journal articles sits behind paywalls. Google Scholar surfaces plenty of records and abstracts, but often stops at \"title visible, full text locked\"; coverage of non-English work also tends to be thinner. So you conclude \"nobody has done this\" when the full text is simply walled off, or that batch was not indexed 😅"},
+    {q:"I found one really key article. Who has cited it since, and how much weight does that journal carry?",
+     right:"cite",
+     ok:"Scopus and Web of Science record the links between articles. Look back at what it cited and forward at who cited it, and one paper unfolds into a whole research lineage.",
+     off:"This is the one people most often get wrong: <b>journal databases do not necessarily carry citation data</b>. Many just give you the full text; \"cited by\" is a separate layer that citation databases build. Google Scholar shows a number, but it counts preprints and slides too, so it is not what the scholarly world actually uses ⚠️"},
+    {q:"Has anyone written a master's thesis on almost exactly this? What did their research design look like?",
+     right:"thes",
+     ok:"The NCCU thesis system and PQDT let you search title, keywords and abstract at once, and sort by downloads and citations.",
+     off:"Theses contain <b>a full methodology chapter and literature review</b>, the parts journal articles usually compress away. Taiwan's thesis system is Open Access, so records and abstracts are findable; but to compare across theses systematically and download authorized full text, a dedicated thesis system is far more efficient than Google."},
+    {q:"When Taiwan's first convenience store opened, how did the newspapers write about it? What did people make of this new thing?",
+     right:"news",
+     ok:"A newspaper database holds decades of full-text papers. You can limit the years and read the pages as they originally appeared.",
+     off:"Google will give you the conclusion \"which year it opened\". But \"how society talked about it\" lives mostly in newspaper pages from decades ago, rarely put fully online. An ordinary search makes it hard to find systematically, and harder still to page through by date."},
+    {q:"Convenience-store counts, population density and disposable household income in Taipei, year by year, over the past two decades.",
+     right:"stat",
+     ok:"The National Statistics site has an English version, and Statista and OECD iLibrary hold long time series with definitions and survey methods attached to every field.",
+     off:"Numbers online usually come with no source, patchy years and unclear definitions. That \"one store per 2,000 people\" figure — from what year? counting which kinds of store? A statistical database gives you the full series plus how it was calculated."},
+    {q:"Before convenience stores existed, where did people in Taiwan buy daily necessities? What did the shops of the Japanese colonial era look like?",
+     right:"hist",
+     ok:"Gale Primary Sources and the library's special collections hold documents and photographs from the period, so you can see the scene rather than imagine it.",
+     off:"Old documents and photographs were largely never digitized or widely re-posted, so they rarely entered AI training data. Even a web-connected AI usually has to piece things together from scattered second-hand fragments, and can sound authoritative while not matching the originals ⚠️"},
+    {q:"How do convenience stores actually make money? How is store density decided? Why does fresh food keep taking a bigger share?",
+     right:"biz",
+     ok:"Annual reports hold the original financial figures. WARC marketing cases and Business Source Complete unpack the reasoning behind the strategy.",
+     off:"Complete financial and industry reports are mostly paid products. What you find free online is second-hand reporting, usually quoting whichever number was most dramatic, with the context and original definitions lost 😅"},
+    {q:"What does the law say about shift work and hours for store staff? What disputes have reached the courts?",
+     right:"law",
+     ok:"A law database gives you not just the statute but the full judgments, so you can see how courts actually applied it.",
+     off:"You can Google a statute well enough. Court judgments are harder: <b>searching precisely, pinning down the point at issue, comparing across court levels</b> is not something an ordinary search does well. And \"what the law says\" and \"how courts actually rule\" are frequently two different things."},
+    {q:"Has anyone written a whole book on convenience stores and consumer society in Taiwan?",
+     right:"book",
+     ok:"The catalogue and the ebook platforms have monographs. A book is a complete argument, not a handful of conclusions.",
+     off:"What AI gives you is usually assembled from fragments. A monograph's reasoning from beginning to end, the way it walks you step by step towards being persuaded: that cannot be summarized, only read."}
+  ],
+  lesson:"Google gets you to the door. The full text is usually behind it",
+  debrief:"The point of this checkpoint is that <b>your question decides where the data lives</b>. And for most of what the library pays for, an ordinary web search will not get you the full content in any systematic way.<br><br>Journal articles, citation records, theses, old newspapers, long statistical series, digitized archives, paid financial and industry reports, full-text judgments, a whole book: none of this is \"just search for it\" material. Some was never digitized. Some costs money. Some you can find as a record but not download.<br><br>🔺 That is also why AI improvises so freely on these topics. The full content sits outside what it can read, so it fills the gap by guessing.",
+  links:["r2","db","vdb"],
+  egg:{title:"🍙 Bonus: where does the name 7-ELEVEN come from?",
+       body:"Opening hours. The company began in Texas in 1927 as the Southland Ice Company, and its stores were called Tote'm Stores. In 1946 they were renamed 7-Eleven to advertise what were then remarkable hours — <b>7am to 11pm, seven days a week</b> ⏰<br><br>So when did 24 hours start? The company's own account is 1963, when a Texas store stayed open after a football game because the crowd kept coming, and business was good enough that it never closed again 🏈<br><br>But note: that is <b>the company telling its own story</b>. A good story is not necessarily the whole story, which is what Checkpoint 5 is about.",
+       go:"👉 And when did Taiwan get its first 24-hour store? An AI will give you a vague year; a newspaper database lets you read the actual reporting from that year."}
+};
+
+const L3={
+  eyebrow:"Checkpoint 3 · Keywords",
+  title:"3️⃣ Only 12 results. Has nobody done this, or are your keywords wrong?",
+  lede:"You ask an AI what keywords to use and it gives you: <code>convenience store AND density AND income</code>.<br><br>You run it. Twelve results 😱 You very nearly concluded that nobody had studied this.<br><br>The keywords are what went wrong. <b>Everyday words and research vocabulary often are not the same.</b> In Chinese the literature says 便利商店, not the colloquial 超商. In English you may need \"retail outlet\" as well as \"convenience store\". Miss the right word and you miss a whole body of research.<br><br>🔺 Use the word tiles below to build a better search.",
+  chips:{
+    "Concept A: the subject":[
+      {t:'"convenience store*"',g:"A",zh:false,academic:true},
+      {t:'"retail outlet*"',g:"A",zh:false,academic:true},
+      {t:"便利商店",g:"A",zh:true,academic:true},
+      {t:"超商",g:"A",zh:true,academic:false}
+    ],
+    "Concept B: the spatial phenomenon":[
+      {t:'"spatial distribution"',g:"B",zh:false,academic:true},
+      {t:'"store density"',g:"B",zh:false,academic:true},
+      {t:"空間分布",g:"B",zh:true,academic:true},
+      {t:"區位",g:"B",zh:true,academic:true}
+    ],
+    "Concept C: the social side":[
+      {t:'"household income"',g:"C",zh:false,academic:true},
+      {t:'"socioeconomic status"',g:"C",zh:false,academic:true},
+      {t:"家戶所得",g:"C",zh:true,academic:true}
+    ],
+    "Operators":[{t:"AND",g:"op"},{t:"OR",g:"op"},{t:"(",g:"op"},{t:")",g:"op"}]
+  },
+  rules:[
+    {id:"aca",label:"Use the term the field uses",desc:"Everyday words and research vocabulary often differ. Getting this one word right can be the difference between 12 results and 200."},
+    {id:"syn",label:"Expand your synonyms",desc:"Give every concept at least two wordings. Leave one out and you lose a whole batch of literature."},
+    {id:"bi", label:"Search in both languages",desc:"Keywords from AI skew English, but research about Taiwan is largely published in Chinese. Run both and you see two different maps of the field."},
+    {id:"or", label:"Join synonyms with OR",desc:"Synonyms are an \"either/or\" relationship. String them with AND and your count drops to zero 😅"},
+    {id:"and",label:"Join concepts with AND",desc:"AND belongs between different concepts. That is the move that intersects your topic."},
+    {id:"par",label:"Group with brackets",desc:"Without brackets the database may apply the operators in an order you did not intend."}
+  ],
+  lesson:"A first search rarely gives you what you need",
+  debrief:"When only a handful of results come back, most people assume nobody has studied the topic. Usually it is <b>the keywords, not the topic</b>.<br><br>🔺 The three most common gaps:<br>· <b>Everyday words</b> instead of the vocabulary of the field<br>· Only <b>one wording</b>, so synonyms and alternative translations drop out<br>· <b>English only</b>, which loses the Chinese-language literature<br><br>⚠️ <b>The six rules above are an example, not a formula.</b> Stack on too many conditions and you can end up with nothing 😅 Real searching goes <b>back and forth</b>:<br>· Thousands of results → add a concept, or limit by year or type<br>· Single digits → drop a concept, loosen the synonyms, lose the quotation marks<br>· A few dozen to a couple of hundred → start reading<br><br>💡 One trick worth having: <b>find an article that fits beautifully, then take its keywords</b>. Check the author keywords, the words that keep recurring in the abstract, the subject headings it was filed under. That is the language the field actually uses, and searching again with it usually opens things up 🌏<br><br>So searching is not typing in the right answer. It is closer to tuning a radio: turn it, listen, turn it again.",
+  links:["r3","rstuck","vsearch","aitool"],
+  tool:{title:"🔎 A tool worth meeting: Scopus AI",
+    body:`<p>If building search strings feels like a chore, there is another route. <b>Scopus AI lets you ask a question in plain language</b>, such as "how is convenience-store density related to socioeconomic status?" and it assembles an answer for you.</p>
+      <p>The difference is that its answer is <b>built on the literature Scopus indexes</b>, and each claim links back to a record you can open. A general AI service does not normally have direct access to licensed collections, which is one reason invented references appear. A database-based tool works within a more clearly defined collection, so its citations are much easier to check.</p>
+      <p>That is not the same as being error-free. Database-based AI may still rely on titles and abstracts rather than full text, and it can still summarize a source inaccurately. A clearly identified source is easier to verify, which is the advantage here.</p>
+      <p>It also has a <b>Deep Research</b> feature that explores a topic more thoroughly and produces a report in academic format, which helps when you need to get oriented in an unfamiliar field fast.</p>
+      <span class="warn-h">⚠️ One important "but"</span>
+      <p><b>AI summaries still get things wrong.</b> Whichever AI you use, however authoritative the database behind it, once you have the material <b>go back to the source and read it</b>. Three tests before it counts:</p>
+      <ol>
+        <li><b>Does this source actually exist?</b> (Open the link; confirm the article really sits in that journal, that volume, that issue.)</li>
+        <li><b>Did the author really say this?</b> (Has the summary shifted the meaning?)</li>
+        <li><b>Is the author's claim itself supported by evidence?</b> (What data and method produced that conclusion?)</li>
+      </ol>
+      <p style="margin-top:10px">Pass all three and you have something worth putting in your paper 💪</p>
+      <p style="margin-top:10px"><a href="https://lib.video.nccu.edu.tw/media/420" target="_blank" rel="noopener">🎬 Watch: Scopus &amp; SciVal, including Scopus AI</a></p>`},
+  egg:{title:"🍙 Bonus: someone has already worked out the \"official\" term for you",
+       body:"You might wonder: how am I supposed to know which term the field uses?<br><br>Good news — <b>many databases have their own thesaurus or subject-heading list</b>, a controlled vocabulary built up over years by cataloguers. It tells you the standard term for a concept, its synonyms, and its broader and narrower terms 📖<br><br>This is one of librarianship's hardcore specialities, and something AI is still fairly short of: AI guesses from which words tend to appear together; a thesaurus is the product of a human deciding that these two terms mean the same thing.",
+       go:"👉 Next time you are in a database, look for a Thesaurus, Subject Terms, or suggested-term button. It saves a lot of time."}
+};
+
+const L4={
+  eyebrow:"Checkpoint 4 · Selection",
+  title:"4️⃣ 218 results, and time to read three",
+  lede:"With better keywords you now have 218 results 🎉 Then you freeze, because there is only time to read three.<br><br>So you start looking past the title: <b>who wrote it, what year, where it appeared, what kind of document it is</b>. None of that is decoration. It is the trail left by everyone who worked on this before you.<br><br>🔺 Pick the three you would read <b>first</b> (multiple choice)",
+  note:"The first four are real, findable in the databases (go and check). The fifth was handed to you by an AI.",
+  papers:[
+    {ti:"Spatial Distribution of Convenience Stores in Taiwan and its Regional Differences, 1987-2016 (in Chinese)",
+     au:"Su, H.-C. (2017). Earth and Environment, 32, 23-59.",
+     meta:["Chinese journal","2017","has DOI","on Airiti"],hot:1,v:"ok",
+     why:"<b>Read it.</b> The closest thing to your topic: spatial autocorrelation and hot-spot analysis of convenience-store distribution across Taiwan from 1987 to 2016, plus how outlet numbers relate to population density, age and occupation. The density × population × socioeconomic line you want to draw: this paper walked it first.<br><br>⚠️ Note: this is a <b>Chinese-language article</b>. A general AI service may well not surface it. Work of this kind is less likely to be in its training data, and the Airiti full text sits behind a paywall, so the library is usually the route to it."},
+    {ti:"Spatial Analysis of Convenience-Store Dispersion and Housing Prices in Greater Taipei (in Chinese)",
+     au:"Peng, T.-C. (2021). Journal of Applied Economics, 110, 51-104.",
+     meta:["Chinese journal","2021","spatial econometrics"],hot:0,v:"ok",
+     why:"<b>Read it.</b> Its dependent variable is housing price rather than income, so the topic looks slightly off. But what it actually handles is <b>convenience-store density in Greater Taipei</b>, using three spatial econometric models.<br><br>You are reading it for the <b>method</b>: how to operationalize \"density\" (stores within 100 metres of a dwelling) and how to handle spatial autocorrelation. This near-miss-on-topic, perfect-on-method paper is often more useful than one that matches exactly 🛠️"},
+    {ti:"The Potential Role of Social Security: A Study on Enhancing Community Safety",
+     au:"Liu, H.-R., & Chen, F.-H. (2025). Buildings, 15(17), 3122.",
+     meta:["international journal","2025 newest","Open Access","peer reviewed"],hot:0,v:"ok",
+     why:"<b>Read it. This is the newest of the batch.</b> Published September 2025, combining document analysis with interviews in urban and rural settings, on how convenience stores in Taiwan function as part of the community safety net. It adds the layer your topic is missing: beyond density, what are these stores actually doing?<br><br>Two bonuses: one author is at <b>NCCU's Institute of Labour Research</b>, so you can look at their other work; and the article is <b>Open Access</b>, free to download, which is part of why an AI service is more likely to surface this one than the two Chinese-language articles above 🔍"},
+    {ti:"Does Healthcare Accessibility Affect Housing Prices? Regression Tree and Random Forest Models (in Chinese)",
+     au:"Peng, T.-C. (2021). Journal of Applied Economics, 109, 115-167.",
+     meta:["Chinese journal","2021","same author"],hot:0,v:"warn",
+     why:"<b>Worth a look, but not now.</b> Another paper by the author of item 2, methodologically valuable, but the subject is healthcare facilities, not convenience stores.<br><br>🔺 A practical habit: when you find an author whose work keeps fitting your topic, go to a <b>citation database and pull their full publication list</b>. You will often unearth a whole string of relevant studies. Just do not accept everything on the strength of the name: <b>relevance still comes first</b>."},
+    {ti:"Convenience-Store Density and Local Social Change: The Case of Taipei",
+     au:"A reference supplied by AI: Lin, S.-Y. (2022). City and Planning, 48(3), 213-240.",
+     meta:["from AI","unverified"],hot:0,v:"no",
+     why:"<b>Do not read it yet. Verify it first.</b> The format is flawless: author, year, title, journal, volume, issue, pages, all present, arguably tidier than the four above. <i>City and Planning</i> is even a real, TSSCI-indexed journal.<br><br>But notice: for the first four you can click into a database and see an abstract or the full text. For this one, you are taking an AI's word for it ⚠️<br><br>This is one of the harder errors to catch: <b>a fabricated article placed inside a journal that does exist</b>. You check the journal and it is there; you open the contents page for that issue and the article is not. The next checkpoint deals with exactly this."}
+  ],
+  lesson:"A citation joins a conversation already in progress",
+  debrief:"Why bother with year, author, journal and document type? Because <b>scholarship is a long public conversation</b>, and these are the marks it leaves behind.<br><br>🔺 <b>Year</b> | Recent work shows where the field is now; older work is usually where the theory came from. <b>Read both.</b><br><br>🔺 <b>Author</b> | When the same name keeps coming up, that person has been at this for years. Go straight to their publication list.<br><br>🔺 <b>Journal and document type</b> | Peer review means other scholars have already read the piece for you. Theses, industry reports and preprints are all worth using, but say which is which when you cite them.<br><br>🔺 <b>Citation count</b> | You will not find this number <b>on the article</b>. It lives in a citation database. Treat it as a rough headcount of who found the paper useful, not a quality score: older papers accumulate more, fields differ enormously, and plenty of papers get cited so they can be argued with 😅<br><br>💡 <b>Found an article that fits beautifully? Do not stop there. <u>Snowball</u> from it.</b><br><br>It is often the quickest way to build a reading list, and one of the steps most easily skipped. One good article opens in two directions:<br><br>🔺 <b>Backward, to what it cited</b> | Its <b>reference list</b> is a set of sources the author already filtered for you. Follow it back and you reach the theory the field rests on.<br><br>🔺 <b>Forward, to who cited it</b> | Open the 'cited by' record in a <b>citation database</b>. These are newer studies: the latest developments, and sometimes corrections or rebuttals.<br><br>Rolled both ways, one article becomes a trail. Which is why <b>the first article matters so much</b>: a good starting point rolls you toward the right literature, while a marginal one just drifts further off course.<br><br>And when you cite something, you are speaking too. You are saying <i>my argument rests on this</i>, or <i>I want to take issue with this</i>. <b>Citation is not decoration. It is how you join the conversation</b> 💬",
+  links:["r4","rauth","vbiblio","ailib"],
+  egg:{title:"🍙 Bonus: what is the most-cited paper in history about?",
+       body:"If citation count meant importance, what would you guess the most-cited paper in history is about? Relativity? The double helix?<br><br>Neither 😲 When <i>Nature</i> ran the numbers in 2014, the paper at the top was Lowry et al., 1951, <b>a methods paper on how to measure protein concentration in a solution</b>, cited over 300,000 times.<br><br>The reason is simple: biochemistry labs worldwide use it every day. So citation count is closer to <b>how many people need this</b> than to how important it is.<br><br>A useful reminder that no single metric belongs on its own, citation counts included 🔍",
+       go:"👉 Curious who is most cited in your field? Scopus, Web of Science and Airiti ACI will all sort by it."}
+};
+
+const L5={
+  eyebrow:"Checkpoint 5 · Verify",
+  title:"5️⃣ Two things from an AI. Which do you check first?",
+  lede:"Halfway through writing, an AI hands you two things: a reference and a specific historical fact. Both look perfectly ordinary, and you have not got much time left today 😵‍💫<br><br>🔺 Fair warning: the order you check them in decides whether you get any sleep tonight.",
+  subs:[
+    {head:"Item one: a Chinese-language reference",
+     quote:"Lin, S.-Y. (2022). Convenience-Store Density and Local Social Change: The Case of Taipei. <i>City and Planning</i>, 48(3), 213-240.",
+     q:"If you can only do one thing, which is most effective?",
+     opts:[
+       {t:"Paste the full title into Google Scholar.",v:"warn",
+        why:"Worth doing, and it takes ten seconds. But Google Scholar's coverage of Chinese-language journals is incomplete, so not finding it does not mean it does not exist. It can give a warning signal, not a conclusion."},
+       {t:"Check whether <i>City and Planning</i> exists, then open the contents page for volume 48, issue 3 and check the pages.",v:"ok",
+        why:"The hardest single step for a Chinese-language reference. Does the journal exist, has it reached volume 48, and is this article on those pages: three questions settled at once. In Airiti you search the journal title and drill straight down to the issue contents."},
+       {t:"Ask the AI to supply a DOI.",v:"no",
+        why:"It will helpfully produce one 😅 A DOI is a string that can be invented, unless you click it and watch it resolve to this article."},
+       {t:"Email the author.",v:"no",
+        why:"If the author is fictional you will wait for a reply that never comes, and you will have spent tonight. Start verification from whatever is <b>easiest to disprove</b>."}
+     ]},
+    {head:"Item two: a historical fact",
+     quote:"\"Taiwan's first 7-ELEVEN opened in Taipei in 1979. It was seen at the time as an expensive shop for imported goods, and took several years before it turned a profit.\"",
+     q:"You want to cite the phrase \"seen at the time as expensive\". Where do you confirm it?",
+     opts:[
+       {t:"Ask a different AI and see whether the accounts agree.",v:"no",
+        why:"Both AIs read the same pool of web material. Agreement only means they copied the same source; it does not mean the source was right."},
+       {t:"Check the Wikipedia article.",v:"warn",
+        why:"A good starting point, and you can follow its footnotes downstream. But Wikipedia is itself second-hand compilation and should not be the source you cite."},
+       {t:"Use a newspaper database to read coverage from 1979 onwards and see how people actually wrote about it.",v:"ok",
+        why:"This is first-hand evidence. \"Seen as\" is a claim about <b>how society perceived something at the time</b>, and only contemporary texts can support it. A newspaper database lets you limit the years and read the pages themselves."},
+       {t:"Look at the company's corporate history page.",v:"warn",
+        why:"First-hand, yes, but also <b>self-narration</b>. A corporate timeline emphasizes the turnaround story and may not preserve the part where customers thought it overpriced. Usable, as long as you note whose account it is."}
+     ]}
+  ],
+  lesson:"Start with whatever is easiest to disprove",
+  debrief:"Both sub-questions come down to one habit: <b>work out what kind of claim you are dealing with, then decide where to check it</b>.<br><br>A reference has a structure, so take it apart field by field, starting with whatever is easiest to check. Confirming a journal exists is much quicker than confirming an author does. \"How people saw it at the time\" is a different kind of claim: it is about historical perception, and only texts from that period can settle it. That is what newspaper databases are for.<br><br>⚠️ Worth knowing: coverage is uneven. Public English-language material is usually easier for AI systems to retrieve than licensed publications, archives, and scholarship in other languages, so references in those areas need more checking, not less.<br><br>🔺 Here is the <b>three-part test</b> from Checkpoint 3 again. If you take one thing from this game, take this:<br><br><b>① Does this source actually exist?</b><br><b>② Did the author really say this?</b><br><b>③ Is the author's claim supported by evidence?</b><br><br>Even with a tool like Scopus AI, anchored to a real corpus, tests ② and ③ <b>are still yours</b>. A tool can confirm a paper exists. It cannot tell you whether the summary kept the paper's meaning, or whether the argument holds up. The next checkpoint shows you how summaries lose their shape.",
+  links:["aicheck","db"],
+  egg:{title:"🍙 Bonus: a lawyer skipped this step and was fined by the court",
+       body:"In 2023 a federal court in New York heard an ordinary personal-injury claim (Mata v. Avianca). Counsel for the plaintiff cited six precedents. Neither opposing counsel nor the judge could find any of them, because ChatGPT had produced all six 😱<br><br>The detail worth noting: the lawyer had checked. He asked ChatGPT whether the cases were real, and it answered that they were.<br><br>Note what the $5,000 sanction was actually for. Not simply using AI, but <b>standing by the filings after the problem was raised, then submitting excerpts that were themselves fabricated</b>. Which tools you use is your business; every document you file is your responsibility.",
+       go:"👉 The case appears in both newspaper databases and legal databases, and the two write it up quite differently, which makes for a useful comparison."}
+};
+
+const L6={
+  eyebrow:"Checkpoint 6 · Read",
+  title:"6️⃣ The summary is not lying. It has just shifted things a little",
+  lede:"You decide to start with that 2025 article from Checkpoint 4. Time is short, so you ask an AI for a summary first.<br><br>It reads perfectly sensibly. It also happens to support exactly what you wanted to argue, <b>which is the moment to get suspicious</b>.<br><br>🔺 Compare it with the original abstract above and highlight the sentences that <b>do not match</b>.",
+  cite:'Liu, H.-R., & Chen, F.-H. (2025). The Potential Role of Social Security: A Study on Enhancing Community Safety. <i>Buildings</i>, 15(17), 3122. Open Access (CC BY). Below is a condensed restatement of the published abstract.',
+  orig:"Responding to concerns about community safety, this study examines the role convenience stores in Taiwan play as a channel for social security. Drawing on analysis of existing literature together with informal conversational interviews conducted in both urban and rural settings, it shows how these commercial sites come to strengthen the social safety net within local communities. The study finds that convenience stores provide front-line assistance during emergencies and natural disasters, and that by supplying everyday necessities they foster a sense of community cohesion. It further argues that features already built into these stores contribute to sustainability, and that localized hiring has positive effects on the local economy and residents' sense of security. Taken together, the findings suggest convenience stores hold undeveloped potential for community safety, and the study offers policymakers a basis for integrating the positive features of retail networks more fully into systems of social security.",
+  need:"Highlight 3 sentences",
+  items:[
+    {t:"Through document analysis and informal conversational interviews in urban and rural settings, the study examines the role of convenience stores in Taiwan's social safety net, finding they provide front-line help in emergencies and disasters.",
+     bad:false,why:"Faithful. Method, settings and central finding all match, and nothing extra has been added."},
+    {t:"The study surveyed 2,000 convenience-store customers and statistically analyzed their perceptions of safety.",
+     bad:true,why:"<b>The method has been rewritten.</b> The original used <u>informal conversational interviews</u>, a qualitative approach. This sentence turns it into a large-sample quantitative survey ⚠️<br><br>And the figure \"2,000\" was invented outright. The abstract never states how many people were interviewed. Where an abstract leaves a detail out, an AI will readily supply one that sounds plausible."},
+    {t:"The study confirms that areas with higher convenience-store density have lower crime rates.",
+     bad:true,why:"<b>A variable and a causal claim conjured from nothing.</b> The study never measured crime rates and ran no test of density against crime. What it discusses is residents' <b>sense of security</b> and the store's community support role, which is a different thing entirely."},
+    {t:"The study recommends that the government require all convenience stores to stock emergency disaster supplies.",
+     bad:true,why:"<b>Overstated force.</b> The original's policy direction is to <u>strengthen and formalize</u> cooperation between convenience stores and public-safety agencies, not to <u>mandate</u> any installation.<br><br>One word, \"require\", turns a research recommendation into a policy position the authors never took 😳"}
+  ],
+  lesson:"The AI has probably only read the abstract",
+  debrief:"None of those four sentences contains an invented fact. That is why detection tools miss them, and why you nearly did too. The real risk in a summary is quieter: <b>the method gets distorted</b>, <b>variables and causation appear from nowhere</b>, <b>recommendations get stronger</b>, <b>the scope widens</b>.<br><br>⚠️ And something more basic is going on. <b>Much of the time, the abstract is all the AI has read.</b> The full text sits behind a paywall or in a PDF it cannot reach, so it takes two or three hundred words and generates \"what this study says\".<br><br>That is where \"2,000 customers\" came from. <b>The abstract never says how many people were interviewed</b> — you would need the methodology section for that. Wherever the abstract goes quiet is where an AI starts filling in.<br><br>🔺 Two things follow:<br>· <b>A well-written abstract makes for a better AI summary.</b> The thinner the abstract, the more gets invented.<br>· <b>But a good abstract does not remove hallucination.</b> The two risks stack.<br><br>So use the AI summary, then <b>open the full text and read the methods and conclusions yourself</b>. This is also why libraries pay for full text: the abstract is free, the research is in the article.",
+  links:["aicheck","r6"]
+};
+
+const L7={
+  eyebrow:"Checkpoint 7 · Submit",
+  title:"7️⃣ Final week: which of these really must not be done",
+  lede:"The paper is due tomorrow 😰 You have considered all five of these.<br><br>🔺 Select everything you <b>should not do</b> (multiple choice)",
+  items:[
+    {t:"Have an AI produce the chapter structure, then write the whole paper straight into that structure.",v:"warn",
+     why:"<b>Grey area, and it needs more care than you would think 🤔</b><br><br>NCCU's guidance allows AI for a preliminary structure, but asks you to review whether it fits. <b>Review</b> is the operative word.<br><br>An AI's structure is <b>generalized from what it has read</b>, which may not match the literature on your topic at all. (Checkpoint 4 again: Chinese-language and paywalled work are largely outside its reach.) You often get a skeleton that <b>looks like a paper</b> rather than one built on what your sources actually show.<br><br>And <b>organizing material is itself a skill</b>. Sorting what you read, finding the connections, deciding what comes first: that is the critical thinking the assignment is training. Copy the structure and you skip the part worth practicing.<br><br>💡 Draft your own outline first, then compare. <b>Use the AI version as a control group, not an answer key.</b>"},
+    {t:"To let an AI help you read, bulk-download a whole year of a journal's PDFs and feed them all in.",v:"no",
+     why:"<b>A hard line ⛔</b><br><br>Database vendors <b>monitor for abnormal downloading</b>: large, continuous, issue-by-issue downloads in a short window get flagged as <b>systematic downloading</b>, which breaches the license.<br><br>And the consequence is not just your own account. Publishers typically <b>block the entire university's IP range</b>, taking the whole campus offline, with a slow appeal to restore it 😱<br><br>For AI help with reading, do one or two articles at a time and prefer Open Access material."},
+    {t:"Paste a paragraph you wrote yourself and ask an AI to polish the phrasing.",v:"ok",
+     why:"Fine. Help at the level of expression; the argument is still yours. Disclose how you used it, as usual."},
+    {t:"Upload interview transcripts including managers' names and store locations for AI thematic analysis.",v:"no",
+     why:"<b>Also a hard line ⛔</b> These are other people's personal data, and interviews normally carry research-ethics commitments. To use AI for analysis you must de-identify first, and confirm your informed-consent form covers this kind of processing."},
+    {t:"Quote a passage of AI-generated text directly, citing ChatGPT in the text.",v:"warn",
+     why:"<b>Grey area 🤔</b> APA, Chicago and MLA all have formats for citing AI, so it is technically possible. But the format is not the problem. AI-generated content <b>has no traceable source</b> and cannot be located and re-examined by anyone else. Using it to illustrate \"how an AI answers this\" is reasonable; as evidence of fact it is not. And rules vary enormously between instructors, so ask before you rely on it."}
+  ],
+  lesson:"Licensing and personal data are hard lines. The rest is your call",
+  debrief:"Most arguments about using AI turn out to be about <b>disclosure</b>. Say where you used it and how, and there is usually no problem.<br><br>Two lines have nothing to do with disclosure: <b>database licensing</b> (bulk downloading above all) and <b>other people's personal data</b>. Cross either one and no explanation afterwards will undo it ⛔<br><br>🔺 For the grey areas, one question sorts it out: <b>if an AI does this for me, what do I lose?</b> Polishing a sentence costs you a few minutes. Handing over how the whole paper is organized costs you a good deal of what the course was there to teach.<br><br>🔺 Finish well: add a short AI-use statement listing the tool and version, when you used it, which tasks, and the prompts in full. Five minutes now, and it is your evidence if anyone ever asks.<br><br>📌 <b>One last thing, and please act on it: rules vary a lot between courses and supervisors.</b> Some are wide open, some allow AI at certain stages only, some prohibit it. University guidance is the floor. <b>Your instructor sets the line you actually have to observe</b>, so ask before you start. It is far less work than explaining afterwards.<br><br>💡 The library's <b>Generative AI Guide</b> has a page on academic integrity that covers citation format and what belongs in a disclosure statement. Link below.",
+  links:["aiethic","r7","vint"],
+  egg:{title:"🍙 Bonus: an AI applied for co-authorship and was turned down",
+       body:"Through late 2022 and early 2023 several papers really did list ChatGPT as a co-author, to considerable uproar. In January 2023 <i>Nature</i> and <i>Science</i> both stated the position: <b>AI cannot be an author</b>.<br><br><i>Nature</i>'s reasoning is what this whole game has been about: <b>authorship carries accountability for the work, and AI tools cannot take on that responsibility.</b><br><br>They cannot be held to account, retracted, or lose standing. So the responsibility comes back to you 💪<br><br>(<i>Nature</i> also said using an LLM is fine, as long as you document it in the methods or acknowledgements. The same disclosure point again.)",
+       go:"👉 Want the actual rules for a given journal? They are in the Author Guidelines or submission requirements on the journal's own site."}
+};
+
+const LEVELS=[L1,L2,L3,L4,L5,L6,L7];
+
+/* ================= State ================= */
+let score=0,li=-1;const got=[],lvScore=[];
+const _now=new Date();
+const _p2=n=>String(n).padStart(2,"0");
+const todayStr=`${_now.getFullYear()}/${_p2(_now.getMonth()+1)}/${_p2(_now.getDate())}`;
+const KEY="nccu_cvs_game_v1";
+function save(){try{localStorage.setItem(KEY,JSON.stringify({score,li,got,lvScore,t:Date.now()}));}catch(e){}}
+function load(){try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):null;}catch(e){return null;}}
+function wipe(){try{localStorage.removeItem(KEY);}catch(e){}}
+const el=document.getElementById("screen");
+const setHue=i=>document.documentElement.style.setProperty("--accent",HUE[i]||"#FFC93C");
+function paint(){
+  document.getElementById("scoreBar").textContent=score;
+  document.getElementById("stk").innerHTML=[0,1,2,3,4,5,6].map(i=>
+    got[i]?`<span class="sticker got" style="background:${HUE[i]}">${i+1}</span>`
+          :`<span class="sticker ${i===li?"now":""}">${i+1}</span>`).join("");
+}
+const add=n=>{score+=n;paint();};
+const RENDERERS=()=>[renderL1,renderL2,renderL3,renderL4,renderL5,renderL6,renderL7,renderEnd];
+function next(){li++;setHue(li);paint();save();
+  RENDERERS()[li]();
+  window.scrollTo({top:0,behavior:"smooth"});}
+function resume(){const d=load();if(!d)return;
+  score=d.score;li=d.li;d.got.forEach((v,i)=>got[i]=v);d.lvScore.forEach((v,i)=>lvScore[i]=v);
+  li--;next();}
+const head=L=>`<div class="stripes stripes--thin" style="background:linear-gradient(90deg,var(--accent) 0 60%,var(--line) 60% 100%);margin-top:4px"></div><span class="eyebrow">${L.eyebrow}</span><h2>${L.title}</h2><p class="lede">${L.lede}</p>`;
+const vlab=v=>v==="ok"?'<span class="verdict v-ok">Best</span>':v==="warn"?'<span class="verdict v-warn">OK but not enough</span>':'<span class="verdict v-no">Avoid</span>';
+function explain(items,keys,title){
+  return `<div class="card"><span class="src">${title}</span>`+items.map((o,i)=>
+    `<div class="exp"><span class="k">${keys[i]}</span><span class="body">
+      <span class="quo">${o.t}${o.v?vlab(o.v):(o.bad?'<span class="verdict v-no">Not in the original</span>':'<span class="verdict v-ok">Faithful</span>')}</span>
+      ${o.why}</span></div>`).join("")+`</div>`;
+}
+const toolBox=t=>`<div class="tool"><span class="lb">${t.title}</span>${t.body}</div>`;
+const eggBox=e=>`<div class="egg"><span class="lb">${e.title}</span><p>${e.body}</p><p class="go">${e.go}</p></div>`;
+function debrief(L,g,idx){
+  got[idx]=true;lvScore[idx]=g;paint();save();
+  return `<div class="fb ${g>=14?"good":"bad"}"><div class="lesson">KEY POINT · ${L.lesson}</div><p>${L.debrief}</p>
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted)">${g} / 20 · stamp ${idx+1} earned ✅</p></div>`
+    +(L.tool?toolBox(L.tool):"")+(L.egg?eggBox(L.egg):"")+(L.links?linkBox(L.links):"");
+}
+const AB="ABCDEF".split("");
+
+/* ================= Intro ================= */
+function renderIntro(){
+  setHue(0);li=-1;got.length=0;score=0;paint();
+  el.innerHTML=`
+  <div class="stripes"></div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.08em;text-align:center;border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);padding:8px 0;margin:0 0 18px">
+    NCCU LIBRARY　·　${todayStr}
+    <a href="index.html" style="float:right;color:var(--muted);text-decoration:underline">中文</a></div>
+  <span class="eyebrow">NCCU Library</span>
+  <h1>Ding-dong!<br>Welcome to the Database</h1>
+  <p class="sub">Seven checkpoints of a convenience-store paper 🏪</p>
+  <p class="lede" style="font-size:18px">Seven things tend to go wrong when you write a paper. The topic is too big. You cannot find the evidence. Your keywords miss. Then you pick the wrong articles, the data turns out fake, you misread a summary, and by the end you are not even sure you are allowed to use AI 😵<br><br>Each checkpoint is one of those moments. Clear it, get a stamp. Collect all seven and you can hand the paper in.</p>
+  <div class="card card--a">
+    <span class="src">The paper you are writing this round</span>
+    <p style="margin:0 0 8px;font-size:21px;font-weight:900">Why does Taiwan have so many convenience stores?</p>
+    <p style="margin:0;color:var(--ink2)">Do not let the question fool you. Answering it properly takes <b>nine</b> different kinds of source: journal articles, citation records, theses, old newspapers, official statistics, colonial-era archives, company financials, court judgments, and a whole book.<br><br>Those nine live in nine different places. For most of them, you cannot get at the <b>full content</b> systematically through a normal Google search ⚠️</p>
+  </div>
+  <div class="tally"><span>1️⃣ Focus</span><span>2️⃣ Evidence</span><span>3️⃣ Keywords</span><span>4️⃣ Selection</span><span>5️⃣ Verify</span><span>6️⃣ Read</span><span>7️⃣ Submit</span></div>
+  <p class="hint">🔺 Seven checkpoints, 20 points each, 140 in total.<br>
+  🔺 There is a fair amount here, so give yourself <b>25 to 35 minutes</b>. No need to rush: <b>your progress is saved in this browser</b>, so you can close the page and come back to the last checkpoint you finished 💾<br>
+  🔺 Every checkpoint ends with a convenience-store bonus 🍙, and there is a research profile waiting for you at the end.<br>
+  🔺 Whatever your major, several of these nine will come up sooner or later.</p>
+  ${linkBox(["lib101","roadmap","videos","aiguide"],"✳️ Bookmark these before you start")}
+  <div id="resumeBox"></div>
+  <button class="btn" onclick="wipe();next()">Ding-dong! Let's go</button>`;
+  const d=load();
+  if(d&&d.li>=0&&d.li<7){
+    document.getElementById("resumeBox").innerHTML=
+      `<div class="egg" style="border-color:var(--ink);background:#fff"><span class="lb">💾 Found your saved progress!</span>
+       <p>You finished <b>checkpoint ${d.li+1}</b> last time with ${d.score} points. Continue?</p>
+       <button class="btn" style="margin-top:12px" onclick="resume()">Resume where you left off →</button></div>`;
+  }
+}
+
+/* ===== 01 Focus ===== */
+function renderL1(){
+  const L=L1;let r=0,pts=0;const ch=[];
+  // topic line always shows the correct answer, to stay consistent with later checkpoints
+  const best=R=>R.opts.find(o=>o.v==="ok");
+  el.innerHTML=head(L)+`<div class="thesis" id="th"></div><div id="body"></div>`;
+  draw();step();
+  function draw(){
+    const s=i=>ch[i]?`<span class="slot filled">${ch[i]}</span>`:`<span class="slot">？</span>`;
+    document.getElementById("th").innerHTML=
+      `<div>${L.tpl[0]} ${s(0)} ${L.tpl[1]} ${s(1)} ${L.tpl[2]} ${s(2)} ${L.tpl[3]} ${s(3)} ${L.tpl[4]}</div>`;
+  }
+  function step(){
+    if(r>=L.rounds.length){
+      const g=Math.round(pts/(L.rounds.length*2)*20);add(g);
+      document.getElementById("body").innerHTML=
+        `<div class="card card--a"><span class="src">✅ A workable research topic after narrowing</span><p style="margin:0;font-size:18px;font-weight:700;line-height:1.7">${
+          L.tpl[0]+ch[0]+L.tpl[1]+ch[1]+L.tpl[2]+ch[2]+L.tpl[3]+ch[3]+L.tpl[4]}</p>
+          <p style="margin:10px 0 0;font-size:13.5px;color:var(--muted)">(Whatever you picked, we continue with the most finishable version, and the following checkpoints all use this topic.)</p></div>`
+        +debrief(L,g,0)+`<button class="btn" onclick="next()">Take the topic and find evidence →</button>`;
+      return;
+    }
+    const R=L.rounds[r];
+    document.getElementById("body").innerHTML=`
+      <div class="card"><span class="src">Narrowing ${r+1} / ${L.rounds.length}</span>
+        <p style="margin:0;font-size:17px;font-weight:500">${R.ask}</p>
+        <div class="opts" id="o">${R.opts.map((o,i)=>
+          `<button class="opt" data-i="${i}"><span class="k">${AB[i]}</span><span>${o.frag}${o.pair?" ／ "+o.pair:""}</span></button>`).join("")}</div>
+      </div><div id="fb"></div>`;
+    document.querySelectorAll("#o .opt").forEach(b=>b.onclick=()=>{
+      const i=+b.dataset.i,o=R.opts[i];
+      document.querySelectorAll("#o .opt").forEach((x,j)=>{
+        x.disabled=true;x.classList.add(R.opts[j].v==="ok"?"good":R.opts[j].v==="warn"?"warn":"bad");});
+      pts+=o.v==="ok"?2:o.v==="warn"?1:0;
+      // always fill with the correct answer
+      const bo=best(R);
+      if(r===0)ch[0]=bo.frag;else if(r===1){ch[1]=bo.frag;ch[2]=bo.pair;}else ch[3]=bo.frag;
+      draw();
+      const note = o.v==="ok"
+        ? ""
+        : `<p style="margin:0 0 6px;font-size:14px;color:var(--ink2)">📝 You picked <b>${AB[i]}</b>. To keep the paper finishable we fill the topic line with the most workable version (option ${AB[R.opts.indexOf(bo)]}) — here is why.</p>`;
+      document.getElementById("fb").innerHTML=
+        note+explain(R.opts.map(x=>({t:x.frag+(x.pair?" ／ "+x.pair:""),v:x.v,why:x.why})),AB,`🤔 Let's look at each option`)
+        +`<button class="btn" id="nx">${r+1<L.rounds.length?"Keep narrowing →":"See what the topic became →"}</button>`;
+      document.getElementById("nx").onclick=()=>{r++;step();};
+    });
+  }
+}
+
+/* ===== 02 Evidence ===== */
+function renderL2(){
+  const L=L2;let idx=0,hit=0;const keys=Object.keys(FAM);
+  el.innerHTML=head(L)+`<div id="body"></div>`;
+  step();
+  function step(){
+    if(idx>=L.needs.length){
+      const g=Math.round(hit/L.needs.length*20);add(g);
+      document.getElementById("body").innerHTML=
+        `<div class="card card--a"><span class="src">✅ The nine places this paper draws on</span>
+          <div class="tally">${Object.values(FAM).map(f=>`<span>${f.n}</span>`).join("")}</div></div>
+         <div class="egg" style="border-color:var(--ink)"><span class="lb">📢 These are only examples</span>
+          <p>The databases and uses named here are just <b>a few representatives of each type</b>. NCCU subscribes to far more than these, and one database often has many uses: Airiti alone covers journals, theses and ebooks; Statista covers both statistical charts and industry reports.</p>
+          <p>More importantly, <b>the categories are fluid</b>. Many databases span several types; the grouping here is just to build the habit of "picture your evidence first", not something to memorize 😊</p>
+          <p class="go">👉 Browse the full database list and filter by subject or type. There is a great deal more than we could name here.</p></div>`
+        +debrief(L,g,1)+`<button class="btn" onclick="next()">On to keywords →</button>`;
+      return;
+    }
+    const N=L.needs[idx];
+    document.getElementById("body").innerHTML=`
+      <div class="need"><span class="src">Evidence needed ${idx+1} / ${L.needs.length}</span>
+        <p style="margin:0;font-size:16px;font-weight:500">${N.q}</p></div>
+      <div class="fams" id="f">${keys.map(k=>
+        `<button class="fam" data-k="${k}"><strong>${FAM[k].n}</strong><span>${FAM[k].d}</span></button>`).join("")}</div>
+      <div id="fb"></div>`;
+    document.querySelectorAll(".fam").forEach(b=>b.onclick=()=>{
+      const k=b.dataset.k,ok=k===N.right;
+      document.querySelectorAll(".fam").forEach(x=>{x.disabled=true;if(x.dataset.k===N.right)x.classList.add("good");});
+      if(!ok)b.classList.add("bad");
+      if(ok)hit++;
+      document.getElementById("fb").innerHTML=`
+        <div class="fb ${ok?"good":"bad"}">
+          <div class="lesson">${ok?"✅ Right place":`You picked ${FAM[k].n}; the answer is ${FAM[N.right].n}`}</div>
+          <p>${N.ok}</p></div>
+        <div class="offgrid"><span class="lb">⚠️ THE PART AN ORDINARY WEB SEARCH CAN'T GIVE YOU</span><br>${N.off}</div>
+        ${profCard(N.right)}
+        <button class="btn" id="nx">${idx+1<L.needs.length?"Next kind of evidence →":"All nine collected →"}</button>`;
+      document.getElementById("nx").onclick=()=>{idx++;step();};
+    });
+  }
+}
+
+/* ===== 03 Keywords ===== */
+function renderL3(){
+  const L=L3;const q=[];
+  el.innerHTML=head(L)+`
+    <div class="query" id="q"><span class="ph">Tap the word tiles below to start building...</span></div>
+    <button class="btn btn--ghost" style="padding:8px 18px;font-size:14px;margin-top:0" id="undo">Undo</button>
+    <button class="btn btn--ghost" style="padding:8px 18px;font-size:14px;margin-top:0" id="clr">Clear</button>
+    <div class="chipset">${Object.entries(L.chips).map(([k,v])=>
+      `<h4>${k}</h4><div class="chips">${v.map((c,i)=>
+        `<button class="chip ${c.g==="op"?"op":""}" data-t="${c.t.replace(/"/g,'&quot;')}" data-g="${c.g}" data-zh="${!!c.zh}" data-ac="${!!c.academic}">${c.t}</button>`).join("")}</div>`).join("")}
+    </div>
+    <button class="btn" id="go" disabled>Check this search</button><div id="fb"></div>`;
+  const draw=()=>{
+    document.getElementById("q").innerHTML=q.length
+      ? q.map(t=>`<span class="tk ${t.g==="op"?"op":""}">${t.t}</span>`).join("")
+      : `<span class="ph">Tap the word tiles below to start building...</span>`;
+    document.getElementById("go").disabled=q.length<3;
+  };
+  document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{
+    q.push({t:b.dataset.t,g:b.dataset.g,zh:b.dataset.zh==="true",ac:b.dataset.ac==="true"});draw();});
+  document.getElementById("undo").onclick=()=>{q.pop();draw();};
+  document.getElementById("clr").onclick=()=>{q.length=0;draw();};
+  document.getElementById("go").onclick=()=>{
+    const cnt=g=>q.filter(t=>t.g===g).length;
+    const op=s=>q.some(t=>t.g==="op"&&t.t===s);
+    const res={
+      aca: q.some(t=>t.g==="A"&&t.ac&&t.zh),
+      syn: cnt("A")>=2||cnt("B")>=2||cnt("C")>=2,
+      bi:  q.some(t=>t.zh&&t.g!=="op")&&q.some(t=>!t.zh&&t.g!=="op"),
+      or:  op("OR"), and: op("AND"), par: op("(")&&op(")")
+    };
+    const hit=Object.values(res).filter(Boolean).length;
+    const g=Math.round(hit/6*20);add(g);
+    document.getElementById("go").remove();
+    document.getElementById("fb").innerHTML=
+      `<div class="card"><span class="src">Result: ${hit} / 6</span>`+
+      L.rules.map(r=>`<div class="rule-row ${res[r.id]?"hit":"no"}"><span class="mk">${res[r.id]?"✓":"✕"}</span>
+        <span><b>${r.label}</b><small>${r.desc}</small></span></div>`).join("")+`</div>`
+      +debrief(L,g,2)+`<button class="btn" onclick="next()">Run the search →</button>`;
+  };
+}
+
+/* ===== 04 Selection ===== */
+function renderL4(){
+  const L=L4;const picked=new Set();
+  el.innerHTML=head(L)+`
+    <div class="note" style="border-style:solid;border-color:var(--line);background:#F7F6FC;color:var(--ink2)">📌 ${L.note}</div>
+    <div class="papers" id="p">${L.papers.map((p,i)=>
+      `<button class="paper" data-i="${i}"><span class="ti">${p.ti}</span><span class="au">${p.au}</span>
+        <span class="meta">${p.meta.map((m,j)=>`<span class="${p.hot&&j===1?"hot":""}">${m}</span>`).join("")}</span></button>`).join("")}
+    </div>
+    <p class="hint" id="cnt">0 selected · pick 3</p>
+    <button class="btn" id="go" disabled>Read these</button><div id="fb"></div>`;
+  const go=document.getElementById("go");
+  document.querySelectorAll(".paper").forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i;
+    picked.has(i)?(picked.delete(i),b.classList.remove("on")):(picked.add(i),b.classList.add("on"));
+    document.getElementById("cnt").textContent=`${picked.size} selected · pick 3`;
+    go.disabled=picked.size===0;});
+  go.onclick=()=>{
+    let hit=0,soft=0,miss=0;
+    document.querySelectorAll(".paper").forEach(b=>{
+      const i=+b.dataset.i,p=L.papers[i];b.disabled=true;b.classList.remove("on");
+      b.classList.add(p.v==="ok"?"good":p.v==="no"?"bad":"warn");
+      if(picked.has(i)&&p.v==="ok")hit++;
+      else if(picked.has(i)&&p.v==="warn")soft++;
+      else if(picked.has(i)&&p.v==="no")miss++;});
+    const total=L.papers.filter(x=>x.v==="ok").length;
+    const g=Math.max(0,Math.round((hit+soft*.5-miss*.5)/total*20));add(g);go.remove();
+    document.getElementById("fb").innerHTML=
+      explain(L.papers.map(p=>({t:p.ti,v:p.v,why:p.why})),AB,
+        `🤔 You picked ${[...picked].sort().map(i=>AB[i]).join(", ")||"nothing"} — here is each one`)
+      +debrief(L,g,3)+`<button class="btn" onclick="next()">Start verifying →</button>`;
+  };
+}
+
+/* ===== 05 Verify ===== */
+function renderL5(){
+  const L=L5;let s=0,pts=0;
+  el.innerHTML=head(L)+`<div id="body"></div>`;
+  step();
+  function step(){
+    if(s>=L.subs.length){
+      const g=Math.round(pts/(L.subs.length*10)*20);add(g);
+      document.getElementById("body").innerHTML=debrief(L,g,4)+`<button class="btn" onclick="next()">Start reading →</button>`;
+      return;
+    }
+    const S=L.subs[s];
+    document.getElementById("body").innerHTML=`
+      <div class="card card--a"><span class="src">${S.head} · ${s+1} / ${L.subs.length}</span>
+        <p style="margin:0;font-size:16px">${S.quote}</p></div>
+      <div class="card"><span class="src">${S.q}</span>
+        <div class="opts" id="o">${S.opts.map((o,i)=>
+          `<button class="opt" data-i="${i}"><span class="k">${AB[i]}</span><span>${o.t}</span></button>`).join("")}</div>
+      </div><div id="fb"></div>`;
+    document.querySelectorAll("#o .opt").forEach(b=>b.onclick=()=>{
+      const i=+b.dataset.i,o=S.opts[i];
+      document.querySelectorAll("#o .opt").forEach((x,j)=>{
+        x.disabled=true;x.classList.add(S.opts[j].v==="ok"?"good":S.opts[j].v==="warn"?"warn":"bad");});
+      pts+=o.v==="ok"?10:o.v==="warn"?6:2;
+      document.getElementById("fb").innerHTML=
+        explain(S.opts,AB,`🤔 You picked ${AB[i]} — here is each option`)
+        +`<button class="btn" id="nx">${s+1<L.subs.length?"Next item →":"Both checked →"}</button>`;
+      document.getElementById("nx").onclick=()=>{s++;step();};
+    });
+  }
+}
+
+/* ===== 06 Read ===== */
+function renderL6(){
+  const L=L6;const picked=new Set();
+  el.innerHTML=head(L)+`
+    <div class="card"><span class="src">📄 THE ORIGINAL ABSTRACT</span>
+      <p style="font-size:13.5px;color:var(--muted);margin:0 0 12px;line-height:1.7">${L.cite}</p>
+      <div class="orig">${L.orig}</div></div>
+    <div class="card card--a"><span class="src">🤖 THE AI SUMMARY · TAP A SENTENCE TO HIGHLIGHT</span><div id="st"></div></div>
+    <p class="hint" id="cnt">0 highlighted · ${L.need}</p>
+    <button class="btn" id="go" disabled>Submit</button><div id="out"></div>`;
+  const box=document.getElementById("st");
+  box.innerHTML=L.items.map((it,i)=>`<button class="stmt" data-i="${i}"><b style="font-family:'IBM Plex Mono',monospace;color:var(--muted);margin-right:8px">${AB[i]}</b>${it.t}</button>`).join("");
+  const go=document.getElementById("go");
+  box.querySelectorAll(".stmt").forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i;
+    picked.has(i)?(picked.delete(i),b.classList.remove("marked")):(picked.add(i),b.classList.add("marked"));
+    document.getElementById("cnt").textContent=`${picked.size} highlighted · ${L.need}`;
+    go.disabled=picked.size===0;});
+  go.onclick=()=>{
+    let hit=0,miss=0;
+    box.querySelectorAll(".stmt").forEach(b=>{
+      const i=+b.dataset.i,it=L.items[i];b.disabled=true;b.classList.remove("marked");
+      if(picked.has(i)&&it.bad){b.classList.add("marked");hit++;}
+      else if(picked.has(i)&&!it.bad){b.classList.add("miss","marked");miss++;}
+      else if(!picked.has(i)&&it.bad){b.classList.add("missed");}});
+    const bad=L.items.filter(x=>x.bad).length;
+    const g=Math.max(0,Math.round((hit-miss*.5)/bad*20));add(g);go.remove();
+    document.getElementById("out").innerHTML=
+      explain(L.items,AB,`🤔 You highlighted ${[...picked].sort().map(i=>AB[i]).join(", ")||"nothing"} — sentence by sentence`)
+      +debrief(L,g,5)+`<button class="btn" onclick="next()">Time to wrap up →</button>`;
+  };
+}
+
+/* ===== 07 Submit ===== */
+function renderL7(){
+  const L=L7;const picked=new Set();
+  el.innerHTML=head(L)+`
+    <div class="opts" id="o">${L.items.map((o,i)=>
+      `<button class="opt" data-i="${i}"><span class="k">${i+1}</span><span>${o.t}</span></button>`).join("")}</div>
+    <button class="btn" id="go" disabled>Submit</button><div id="fb"></div>`;
+  const go=document.getElementById("go");
+  document.querySelectorAll("#o .opt").forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i;
+    picked.has(i)?(picked.delete(i),b.classList.remove("on")):(picked.add(i),b.classList.add("on"));
+    go.disabled=picked.size===0;});
+  go.onclick=()=>{
+    let hit=0,miss=0;
+    document.querySelectorAll("#o .opt").forEach(b=>{
+      const i=+b.dataset.i,o=L.items[i];b.disabled=true;b.classList.remove("on");
+      b.classList.add(o.v==="no"?"bad":o.v==="warn"?"warn":"good");
+      if(picked.has(i)&&o.v==="no")hit++;
+      if(picked.has(i)&&o.v==="ok")miss++;});
+    const total=L.items.filter(x=>x.v==="no").length;
+    const g=Math.max(0,Math.round((hit-miss*.5)/total*20));add(g);go.remove();
+    document.getElementById("fb").innerHTML=
+      explain(L.items,["1","2","3","4","5"],`🤔 You picked ${[...picked].sort((a,b)=>a-b).map(i=>i+1).join(", ")||"nothing"} — here is each one`)
+      +debrief(L,g,6)+`<button class="btn" onclick="next()">Hand it in! →</button>`;
+  };
+}
+
+/* ================= Result ================= */
+const FORM="https://docs.google.com/forms/d/e/1FAIpQLSfBRo1vsptXgR7PPzUmug9ZyXdpwJiSpUuWI2pWpSe8SWAkXw/viewform?usp=publish-editor";
+const STG=["Focus","Evidence","Keywords","Selection","Verify","Read","Submit"];
+const PERSONA=[
+ {n:"the Question Framer",e:"🧭",d:"You are good at grinding a vague curiosity into a question that can actually be asked and answered. It is one of the harder things to learn in research, and one of the more useful."},
+ {n:"the Map Reader",e:"🗺️",d:"You carry a map of resources in your head. Given a question, you first ask where that kind of thing lives, rather than rushing to open a search box."},
+ {n:"the Key Cutter",e:"🔑",d:"You know how to speak the language a database understands, and that thin results mean adjusting the keywords rather than concluding nobody has done it."},
+ {n:"the Appraiser",e:"💎",d:"Faced with a long results list, you can tell which items are worth your time. You are not led by pretty numbers, and you do not overlook an unassuming thesis."},
+ {n:"the Verifier",e:"🔍",d:"A tidy-looking record does not fool you. You start from whatever is easiest to disprove, and you know even a first-hand source has a point of view."},
+ {n:"the Proofreader",e:"📐",d:"You have a sharp ear for language and catch the quiet shifts in a paraphrase: force, scope, method, causation. Not many people can."},
+ {n:"the Ethics Keeper",e:"🛡️",d:"You can tell a hard line from a disclosure question. That suggests you want the paper not merely finished but defensible."}
+];
+const FIXUP=[
+ {t:"Narrow the topic further",d:"Before you start next time, answer three questions: who are you studying, what is related to what, and where does the evidence come from? Only when all three have answers is the topic set.",k:"r1"},
+ {t:"Explore more kinds of resource",d:"Next time you get stuck, picture what your evidence should look like. A passage from a book? A sourced chart? A court judgment? A peer-reviewed article? The answer tells you where to go.",k:"r2"},
+ {t:"Try more keyword combinations",d:"Searching is iterative. Too many results, add a condition; too few, loosen the synonyms. And steal the keywords from one article that fits well.",k:"r3"},
+ {t:"Practice judging sources",d:"Next time, look at year, author, journal and document type before deciding what to read. And check a citation database to see who has cited it.",k:"rauth"},
+ {t:"Build a verification habit",d:"For anything an AI hands you, ask three things: does this source exist, did the author really say it, and is their claim supported by evidence?",k:"aicheck"},
+ {t:"Read the conclusions yourself",d:"Let an AI summarize if you like, but open the full text for the methods and conclusions. Often all the AI had was the abstract too.",k:"r6"},
+ {t:"Check your course rules first",d:"Instructors differ a great deal on AI. Ask before you start, and add an AI-use statement listing tool, version, timing and full prompts.",k:"aiethic"}
+];
+function loyaltyCard(){
+  const done=got.filter(Boolean).length;
+  const full=done===7;
+  return `<div class="loyalty">
+    <div class="loyalty-top">
+      <div>
+        <div class="loyalty-brand">🏪 LOYALTY CARD</div>
+        <div class="loyalty-sub">NCCU Library · Ding-dong! Welcome to the Database</div>
+      </div>
+      <div class="loyalty-no">DATE<br><b>${todayStr}</b></div>
+    </div>
+    <div class="loyalty-grid">${STG.map((nm,i)=>
+      got[i]
+        ? `<div class="cell filled"><span class="ink" style="--c:${HUE[i]}"><b>${lvScore[i]||0}</b><i>pts</i></span><span class="cell-nm">${i+1}·${nm}</span></div>`
+        : `<div class="cell"><span class="ink-empty">${i+1}</span><span class="cell-nm">${nm}</span></div>`
+      ).join("")}
+      <div class="cell reward ${full?"win":""}">
+        <span class="ink-reward">${full?"🎁":"？"}</span>
+        <span class="cell-nm">${full?"complete!":"collect all"}</span>
+      </div>
+    </div>
+    <div class="loyalty-foot">
+      <span>${done} / 7 stamps</span>
+      <span>${full?"★ ALL COLLECTED ★":"⋯⋯⋯⋯⋯⋯"}</span>
+    </div>
+  </div>`;
+}
+function giftCard(){
+  let best=0,worst=0;
+  for(let i=0;i<7;i++){
+    if((lvScore[i]||0)>(lvScore[best]||0))best=i;
+    if((lvScore[i]||0)<(lvScore[worst]===undefined?99:lvScore[worst]))worst=i;
+  }
+  const P=PERSONA[best],F=FIXUP[worst],L=LK[F.k];
+  return `<div class="gift"><span class="tag">YOUR TAKEAWAY</span>
+    <h3>${P.e} You are ${P.n}</h3>
+    <p>${P.d}</p>
+    <p style="margin-top:14px"><b>Your strongest checkpoint</b> | ${best+1}. ${STG[best]} (${lvScore[best]||0} / 20)</p>
+    <div class="rx"><b>🎒 Your next step: ${F.t}</b><br>${F.d}
+      <br><br><a href="${L.u}" target="_blank" rel="noopener" style="color:#F5A800;font-weight:700">${L.t} →</a></div>
+    <p style="margin-top:14px;font-size:13.5px;opacity:.85">(Screenshot this and glance at it before your next paper 📸)</p></div>`;
+}
+
+function renderEnd(){
+  setHue(0);paint();
+  const t=[
+    {min:124,s:"This paper can be written!",e:"🎯",x:"You can get past all seven checkpoints. The rest is just time and coffee ☕"},
+    {min:96,s:"One more revision and it is ready",e:"📎",x:"Your judgment is largely solid. The usual place to lose points: realizing too late the keywords or topic still needed tuning."},
+    {min:62,s:"Stuck in the middle",e:"🧩",x:"Right direction, but your verification order could save you time. Start from whatever is easiest to disprove."},
+    {min:0,s:"Come by the library first",e:"🚪",x:"No worries, these seven were built to trip people up 😄 Play again, and this time ask at every step: what should my evidence look like?"}
+  ].find(x=>score>=x.min);
+  el.innerHTML=`
+    <div class="stripes"></div>
+    <span class="eyebrow">Result</span>
+    <div class="stamp">${t.e} ${t.s}</div>
+    <div class="score">${score}<small> / 140</small></div>
+    <p class="lede" style="margin-top:14px">${t.x}</p>
+    <a class="cta" href="${FORM}" target="_blank" rel="noopener">🎁 Take the survey · win a NT$2,000 voucher
+      <small>One minute, and tell us which checkpoint helped most</small></a>
+    ${loyaltyCard()}
+    ${giftCard()}
+    <hr class="rule">
+    <h2>🤖 So where is AI actually good?</h2>
+    <p class="lede">This round has been about staying wary of AI, which might sound like an argument for not using it. It is not. <b>Quite the opposite.</b> Checking matters because AI is useful and you are going to want to use it.<br><br>Everything below appears in <b>both Taiwan's guidelines (NTU, NTNU, NSYSU and others, as summarized by the academic integrity resource center) and the policies of Harvard, MIT, Oxford and Cambridge</b> as an acceptable way for students to use AI. Those same guidelines attach <b>a caveat to every one</b>, so the caveats are here too 👇</p>
+    <div class="ai-good">
+      <div class="ai-row"><span class="ai-ic">💡</span><div><b>Generating topics and ideas</b> | Stuck on what to study? Give AI the situation, some keywords and what you need, and let it throw several angles at you. <b>Brainstorming</b> a research question or a way into a piece of writing is one of its real strengths.<br><span class="ai-but">Caveat: what you get is a starting point, not a conclusion. Narrowing the topic down, and working out whether it can actually be done, is still your job.</span></div></div>
+      <div class="ai-row"><span class="ai-ic">🧠</span><div><b>Practicing critical thinking</b> | Treat AI as someone who sees the question differently. Ask it to push back on your argument from another angle, and use the exchange to practice shifting perspective and asking a sharper question. Your own thinking gets clearer in the back-and-forth.<br><span class="ai-but">Caveat: what it says depends on how you ask. Aim the question badly and you get a biased or simply wrong answer back. It is a sparring partner, not a referee.</span></div></div>
+      <div class="ai-row"><span class="ai-ic">🗂️</span><div><b>Organizing and summarizing material</b> | Hand it the material <b>you found and read yourself</b>, then let it reorganize, break up and summarize that material into notes you can use. This can save a useful amount of time.<br><span class="ai-but">Caveat: the guidelines warn about this specifically. What comes back usually has no sources attached and is not necessarily right, so <b>cross-check</b> it against other tools or the original sites before you rely on it.</span></div></div>
+      <div class="ai-row"><span class="ai-ic">🔤</span><div><b>Translating and polishing your writing</b> | Take a paragraph you wrote and ask AI to translate it, smooth out the tone, or fix the grammar. This is especially useful when you are writing in a language that is not your first. University guidelines generally accept this use.<br><span class="ai-but">Caveat: AI misses nuance and emotional register, and it mistranslates technical terms more often than you would expect. Read back over the wording, grammar and meaning yourself.</span></div></div>
+      <div class="ai-row"><span class="ai-ic">✏️</span><div><b>Practicing rewriting and debugging</b> | Feed a passage to AI, take its version, then <b>compare</b> it with your own rewrite and look at where the two differ. The guidelines suggest this as a way to practice paraphrasing. Debugging code and proofreading work the same way.<br><span class="ai-but">Caveat: this is for <b>practice and comparison</b>. It is not permission to hand in AI's rewrite as your own work. You still have to read the final text and answer for it.</span></div></div>
+      <div class="ai-row"><span class="ai-ic">🔒</span><div><b>(A shared red line) Do not feed it confidential or personal data</b> | Harvard, MIT and Oxford all make the same point: <b>keep confidential material, unpublished research and other people's personal data out of public AI tools</b>. On default settings, what you type in is not private. Checkpoint 7 covered the same ground: interview transcripts have to be de-identified first.<br><span class="ai-but">Caveat: this is not a "be careful" suggestion. It is an explicit rule at most institutions. Where other people's personal data is involved, check first that your informed-consent form covers this kind of processing.</span></div></div>
+    </div>
+    <p class="lede" style="font-size:15px;color:var(--muted);margin-top:16px">There is a pattern in all of these. <b>AI does the generating, the sparring, the organizing and the polishing. You do the checking, the judging and the deciding, and you answer for the result.</b> It makes the work faster. The last step, working out what is actually true and standing behind the conclusion, stays with you.<br><br>Oxford and a number of other universities boil this down to one question you can ask yourself at any point: <b>"Am I still the author of this work?"</b> While the answer is yes, you are on the right side of the line. That question is more or less what the seven kinds of judgment below add up to 👇<br><br>📌 A reminder to close on: these are uses <b>recognized at most institutions</b>, but <b>your instructor and your course may still take a different line</b>. Check the rules before you start, and be straightforward about how you used AI.</p>
+        <hr class="rule">
+    <h2>Seven checkpoints are really seven kinds of judgment</h2>
+    <ol class="list">
+      <li><b>The question is yours to ask.</b> Research is not about finding an answer. It is about grinding a vague curiosity down into a question that can actually be asked and answered, and nobody else can do that part for you.</li>
+      <li><b>The shape of information decides where it lives.</b> Old newspapers, data series, judgments, company financials and monographs are all produced in different ways. Once you know what your evidence should look like, you know where to go.</li>
+      <li><b>Searching is exploration.</b> Adjust as you go, take keywords from a good article, snowball backward and forward through references and citations, tighten when there is too much and loosen when there is too little. It works more like browsing than like looking up an answer.</li>
+      <li><b>Authority is built, and it depends on context.</b> Journal rank, peer review and citation counts are clues rather than scores. Preprints, theses and industry reports each have their place. Relevance still comes first.</li>
+      <li><b>Every claim can be taken apart and checked.</b> Start with whichever part is easiest to disprove.</li>
+      <li><b>Paraphrase drifts, and the drift is what reads most smoothly.</b> Watch four things in particular: method, scope, strength of claim, and causation.</li>
+      <li><b>Information has value, and value brings responsibility.</b> Licensing, personal data, giving credit in citations: you have access to all this because somebody paid a cost for it.</li>
+    </ol>
+    <p class="lede" style="font-size:15px;color:var(--muted);margin-top:18px">The same idea runs through all seven: <b>scholarship is a long public conversation</b>. Searching the literature is listening to what other people have said. Citing is putting your hand up and saying where you stand. Naming your sources is what lets the next person carry the work forward. AI makes a good assistant, and it can speed things up, generate ideas and put material in order. What it cannot do is take your place in that conversation, because <b>only you can answer for what gets said</b>. That part, the part it cannot do for you, is the part worth practicing.</p>
+    <hr class="rule">
+    <p class="lede">📢 The library runs workshops through the semester, and the video guides below cover most of the same ground if the timing does not work for you.<br><br></p>
+    ${linkBox(["lib101","roadmap","videos","aiguide","aiwork","db"],"✳️ Links to take with you")}
+    <p class="hint" style="margin-top:26px;padding-top:16px;border-top:1px dotted var(--line)">The checkpoints in this game are built around the ideas in the ACRL Framework for Information Literacy for Higher Education.</p>
+    <hr class="rule">
+    <h2>🏪 The nine places you just visited</h2>
+    <p class="lede">One paper, nine kinds of source. For most of them an ordinary Google search will not get you the full content: some was never digitized, some sits behind a paid license, and some you can find as a record but not download.<br><br>🔺 Worth screenshotting. Next time a paper stalls, work out which piece you are missing and you will know where to go 📎</p>
+    <div class="profs">${Object.keys(FAM).map(k=>profCard(k)).join("")}
+    </div>
+    <button class="btn" onclick="wipe();renderIntro();window.scrollTo(0,0)">Play again</button>`;
+}
+
+renderIntro();
+</script>
