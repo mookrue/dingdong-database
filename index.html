@@ -50,7 +50,7 @@ hr.rule{border:0;border-top:2px dotted var(--line);margin:36px 0}
   background:repeating-linear-gradient(90deg,var(--accent) 0 10px,transparent 10px 16px)}
 .src{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted);letter-spacing:.05em;display:block;margin-bottom:12px;text-transform:uppercase}
 
-.thesis{background:#123B2A;color:#EAF5EF;border-radius:14px;padding:22px;margin:22px 0;font-size:clamp(17px,3.2vw,22px);font-weight:500;line-height:1.65;min-height:104px;display:flex;align-items:center}
+.thesis{background:#123B2A;color:#EAF5EF;border-radius:14px;padding:22px;margin:22px 0;font-size:clamp(17px,3.2vw,22px);font-weight:500;line-height:1.65;min-height:104px;display:flex;align-items:center;position:sticky;top:8px;z-index:5;box-shadow:0 4px 16px rgba(18,59,42,.18)}
 .slot{border-bottom:2px dashed #4E7A64;padding:0 7px;margin:0 2px;color:#8FBFA5;transition:.3s}
 .slot.filled{color:#123B2A;background:#F5A800;border-bottom-color:#F5A800;border-radius:4px;animation:pop .36s cubic-bezier(.3,1.5,.5,1)}
 @keyframes pop{0%{opacity:.2;transform:translateY(4px) scale(.94)}100%{opacity:1;transform:none}}
@@ -79,7 +79,21 @@ hr.rule{border:0;border-top:2px dotted var(--line);margin:36px 0}
 .fam:disabled{cursor:default;transform:none;box-shadow:none;opacity:.42}
 .fam strong{display:block;font-size:14.5px;font-weight:700}
 .fam span{display:block;font-size:12px;color:var(--muted);margin-top:3px;line-height:1.5}
-.fam.good{border-color:var(--green);background:#EBFAF4;opacity:1}
+.fam.good{border-color:var(--green);background:#EBFAF4;opacity:1;animation:pop .3s ease}
+@keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.04);box-shadow:0 0 0 3px rgba(14,122,61,.18)}100%{transform:scale(1)}}
+.l2bar{display:flex;gap:6px;margin:16px 0 4px}
+.l2bar .dot{width:100%;height:5px;border-radius:3px;background:var(--line);transition:.2s}
+.l2bar .dot.done{background:var(--green)}
+.l2bar .dot.now{background:var(--ink)}
+.fold{border:1px solid var(--line);border-radius:6px;margin:10px 0;background:var(--card);overflow:hidden}
+.fold summary{cursor:pointer;padding:15px 18px;font-weight:800;font-size:16px;list-style:none;user-select:none;display:flex;align-items:center;justify-content:space-between}
+.fold summary::-webkit-details-marker{display:none}
+.fold summary::after{content:"＋";font-family:"IBM Plex Mono",monospace;color:var(--muted);font-weight:400;font-size:20px}
+.fold[open] summary::after{content:"－"}
+.fold summary:hover{background:#F3F1E8}
+.fold[open] summary{border-bottom:1px dashed var(--line)}
+.fold>*:not(summary){padding-left:18px;padding-right:18px}
+.fold>*:last-child{padding-bottom:16px}
 .fam.bad{border-color:var(--red);background:#FEEFF3;opacity:1}
 
 .offgrid{background:#123B2A;color:#EAF5EF;border-radius:12px;padding:16px 18px;margin-top:14px;font-size:15px;line-height:1.8}
@@ -117,15 +131,21 @@ hr.rule{border:0;border-top:2px dotted var(--line);margin:36px 0}
 .paper.warn{border-color:#E39A16;background:#FFF7E6}
 
 /* 資源檔案卡 */
-.prof{background:var(--card);border:1.5px solid var(--line);border-top:5px solid var(--fc,var(--accent));border-radius:12px;padding:18px 20px;margin-top:16px;box-shadow:var(--shadow)}
-.prof-h{display:flex;gap:12px;align-items:center;padding-bottom:13px;margin-bottom:4px;border-bottom:2px dotted var(--line)}
+.prof{background:var(--card);border:1.5px solid var(--line);border-left:5px solid var(--fc,var(--accent));border-radius:12px;margin-top:12px;box-shadow:var(--shadow);overflow:hidden}
+.prof-sum{display:flex;gap:12px;align-items:center;padding:15px 18px;cursor:pointer;list-style:none;user-select:none}
+.prof-sum::-webkit-details-marker{display:none}
+.prof-sum::after{content:"＋";margin-left:auto;font-family:"IBM Plex Mono",monospace;color:var(--muted);font-size:20px;flex:none}
+.prof[open] .prof-sum::after{content:"－"}
+.prof-sum:hover{background:#F3F1E8}
+.prof-t{display:flex;flex-direction:column}
 .prof-i{width:38px;height:38px;flex:none;border-radius:10px;background:var(--fc,var(--accent));color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px}
-.prof-h b{display:block;font-size:17px;font-weight:900;line-height:1.35}
-.prof-h small{display:block;font-size:12.5px;color:var(--muted);font-family:"IBM Plex Mono",monospace}
+.prof-t b{display:block;font-size:16px;font-weight:900;line-height:1.35}
+.prof-t small{display:block;font-size:13px;color:var(--fc,var(--muted));font-weight:600;margin-top:1px}
+.prof-body{padding:2px 20px 16px;border-top:1px dashed var(--line)}
 .prof-r{padding:11px 0;border-bottom:1px dotted var(--line);font-size:14.5px;color:var(--ink2);line-height:1.8}
 .prof-r:last-child{border-bottom:0;padding-bottom:0}
 .prof-r .lb{display:block;font-size:12.5px;font-weight:700;color:var(--ink);margin-bottom:2px;letter-spacing:.02em}
-.profs{display:grid;gap:14px;margin-top:18px}
+.profs{display:grid;gap:10px;margin-top:18px}
 
 /* 大張集點卡 */
 .loyalty{background:var(--receipt);border:1px solid var(--line);border-radius:6px;padding:0;margin-top:20px;box-shadow:var(--shadow);overflow:hidden}
@@ -260,55 +280,55 @@ const linkBox=(ks,label)=>`<div class="links-t">${label||"✳️ 想更深入的
 
 /* ========== 八種資源家族 ========== */
 const FAM={
-  jour:{n:"期刊論文資料庫",d:"華藝、JSTOR、CNKI、ProQuest",c:"#00A44E",icon:"期",
+  jour:{n:"期刊論文資料庫",hook:"想知道「這題有沒有人做過」？先來這裡",d:"華藝、JSTOR、CNKI、ProQuest",c:"#00A44E",icon:"期",
     hold:"期刊文章的書目、摘要與全文。有些是圖書館付費訂購的（訂了才看得到），有些是<b>開放取用（Open Access, OA）</b>——作者或機構已經付費讓全世界免費看。",
     where:"<b>文獻回顧</b>與<b>討論</b>。前者用來交代「前人做到哪裡」，後者用來把自己的發現放回既有研究裡對話。",
     when:"想知道這個問題有沒有人研究過、他們用什麼理論與方法、彼此的結論有沒有衝突。",
     eg:"華藝線上圖書館（中文）、CNKI 中國知網、ProQuest Central Premium、EBSCOhost、JSTOR、Cambridge Core、Oxford Academic、ScienceDirect、Taylor &amp; Francis Online、Emerald Insight、Wiley Online Library、KRpia／DBpia（韓文）",
     limit:"⚠️ 這裡有個很多人沒發現的偏誤：<b>網路上與 AI 能給你的文獻，多半是 OA 或預印本</b>——因為那些是它讀得到的。圖書館花錢訂購的那一大批，多半不在它的訓練資料裡，就算能上網也擋在付費牆外，於是它不太會推薦給你。<br><br>💡 解法很簡單：到 Google Scholar 的「設定 → 圖書館連結」搜尋並勾選政治大學，之後查詢結果旁邊就會出現政大的全文連結，能直接連回圖書館訂購的資源。這一步只要做一次，之後受用無窮～"},
-  cite:{n:"引文資料庫",d:"Scopus、Web of Science、JCR",c:"#F58220",icon:"引",
+  cite:{n:"引文資料庫",hook:"找到一篇好文章後，怎麼滾出一整串？",d:"Scopus、Web of Science、JCR",c:"#F58220",icon:"引",
     hold:"不收全文，收的是<b>文章與文章之間的引用關係</b>：這篇引了誰、又被誰引用、被引用幾次，以及各期刊的影響係數與領域排名。",
     where:"<b>文獻回顧的擴張</b>與<b>品質判斷</b>。它不會給你新的內容，但會告訴你該往哪裡找，以及手上這篇的份量有多重。",
     when:"找到一篇很關鍵的文章時——往前看它引了誰（找到理論源頭），往後看誰引了它（找到最新發展）。想判斷一本期刊在領域裡的位置時也用它。<br><br>💡 Scopus 另外還有 <b>Scopus AI</b>，可以用白話文提問，答案建立在它實際收錄的文獻上，並附可點回的出處；Deep research 功能還能產出學術格式的探索報告。",
     eg:"Scopus（含 Scopus AI）、Web of Science、Journal Citation Reports (JCR)、TCI 臺灣人文及社會科學引文索引",
     limit:"引用次數會受年代與領域習慣影響，老文章自然累積得多，理工的引用量也天生比人文社科大。而且被引用不一定是被稱讚，也可能是被拿來反駁——數字本身不會告訴你是哪一種。"},
-  thes:{n:"學位論文系統",d:"臺灣博碩士論文、政大論文系統",c:"#E03C31",icon:"論",
+  thes:{n:"學位論文系統",hook:"不知道研究方法怎麼設計？偷看別人的",d:"臺灣博碩士論文、政大論文系統",c:"#E03C31",icon:"論",
     hold:"碩博士論文全文，多數可以免費下載，還能依下載與被引用次數排序。",
     where:"<b>研究方法</b>與<b>文獻回顧</b>。它的方法章節寫得比期刊論文詳細很多，因為要向口試委員交代每一個步驟。",
     when:"剛起步、還不知道怎麼設計研究的時候。看看同題目的人怎麼做，順便接收一份已經整理好的參考書目。",
     eg:"政大博碩士論文系統、臺灣博碩士論文知識加值系統（NDLTD，免費）、ProQuest Dissertations &amp; Theses Global (PQDT)、DDC 國際博碩士論文全文資料庫",
     limit:"品質落差比期刊大很多，要自己判斷論證是否扎實；而且學位論文本來就比較少被引用，不太適合拿引用次數當品質指標。"},
-  news:{n:"報紙與新聞雜誌",d:"聯合知識庫、FT、天下、商周",c:"#0072CE",icon:"報",
+  news:{n:"報紙與新聞雜誌",hook:"想知道「當時的人怎麼看」？報紙有答案",d:"聯合知識庫、FT、天下、商周",c:"#0072CE",icon:"報",
     hold:"報紙與新聞雜誌的全文，多數可以限定日期範圍檢索，有些還保留了版面影像。",
     where:"<b>研究背景與問題意識</b>，以及<b>討論</b>時的時事對照。",
     when:"想知道一件事什麼時候發生、當時的人怎麼看、爭議點在哪裡、後來又怎麼發展。",
     eg:"聯合知識庫、臺灣新聞智慧網、慧科大中華新聞網、端傳媒、天下雜誌群知識庫、商業周刊、哈佛商業評論、Financial Times、The New York Times、The Economist",
     limit:"報導有立場也可能有錯，同一件事建議對照兩家以上。而且報紙是「當時的紀錄」，不是「事後的定論」——這正是它珍貴的地方，也是要小心的地方 ⚠️"},
-  stat:{n:"統計資料庫",d:"統計資訊網、PRIDE、Statista",c:"#009E9E",icon:"統",
+  stat:{n:"統計資料庫",hook:"需要「有出處、附定義」的數字？在這裡",d:"統計資訊網、PRIDE、Statista",c:"#009E9E",icon:"統",
     hold:"經過整理的數據與長期數列，通常附有調查方法、定義說明與原始出處。",
     where:"<b>研究背景</b>（用數字撐起問題意識），以及<b>資料與分析</b>（直接當研究資料用）。",
     when:"想知道有多少、多久了、趨勢往哪走、跟其他國家或縣市比起來如何。",
     eg:"統計報告資料庫、政策研究指標資料庫 PRIDE、Statista、OECD iLibrary、MIC-AISP 資策會產業情報、中華民國統計資訊網（政府免費公開）",
     limit:"記得點開「定義」與「調查方法」！同一個名詞，不同機構的算法可能不一樣——很多數據矛盾其實不是誰造假，是定義不同。跨年比較前建議先看定義有沒有換過 🔍"},
-  hist:{n:"史料資料庫",d:"臺灣日日新報、臺灣文獻叢刊",c:"#F5A800",icon:"史",
+  hist:{n:"史料資料庫",hook:"想看幾十年前、甚至日治時期的樣子？",d:"臺灣日日新報、臺灣文獻叢刊",c:"#F5A800",icon:"史",
     hold:"已經數位化的原始文獻、老報紙、老照片、官方檔案，有些提供全文檢索，有些只能瀏覽影像。",
     where:"<b>研究背景</b>（長時段脈絡），以及<b>資料與分析</b>——史料本身就可以是研究材料。",
     when:"想知道以前是什麼樣子、一個現象是什麼時候、怎麼開始的。",
     eg:"臺灣日日新報（日治時期最主要的報紙）、臺灣文獻叢刊、臺灣百年寫真、風月報／三六九小報（日治漢文刊物）、政大圖書館特藏資源、Gale Primary Sources（跨國歷史檔案）",
     limit:"被數位化的只是留存史料的一部分，OCR 辨識也未必準確，純用關鍵字檢索容易漏東西，記得搭配分類瀏覽。另外舊資料的用詞跟現在差很多（老地名、舊譯名、異體字），關鍵字要多試幾種～"},
-  biz:{n:"商學資料庫",d:"TEJ、Bloomberg、產業報告",c:"#3A4CA8",icon:"商",
+  biz:{n:"商學資料庫",hook:"想搞懂一個產業怎麼運作、怎麼賺錢？",d:"TEJ、Bloomberg、產業報告",c:"#3A4CA8",icon:"商",
     hold:"公司財務數據、產業分析報告、市場調查、行銷個案與消費者行為資料。",
     where:"<b>研究背景</b>（產業結構）與<b>資料與分析</b>（財務數據、個案）。",
     when:"想知道一個產業怎麼運作、公司靠什麼賺錢、市場規模多大、消費者長什麼樣子。",
     eg:"TEJ Pro 台灣經濟新報、Bloomberg（金融市場即時資訊）、E-ICP 東方消費者行銷資料庫、Business Source Complete、WARC（行銷個案）、MIC-AISP 資策會產業情報、LSEG Workspace（全球財經數據）、公開資訊觀測站（政府免費公開）",
     limit:"產業報告是有商業目的的產品，數字口徑要看清楚。公司年報是法定揭露，可信度高但也最保守——想知道策略背後的想法，行銷個案通常會講得更多 💡"},
-  law:{n:"法學資料庫",d:"法源、月旦、Westlaw、HeinOnline",c:"#8A4FBF",icon:"法",
+  law:{n:"法學資料庫",hook:"想知道「法律實際上怎麼判」而不只是條文？",d:"法源、月旦、Westlaw、HeinOnline",c:"#8A4FBF",icon:"法",
     hold:"法規條文與歷次修正、法院判決全文、行政函釋，以及法學期刊論文與評釋。",
     where:"<b>研究背景</b>（制度框架）與<b>討論及政策建議</b>。",
     when:"想知道法律怎麼規定、法院實務上怎麼認定、有沒有修過法、主管機關的解釋是什麼。",
     eg:"法源法律網、月旦法學知識庫（中文法學論著）、Westlaw Classic（英美法）、HeinOnline（法學期刊回溯全文）、Beck-online（德國法）、TKC Law Library（日本法）、司法院裁判書查詢系統（政府免費公開）",
     limit:"法規會修！記得確認你引的是哪一個版本、生效日期是什麼時候。判決也有審級之分，地方法院跟最高法院的份量不一樣；而且個案判決不見得能直接推成通則～"},
-  book:{n:"圖書與電子書",d:"館藏目錄、HyRead、udn 讀書館",c:"#1E2A33",icon:"書",
+  book:{n:"圖書與電子書",hook:"需要一個撐得起整篇報告的理論框架？",d:"館藏目錄、HyRead、udn 讀書館",c:"#1E2A33",icon:"書",
     hold:"紙本館藏與電子書全文。多數電子書可以用圖書館帳號直接登入借閱，不必另外註冊。",
     where:"<b>理論框架</b>（最強）、<b>研究背景</b>與<b>文獻回顧</b>。",
     when:"需要弄懂一個概念的來龍去脈、需要一個能撐起整份報告的分析架構，或者剛踏進一個陌生的領域。",
@@ -317,14 +337,16 @@ const FAM={
 };
 const profCard=k=>{
   const f=FAM[k];
-  return `<div class="prof" style="--fc:${f.c}">
-    <div class="prof-h"><span class="prof-i">${f.icon}</span><span><b>${f.n}</b><small>${f.d}</small></span></div>
-    <div class="prof-r"><span class="lb">📦 收錄什麼</span>${f.hold}</div>
-    <div class="prof-r"><span class="lb">🎯 用在報告的哪一段</span>${f.where}</div>
-    <div class="prof-r"><span class="lb">✅ 什麼時候找它</span>${f.when}</div>
-    <div class="prof-r"><span class="lb">📚 有哪些（舉例）</span>${f.eg}</div>
-    <div class="prof-r"><span class="lb">⚠️ 它的限制</span>${f.limit}</div>
-  </div>`;
+  return `<details class="prof" style="--fc:${f.c}">
+    <summary class="prof-sum"><span class="prof-i">${f.icon}</span><span class="prof-t"><b>${f.n}</b><small>${f.hook||f.d}</small></span></summary>
+    <div class="prof-body">
+      <div class="prof-r"><span class="lb">📦 收錄什麼</span>${f.hold}</div>
+      <div class="prof-r"><span class="lb">🎯 用在報告的哪一段</span>${f.where}</div>
+      <div class="prof-r"><span class="lb">✅ 什麼時候找它</span>${f.when}</div>
+      <div class="prof-r"><span class="lb">📚 有哪些（舉例）</span>${f.eg}</div>
+      <div class="prof-r"><span class="lb">⚠️ 它的限制</span>${f.limit}</div>
+    </div>
+  </details>`;
 };
 
 /* ================= 關卡 ================= */
@@ -339,18 +361,18 @@ const L1={
      opts:[
        {frag:"全世界的便利商店",v:"no",why:"跨國比較要有跨國資料喔！光是把日本、韓國的統計定義弄清楚，一學期就過去了。"},
        {frag:"全臺灣的超商",v:"warn",why:"比原本好一些，不過「全臺灣」還是很大呢～想一想，你打算怎麼處理澎湖跟臺北的差異？"},
-       {frag:"臺北市 12 個行政區的超商",v:"ok",why:"很棒！資料拿得到、推論範圍講得清楚，也還留著可以比較的空間～"}
+       {frag:"臺北市 12 個行政區的超商",v:"ok",why:"很棒～不過真正的關鍵不是「臺北市」而是「12 個行政區」：有了行政區這個單位，你才能做跨區比較、算相關，題目才真的動得起來。範圍縮到「可以比較」的顆粒度，比單純縮小更重要。"}
      ]},
     {ask:"接下來，是什麼跟什麼有關呢？「為什麼這麼多」並不是一個能測量的東西喔！",
      opts:[
-       {frag:"店數密度",v:"ok",pair:"人口密度與家戶所得",why:"兩邊都有現成的官方數字，定義也講得清楚。這就是可以動工的樣子囉～"},
+       {frag:"店數密度",v:"ok",pair:"人口密度與家戶所得",why:"對了～注意這裡藏了一個常被忽略的坑：「密度」跟「所得」都要是<b>可測量、有現成定義</b>的變數。很多題目卡住不是因為太大，而是因為挑了「便利程度」「幸福感」這種聽起來具體、其實很難操作化的詞。"},
        {frag:"超商的便利程度",v:"warn",pair:"生活品質",why:"都是好問題！但「便利程度」跟「生活品質」要先花很大力氣定義，時間不夠的話很容易卡在這裡。"},
        {frag:"大家愛逛超商的習慣",v:"no",pair:"臺灣人的個性",why:"這比較像聊天而不是研究呢～「個性」沒辦法被測量，也沒辦法被否證。"}
      ]},
     {ask:"最後，證據要從哪裡來？這一步會直接決定你做不做得完！",
      opts:[
        {frag:"發一份全市問卷",v:"no",why:"抽樣、發放、回收、清理資料⋯⋯一學期真的跑不完。而且你要研究的是店數密度，問卷根本問不到喔！"},
-       {frag:"現成的官方統計加上歷史報紙",v:"ok",why:"很聰明！統計數列已經有人整理好了，報紙可以補上發展脈絡，兩種都在圖書館的資料庫裡等你～"},
+       {frag:"現成的官方統計加上歷史報紙",v:"ok",why:"很聰明～這裡的巧思是<b>用現成資料而不是自己蒐集</b>：一份大學報告的時間根本不夠做全市問卷，但官方統計早就有人整理好、報紙也躺在資料庫裡。選對資料來源，等於幫自己省下大半學期。"},
        {frag:"訪談 8 到 10 位店長",v:"ok",why:"規模可控，而且能拿到統計看不到的東西——展店決策背後的想法。"}
      ]}
   ],
@@ -652,6 +674,7 @@ function renderIntro(){
   <p class="hint">🔺 七個關卡、每關 20 分，滿分 140。<br>
   🔺 內容有點多，慢慢玩大約需要 <b>25 到 35 分鐘</b>——沒關係，<b>進度會自動存在這台裝置的瀏覽器裡</b>，關掉頁面之後回來，可以從上次完成的關卡接著玩 💾<br>
   🔺 每一關結束都有一個超商小彩蛋 🍙，最後還有一份專屬於你的研究體質分析！<br>
+  🔺 前面兩關是暖身，越後面越燒腦——第 4 到 6 關會遇到 AI 造假的文獻、被動過手腳的摘要，老手也不一定全過 😏<br>
   🔺 不管你是哪個系的，這九種資料以後你都會用到其中好幾種～</p>
   ${linkBox(["course","elearn","guide","aiguide"],"✳️ 先收藏這幾個連結，等一下會用到")}
   <div id="resumeBox"></div>
@@ -667,91 +690,104 @@ function renderIntro(){
 
 /* ================= 01 定題 ================= */
 function renderL1(){
-  const L=L1;let r=0,pts=0;const ch=[];
-  // 題目行始終填入「正解」，讓收斂後的研究問題與後續關卡一致
+  const L=L1;let pts=0;const ch=[];const answered=[false,false,false];
   const best=R=>R.opts.find(o=>o.v==="ok");
-  el.innerHTML=head(L)+`<div class="thesis" id="th"></div><div id="body"></div>`;
-  draw();step();
+  el.innerHTML=head(L)
+    +`<div class="thesis" id="th"></div>`
+    +L.rounds.map((R,r)=>`
+      <div class="card" data-r="${r}">
+        <span class="src">收斂 ${r+1} / ${L.rounds.length}</span>
+        <p style="margin:0 0 4px;font-size:17px;font-weight:500">${R.ask}</p>
+        <div class="opts" id="o${r}">${R.opts.map((o,i)=>
+          `<button class="opt" data-i="${i}"><span class="k">${AB[i]}</span><span>${o.frag}${o.pair?" ／ "+o.pair:""}</span></button>`).join("")}</div>
+        <div id="fb${r}"></div>
+      </div>`).join("")
+    +`<div id="done"></div>`;
+  draw();
+  L.rounds.forEach((R,r)=>{
+    document.querySelectorAll(`#o${r} .opt`).forEach(b=>b.onclick=()=>{
+      if(answered[r])return;
+      answered[r]=true;
+      const i=+b.dataset.i,o=R.opts[i];
+      document.querySelectorAll(`#o${r} .opt`).forEach((x,j)=>{
+        x.disabled=true;x.classList.add(R.opts[j].v==="ok"?"good":R.opts[j].v==="warn"?"warn":"bad");});
+      pts+=o.v==="ok"?2:o.v==="warn"?1:0;
+      const bo=best(R);
+      if(r===0)ch[0]=bo.frag;else if(r===1){ch[1]=bo.frag;ch[2]=bo.pair;}else ch[3]=bo.frag;
+      draw();
+      const note = o.v==="ok" ? ""
+        : `<p style="margin:0 0 6px;font-size:14px;color:var(--ink2)">📝 你選了 <b>${AB[i]}</b>，不過為了讓這份報告做得完，我們把題目行填成最能動工的版本（選項 ${AB[R.opts.indexOf(bo)]}），一起往下看看為什麼～</p>`;
+      document.getElementById(`fb${r}`).innerHTML=
+        note+explain(R.opts.map(x=>({t:x.frag+(x.pair?" ／ "+x.pair:""),v:x.v,why:x.why})),AB,`🤔 逐一看看每個選項`);
+      if(answered.every(Boolean))finish();
+    });
+  });
   function draw(){
     const s=i=>ch[i]?`<span class="slot filled">${ch[i]}</span>`:`<span class="slot">？</span>`;
     document.getElementById("th").innerHTML=
       `<div>${L.tpl[0]} ${s(0)} ${L.tpl[1]} ${s(1)} ${L.tpl[2]} ${s(2)} ${L.tpl[3]} ${s(3)} ${L.tpl[4]}</div>`;
   }
-  function step(){
-    if(r>=L.rounds.length){
-      const g=Math.round(pts/(L.rounds.length*2)*20);add(g);
-      document.getElementById("body").innerHTML=
-        `<div class="card card--a"><span class="src">✅ 收斂後可以動工的研究題目</span><p style="margin:0;font-size:18px;font-weight:700;line-height:1.7">${
-          L.tpl[0]+ch[0]+L.tpl[1]+ch[1]+L.tpl[2]+ch[2]+L.tpl[3]+ch[3]+L.tpl[4]}</p>
-          <p style="margin:10px 0 0;font-size:13.5px;color:var(--muted)">（不論剛剛選了什麼，我們都以最能做得完的版本往下走，後面幾關都會用這個題目～）</p></div>`
-        +debrief(L,g,0)+`<button class="btn" onclick="next()">拿著題目去找資料 →</button>`;
-      return;
-    }
-    const R=L.rounds[r];
-    document.getElementById("body").innerHTML=`
-      <div class="card"><span class="src">收斂 ${r+1} / ${L.rounds.length}</span>
-        <p style="margin:0;font-size:17px;font-weight:500">${R.ask}</p>
-        <div class="opts" id="o">${R.opts.map((o,i)=>
-          `<button class="opt" data-i="${i}"><span class="k">${AB[i]}</span><span>${o.frag}${o.pair?" ／ "+o.pair:""}</span></button>`).join("")}</div>
-      </div><div id="fb"></div>`;
-    document.querySelectorAll("#o .opt").forEach(b=>b.onclick=()=>{
-      const i=+b.dataset.i,o=R.opts[i];
-      document.querySelectorAll("#o .opt").forEach((x,j)=>{
-        x.disabled=true;x.classList.add(R.opts[j].v==="ok"?"good":R.opts[j].v==="warn"?"warn":"bad");});
-      pts+=o.v==="ok"?2:o.v==="warn"?1:0;
-      // 題目行一律填入正解，與第 3 關的檢索題保持一致
-      const bo=best(R);
-      if(r===0)ch[0]=bo.frag;else if(r===1){ch[1]=bo.frag;ch[2]=bo.pair;}else ch[3]=bo.frag;
-      draw();
-      const note = o.v==="ok"
-        ? ""
-        : `<p style="margin:0 0 6px;font-size:14px;color:var(--ink2)">📝 你選了 <b>${AB[i]}</b>，不過為了讓這份報告做得完，我們把題目行填成最能動工的版本（選項 ${AB[R.opts.indexOf(bo)]}），一起往下看看為什麼～</p>`;
-      document.getElementById("fb").innerHTML=
-        note+explain(R.opts.map(x=>({t:x.frag+(x.pair?" ／ "+x.pair:""),v:x.v,why:x.why})),AB,`🤔 逐一看看每個選項`)
-        +`<button class="btn" id="nx">${r+1<L.rounds.length?"繼續縮小 →":"看看題目變成什麼樣子 →"}</button>`;
-      document.getElementById("nx").onclick=()=>{r++;step();};
-    });
+  function finish(){
+    const g=Math.round(pts/(L.rounds.length*2)*20);add(g);
+    document.getElementById("done").innerHTML=
+      `<div class="card card--a"><span class="src">✅ 收斂後可以動工的研究題目</span><p style="margin:0;font-size:18px;font-weight:700;line-height:1.7">${
+        L.tpl[0]+ch[0]+L.tpl[1]+ch[1]+L.tpl[2]+ch[2]+L.tpl[3]+ch[3]+L.tpl[4]}</p>
+        <p style="margin:10px 0 0;font-size:13.5px;color:var(--muted)">（不論剛剛選了什麼，我們都以最能做得完的版本往下走，後面幾關都會用這個題目～）</p></div>`
+      +debrief(L,g,0)+`<button class="btn" onclick="next()">拿著題目去找資料 →</button>`;
+    document.getElementById("done").scrollIntoView&&document.getElementById("done").scrollIntoView({behavior:"smooth",block:"nearest"});
   }
 }
 
 /* ================= 02 證據 ================= */
 function renderL2(){
-  const L=L2;let idx=0,hit=0;const keys=Object.keys(FAM);
-  el.innerHTML=head(L)+`<div id="body"></div>`;
+  const L=L2;let idx=0,hit=0;const keys=Object.keys(FAM);const wrong=[];
+  el.innerHTML=head(L)+`<div class="l2bar" id="prog"></div><div id="body"></div>`;
   step();
+  function prog(){
+    document.getElementById("prog").innerHTML=L.needs.map((n,i)=>
+      `<span class="dot ${i<idx?'done':i===idx?'now':''}"></span>`).join("");
+  }
   function step(){
+    prog();
     if(idx>=L.needs.length){
       const g=Math.round(hit/L.needs.length*20);add(g);
       document.getElementById("body").innerHTML=
         `<div class="card card--a"><span class="src">✅ 你這份報告會用到的九個地方</span>
-          <div class="tally">${Object.values(FAM).map(f=>`<span>${f.n}</span>`).join("")}</div></div>
+          <p style="margin:0 0 4px;font-size:15px;color:var(--ink2)">九題你答對了 <b>${hit}</b> 題～下面這九張檔案卡，是每一類資源的速查表：</p></div>
+         <div class="profs">${keys.map(k=>profCard(k)).join("")}</div>
          <div class="egg" style="border-color:var(--ink)"><span class="lb">📢 這些都只是舉例喔！</span>
-          <p>這關提到的資料庫跟用法，都只是<b>各類型的其中幾個代表</b>而已～政大圖書館訂購的資料庫遠不只這些，而且同一個資料庫往往有很多種用法：同樣一個華藝，可以查期刊、查學位論文、也可以查電子書；同樣一個 Statista，可以查統計圖表，也可以查產業報告。</p>
-          <p>不過<b>分類本身是流動的</b>。很多資料庫同時橫跨好幾個類型，這裡的分類只是想幫你養成「先想證據長什麼樣子」的習慣，不是要你背下來哪個庫屬於哪一類 😊</p>
-          <p class="go">👉 建議直接去資料庫總覽逛逛，用學科或類型篩選看看，你會發現還有超多沒被介紹到的好東西！</p></div>`
+          <p>這關的分類只是想幫你養成「先想證據長什麼樣子」的習慣，不是要你背哪個庫屬於哪一類。很多資料庫其實同時橫跨好幾類——同一個華藝，可以查期刊、學位論文，也能查電子書 😊</p>
+          <p class="go">👉 直接去資料庫總覽逛逛，用學科或類型篩選，你會發現還有超多好東西！</p></div>`
         +debrief(L,g,1)+`<button class="btn" onclick="next()">來擬關鍵字 →</button>`;
       return;
     }
     const N=L.needs[idx];
     document.getElementById("body").innerHTML=`
-      <div class="need"><span class="src">需要的證據 ${idx+1} / ${L.needs.length}</span>
+      <div class="need"><span class="src">第 ${idx+1} / ${L.needs.length} 題</span>
         <p style="margin:0;font-size:16px;font-weight:500">${N.q}</p></div>
       <div class="fams" id="f">${keys.map(k=>
         `<button class="fam" data-k="${k}"><strong>${FAM[k].n}</strong><span>${FAM[k].d}</span></button>`).join("")}</div>
       <div id="fb"></div>`;
     document.querySelectorAll(".fam").forEach(b=>b.onclick=()=>{
       const k=b.dataset.k,ok=k===N.right;
-      document.querySelectorAll(".fam").forEach(x=>{x.disabled=true;if(x.dataset.k===N.right)x.classList.add("good");});
-      if(!ok)b.classList.add("bad");
-      if(ok)hit++;
-      document.getElementById("fb").innerHTML=`
-        <div class="fb ${ok?"good":"bad"}">
-          <div class="lesson">${ok?"✅ 找對地方了":`你選了「${FAM[k].n}」，正解是「${FAM[N.right].n}」`}</div>
-          <p>${N.ok}</p></div>
-        <div class="offgrid"><span class="lb">⚠️ 網路上拿不到的部分</span><br>${N.off}</div>
-        ${profCard(N.right)}
-        <button class="btn" id="nx">${idx+1<L.needs.length?"下一種證據 →":"九種都集齊了 →"}</button>`;
-      document.getElementById("nx").onclick=()=>{idx++;step();};
+      if(ok){
+        // 答對：閃綠一下就自動進下一題，不打斷節奏
+        hit++;b.classList.add("good");
+        document.querySelectorAll(".fam").forEach(x=>x.disabled=true);
+        setTimeout(()=>{idx++;step();},420);
+      }else{
+        // 答錯：停下來說明，這才是需要學的時刻
+        wrong.push(idx);
+        document.querySelectorAll(".fam").forEach(x=>{x.disabled=true;if(x.dataset.k===N.right)x.classList.add("good");});
+        b.classList.add("bad");
+        document.getElementById("fb").innerHTML=`
+          <div class="fb bad">
+            <div class="lesson">你選了「${FAM[k].n}」，這題該去的是「${FAM[N.right].n}」</div>
+            <p>${N.ok}</p></div>
+          <div class="offgrid"><span class="lb">⚠️ 網路上拿不到的部分</span><br>${N.off}</div>
+          <button class="btn" id="nx">${idx+1<L.needs.length?"下一題 →":"看九種資源 →"}</button>`;
+        document.getElementById("nx").onclick=()=>{idx++;step();};
+      }
     });
   }
 }
@@ -1006,8 +1042,9 @@ function renderEnd(){
       <small>只要一分鐘，還能告訴我們你覺得哪一關最有用</small></a>
     ${loyaltyCard()}
     ${giftCard()}
-    <hr class="rule">
-    <h2>🤖 那 AI 到底好用在哪？</h2>
+    <p class="lede" style="font-size:14px;color:var(--muted);text-align:center;margin-top:18px">↓ 想再多帶走一點的話，下面三塊可以展開看 ↓</p>
+
+    <details class="fold"><summary>🤖 那 AI 到底好用在哪？</summary>
     <p class="lede">這個遊戲一直在提醒你「對 AI 保持警覺」，但這不代表要你別用它——<b>剛好相反</b>。查證之所以重要，正是因為 AI 真的好用、你真的會想用它。<br><br>下面這幾種用法，是<b>台灣（教育部學術倫理資源中心彙整臺大、臺師大、中山、暨南、臺科大等校）與國際頂尖大學（哈佛、MIT、牛津、劍橋）的 AI 指引，都明確列為「學生可以用 AI 輔助學習」的方向</b>——也就是說，這些用法在國內外多數學校都算 OK。不過每一項指引也都附了但書，我一起寫在後面 👇</p>
     <div class="ai-good">
       <div class="ai-row"><span class="ai-ic">💡</span><div><b>發想議題與靈感</b>｜卡在不知道要研究什麼的時候，把問題情境、關鍵字、你的需求丟給 AI，讓它給你多元觀點來刺激想法——研究題目、寫作切入點的<b>腦力激盪</b>是它的強項。<br><span class="ai-but">但書：它給的是靈感的起點，不是結論。真正的題目還是要你自己收斂、自己判斷可不可行。</span></div></div>
@@ -1017,9 +1054,10 @@ function renderEnd(){
       <div class="ai-row"><span class="ai-ic">✏️</span><div><b>練習改寫與除錯</b>｜把一段文獻丟給 AI 生成一個版本，再跟你自己的改寫版<b>對照</b>，分析差異優缺點——這是官方建議的「練習改寫摘寫技巧」的方法。程式碼的除錯與校對同理。<br><span class="ai-but">但書：這是拿來<b>練習與對照</b>的，不是直接把 AI 改出來的當成你的作業交出去。最終內容你要親自讀過、負起責任。</span></div></div>
       <div class="ai-row"><span class="ai-ic">🔒</span><div><b>（國際共同紅線）別餵它機密與個資</b>｜哈佛、MIT、牛津的指引都特別強調同一件事：<b>不要把機密資料、還沒發表的研究、別人的個人資料輸入公開的 AI 工具</b>。你打進去的東西，在預設設定下並不是私密的。這一點呼應第 7 關——訪談逐字稿要去識別化後才能用。<br><span class="ai-but">但書：這不是「小心就好」，而是多數學校的明確規定；牽涉他人個資時，先確認你的知情同意書涵蓋這種處理方式。</span></div></div>
     </div>
-    <p class="lede" style="font-size:15px;color:var(--muted);margin-top:16px">看得出來這些用法有個共同點：<b>AI 負責發想、陪練、整理、修潤，你負責查證、判斷、拍板、負責</b>。它幫你把過程變快，但最後、也最關鍵的一步——確認什麼是對的、為結論負責——始終是你的工作。<br><br>牛津和許多大學的指引，把這件事濃縮成一個你隨時可以問自己的問題：<b>「這份作品，我還是它的作者嗎？」</b>只要答案是肯定的，你就走在安全的線上。這也正是下面這七種判斷力想說的事 👇<br><br>📌 再提醒一次：以上是「國內外多數學校認可的方向」，但<b>每位老師、每門課的規定仍可能不同</b>，動筆前務必先確認你的課堂規範，並照實揭露你怎麼用了 AI。</p>
-    <hr class="rule">
-    <h2>七個卡點，其實在練七種判斷力</h2>
+    <p class="lede" style="font-size:15px;color:var(--muted);margin-top:16px">看得出來這些用法有個共同點：<b>AI 負責發想、陪練、整理、修潤，你負責查證、判斷、拍板、負責</b>。它幫你把過程變快，但最後、也最關鍵的一步——確認什麼是對的、為結論負責——始終是你的工作。<br><br>牛津和許多大學的指引，把這件事濃縮成一個你隨時可以問自己的問題：<b>「這份作品，我還是它的作者嗎？」</b>只要答案是肯定的，你就走在安全的線上。<br><br>📌 再提醒一次：以上是「國內外多數學校認可的方向」，但<b>每位老師、每門課的規定仍可能不同</b>，動筆前務必先確認你的課堂規範，並照實揭露你怎麼用了 AI。</p>
+    </details>
+
+    <details class="fold"><summary>💡 七個卡點，其實在練七種判斷力</summary>
     <ol class="list">
       <li><b>問題是自己問出來的。</b>研究不是找答案，是把一個模糊的好奇心磨成一個真的問得出口、答得出來的問題——而這件事沒有人能代勞。</li>
       <li><b>資訊的形狀決定它住在哪裡。</b>老報紙、統計數列、判決、財報、專書各有各的生產方式，先想清楚你要的證據長什麼樣子，路就出現了。</li>
@@ -1030,15 +1068,18 @@ function renderEnd(){
       <li><b>資訊是有價值的，而價值意味著責任。</b>授權、個資、引用歸屬，都是因為有人付出過代價，才有你現在拿到的東西。</li>
     </ol>
     <p class="lede" style="font-size:15px;color:var(--muted);margin-top:18px">而貫穿這七件事的是同一句話：<b>學術是一場長期的公開對話</b>。你查文獻，是在聽別人說了什麼；你引用，是在說「我站在這裡」；你標明出處，是讓下一個人能接著往下走。AI 是很好的助手，可以幫你加速、發想、整理，但它沒辦法「替你」進入這場對話——因為<b>能為說出口的話負責的，只有你</b>。而這，也正是它幫不了、卻最值得你自己練的部分。</p>
-    <hr class="rule">
-    <p class="lede">📢 圖書館每學期都有開設講習課程喔！時間上無法參加的話，也歡迎到 e 學習網自學，多數講習都會錄影～<br><br></p>
-    ${linkBox(["course","elearn","aiguide","review","guide","db","ebook"],"✳️ 帶著走的連結")}
-    <p class="hint" style="margin-top:26px;padding-top:16px;border-top:1px dotted var(--line)">本遊戲的關卡設計，參考了 ACRL《高等教育資訊素養框架》的精神。<br>內容由政大圖書館推廣諮詢組企劃，並在 Anthropic Claude Opus 4.8 的協助下製作。</p>
-    <hr class="rule">
-    <h2>🏪 你剛剛逛過的九個地方</h2>
-    <p class="lede">同一份報告，九種完全不同的資料。它們的完整內容，多半沒辦法用一般 Google 搜尋系統性地取得——有的還沒被數位化、有的需要付費授權、有的雖然查得到書目卻下載不了全文～<br><br>🔺 下面這九張檔案卡建議截圖存起來！下次寫報告卡住的時候，看看你缺的是哪一段，就知道該往哪裡走了 📎</p>
+    </details>
+
+    <details class="fold"><summary>🏪 你剛剛逛過的九個地方（資源速查表）</summary>
+    <p class="lede">同一份報告，九種完全不同的資料。它們的完整內容，多半沒辦法用一般 Google 搜尋系統性地取得——有的還沒被數位化、有的需要付費授權、有的雖然查得到書目卻下載不了全文～<br><br>🔺 這九張檔案卡建議截圖存起來！下次寫報告卡住的時候，看看你缺的是哪一段，就知道該往哪裡走了 📎</p>
     <div class="profs">${Object.keys(FAM).map(k=>profCard(k)).join("")}
     </div>
+    </details>
+
+    <hr class="rule">
+    <p class="lede" style="font-size:14.5px">📢 圖書館每學期都有開設講習課程喔！時間上無法參加的話，也歡迎到 e 學習網自學，多數講習都會錄影～</p>
+    ${linkBox(["course","elearn","aiguide","review","guide","db","ebook"],"✳️ 帶著走的連結")}
+    <p class="hint" style="margin-top:26px;padding-top:16px;border-top:1px dotted var(--line)">本遊戲的關卡設計，參考了 ACRL《高等教育資訊素養框架》的精神。<br>內容由政大圖書館推廣諮詢組企劃，並在 Anthropic Claude Opus 4.8 的協助下製作。</p>
     <button class="btn" onclick="wipe();renderIntro();window.scrollTo(0,0)">再走一次</button>`;
 }
 
