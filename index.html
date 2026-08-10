@@ -16,8 +16,8 @@
 body{background:var(--paper);
   background-image:radial-gradient(circle at 1px 1px, rgba(35,40,31,.05) 1px, transparent 0);
   background-size:22px 22px;
-  color:var(--ink);font-family:"Noto Sans TC",system-ui,sans-serif;font-size:16px;line-height:1.8;-webkit-font-smoothing:antialiased}
-.wrap{max-width:820px;margin:0 auto;padding:0 20px 100px}
+  color:var(--ink);font-family:"Noto Sans TC",system-ui,sans-serif;font-size:17px;line-height:1.85;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 28px 100px}
 
 .bar{position:sticky;top:0;z-index:30;background:#fff;color:var(--ink);margin:0 -20px 30px;padding:10px 20px 13px;display:flex;gap:12px;align-items:center;justify-content:space-between;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.04em;font-weight:600;box-shadow:0 4px 14px rgba(30,42,51,.06)}
 .bar::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:6px;
@@ -40,7 +40,7 @@ h1{font-size:clamp(36px,8vw,64px);font-weight:900;line-height:1.06;letter-spacin
 .sub{font-size:clamp(16px,3vw,20px);font-weight:700;color:var(--muted);margin:0 0 16px}
 h2{font-size:clamp(23px,4.4vw,32px);font-weight:900;line-height:1.24;letter-spacing:-.02em;margin:0 0 8px}
 .eyebrow{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;background:transparent;color:var(--ink);border:1px dashed var(--ink);padding:3px 12px;border-radius:2px;margin-bottom:12px}
-.lede{font-size:17px;color:var(--ink2);max-width:60ch}
+.lede{font-size:18px;color:var(--ink2);max-width:64ch}
 .hint{font-size:13.5px;color:var(--muted);margin-top:10px}
 hr.rule{border:0;border-top:2px dotted var(--line);margin:36px 0}
 
@@ -67,8 +67,8 @@ hr.rule{border:0;border-top:2px dotted var(--line);margin:36px 0}
 
 .exp{display:flex;gap:13px;align-items:flex-start;padding:14px 0;border-bottom:1px dotted var(--line)}
 .exp:last-child{border-bottom:0;padding-bottom:0}
-.exp .k{margin-top:2px}.exp .body{font-size:15px}
-.exp .quo{display:block;font-weight:700;margin-bottom:3px;line-height:1.55}
+.exp .k{margin-top:2px}.exp .body{font-size:14.5px;color:var(--muted);line-height:1.8}
+.exp .quo{display:block;font-weight:800;font-size:15.5px;color:var(--ink);margin-bottom:6px;line-height:1.5}
 .verdict{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.06em;padding:2px 8px;border-radius:20px;margin-left:7px;white-space:nowrap;vertical-align:2px}
 .v-ok{background:var(--green);color:#fff}.v-no{background:var(--red);color:#fff}.v-warn{background:#E39A16;color:#fff}
 
@@ -93,6 +93,8 @@ hr.rule{border:0;border-top:2px dotted var(--line);margin:36px 0}
 .fold summary:hover{background:#F3F1E8}
 .fold[open] summary{border-bottom:1px dashed var(--line)}
 .fold>*:not(summary){padding-left:18px;padding-right:18px}
+.fold .lede{max-width:none;font-size:15.5px;line-height:1.85}
+.fold .list{font-size:15.5px}
 .fold>*:last-child{padding-bottom:16px}
 .fam.bad{border-color:var(--red);background:#FEEFF3;opacity:1}
 
@@ -101,6 +103,7 @@ hr.rule{border:0;border-top:2px dotted var(--line);margin:36px 0}
 
 /* 檢索式 */
 .query{background:#123B2A;color:#C9EFD8;border-radius:12px;padding:16px 18px;min-height:78px;font-family:"IBM Plex Mono",monospace;font-size:14.5px;line-height:2.1;word-break:break-word;margin:16px 0}
+.query-ans{background:#123B2A;color:#C9EFD8;border-radius:10px;padding:14px 16px;font-family:"IBM Plex Mono",monospace;font-size:14px;line-height:1.9;word-break:break-word;margin-top:6px}
 .query .ph{color:#5E8A72}
 .query .tk{background:#1E5A41;padding:2px 8px;border-radius:4px;margin:0 3px;display:inline-block}
 .query .tk.op{background:transparent;color:#F5A800;font-weight:600}
@@ -149,6 +152,21 @@ hr.rule{border:0;border-top:2px dotted var(--line);margin:36px 0}
 
 /* 大張集點卡 */
 .loyalty{background:var(--receipt);border:1px solid var(--line);border-radius:6px;padding:0;margin-top:20px;box-shadow:var(--shadow);overflow:hidden}
+.pie-wrap{display:flex;gap:26px;align-items:center;padding:24px 22px;flex-wrap:wrap;justify-content:center}
+.pie-chart{position:relative;flex:none;width:180px;height:180px}
+.pie-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
+.pie-center b{font-size:38px;font-weight:900;line-height:1;color:var(--ink);font-family:"IBM Plex Mono",monospace}
+.pie-center i{font-size:14px;color:var(--muted);font-style:normal;margin-top:3px;font-family:"IBM Plex Mono",monospace}
+.pie-legend{flex:1;min-width:220px}
+.pie-leg-row{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px dotted var(--line);font-size:15px}
+.pie-leg-row:last-child{border-bottom:0}
+.pie-dot{width:13px;height:13px;border-radius:3px;flex:none}
+.pie-leg-nm{flex:1;color:var(--ink2)}
+.pie-leg-val{font-family:"IBM Plex Mono",monospace;font-weight:700;color:var(--ink)}
+.pie-leg-val i{font-style:normal;font-weight:400;color:var(--muted);font-size:12px}
+.pie-leg-total{margin-top:4px;padding-top:10px;border-top:2px solid var(--line);font-size:16px}
+.pie-leg-total .pie-leg-nm{font-weight:700;color:var(--ink)}
+.pie-leg-total .pie-leg-val b{font-size:19px}
 .loyalty-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:16px 18px 14px;background:#123B2A;color:#EAF5EF}
 .loyalty-brand{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:14px;letter-spacing:.06em}
 .loyalty-sub{font-size:12.5px;color:#9FC4AF;margin-top:3px}
@@ -207,6 +225,7 @@ hr.rule{border:0;border-top:2px dotted var(--line);margin:36px 0}
 .stmt.marked{background-size:100% 90%}
 .stmt:disabled{cursor:default}
 .stmt.miss{background-image:linear-gradient(#FBD3DF,#FBD3DF);text-decoration:line-through;text-decoration-color:var(--red)}
+.stmt.good{background-image:linear-gradient(#CFEEE2,#CFEEE2);background-size:100% 90%;border-color:var(--green)}
 .stmt.missed{background-image:linear-gradient(#CFEEE2,#CFEEE2);background-size:100% 90%}
 
 .fb{background:var(--card);border:1.5px solid var(--line);border-left:6px solid var(--accent);border-radius:0 12px 12px 0;padding:17px 19px;margin-top:20px;box-shadow:var(--shadow)}
@@ -230,7 +249,7 @@ hr.rule{border:0;border-top:2px dotted var(--line);margin:36px 0}
 .stamp{display:inline-block;background:var(--accent);color:#fff;font-weight:900;font-size:25px;padding:10px 26px;border-radius:14px;transform:rotate(-2.5deg);margin:10px 0 22px}
 .score{font-family:"IBM Plex Mono",monospace;font-size:58px;font-weight:600;line-height:1}
 .score small{font-size:16px;color:var(--muted)}
-.list{padding-left:1.2em;color:var(--ink2);font-size:15px}
+.list{padding-left:0;margin-left:0;list-style-position:inside;color:var(--ink2);font-size:15px}
 .ai-good{display:flex;flex-direction:column;gap:2px;margin:16px 0 0}
 .ai-row{display:flex;gap:13px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--green);border-radius:3px;padding:14px 16px;margin-bottom:8px;font-size:14.5px;line-height:1.75;color:var(--ink2)}
 .ai-row b{color:var(--ink)}
@@ -250,6 +269,9 @@ hr.rule{border:0;border-top:2px dotted var(--line);margin:36px 0}
 .learn>div{padding:2px 15px 14px;font-size:14.5px;line-height:1.85;color:var(--ink2);border-top:1px dashed var(--line)}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+#toTop{position:fixed;right:24px;bottom:24px;width:48px;height:48px;border-radius:50%;border:none;background:var(--accent);color:#fff;font-size:22px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.22);opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .2s,transform .2s;z-index:50}
+#toTop.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+#toTop:hover{filter:brightness(1.08)}
 :focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 </style>
 
@@ -260,6 +282,13 @@ hr.rule{border:0;border-top:2px dotted var(--line);margin:36px 0}
 </div>
 
 <div class="wrap"><div id="screen"></div></div>
+<button id="toTop" aria-label="回到頂端" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+window.addEventListener("scroll",function(){
+  var b=document.getElementById("toTop");
+  if(b)b.classList.toggle("show",window.scrollY>420);
+});
+</script>
 
 <script>
 const HUE=["#00A44E","#F58220","#E03C31","#0072CE","#009E9E","#F5A800","#3A4CA8"];
@@ -289,17 +318,17 @@ const linkBox=(ks,label)=>`<div class="links-t">${label||"✳️ 想更深入的
 /* ========== 八種資源家族 ========== */
 const FAM={
   jour:{n:"期刊論文資料庫",hook:"想知道「這題有沒有人做過」？先來這裡",d:"華藝、JSTOR、CNKI、ProQuest",c:"#00A44E",icon:"期",
-    hold:"期刊文章的書目、摘要與全文。有些是圖書館付費訂購的（訂了才看得到），有些是<b>開放取用（Open Access, OA）</b>——作者或機構已經付費讓全世界免費看。",
+    hold:"期刊文章的書目、摘要與全文。有些是圖書館付費訂購的（訂了才看得到），有些是<b>開放取用（Open Access, OA）</b>—作者或機構已經付費讓全世界免費看。",
     where:"<b>文獻回顧</b>與<b>討論</b>。前者用來交代「前人做到哪裡」，後者用來把自己的發現放回既有研究裡對話。",
     when:"想知道這個問題有沒有人研究過、他們用什麼理論與方法、彼此的結論有沒有衝突。",
     eg:"華藝線上圖書館（中文）、CNKI 中國知網、ProQuest Central Premium、EBSCOhost、JSTOR、Cambridge Core、Oxford Academic、ScienceDirect、Taylor &amp; Francis Online、Emerald Insight、Wiley Online Library、KRpia／DBpia（韓文）",
-    limit:"⚠️ 這裡有個很多人沒發現的偏誤：<b>網路上與 AI 能給你的文獻，多半是 OA 或預印本</b>——因為那些是它讀得到的。圖書館花錢訂購的那一大批，多半不在它的訓練資料裡，就算能上網也擋在付費牆外，於是它不太會推薦給你。<br><br>💡 解法很簡單：到 Google Scholar 的「設定 → 圖書館連結」搜尋並勾選政治大學，之後查詢結果旁邊就會出現政大的全文連結，能直接連回圖書館訂購的資源。這一步只要做一次，之後受用無窮～"},
+    limit:"⚠️ 這裡有個很多人沒發現的偏誤：<b>網路上與 AI 能給你的文獻，多半是 OA 或預印本</b>—因為那些是它讀得到的。圖書館花錢訂購的那一大批，多半不在它的訓練資料裡，就算能上網也擋在付費牆外，於是它不太會推薦給你。<br><br>💡 解法很簡單：到 Google Scholar 的「設定 → 圖書館連結」搜尋並勾選政治大學，之後查詢結果旁邊就會出現政大的全文連結，能直接連回圖書館訂購的資源。這一步只要做一次，之後受用無窮～"},
   cite:{n:"引文資料庫",hook:"找到一篇好文章後，怎麼滾出一整串？",d:"Scopus、Web of Science、JCR",c:"#F58220",icon:"引",
     hold:"不收全文，收的是<b>文章與文章之間的引用關係</b>：這篇引了誰、又被誰引用、被引用幾次，以及各期刊的影響係數與領域排名。",
     where:"<b>文獻回顧的擴張</b>與<b>品質判斷</b>。它不會給你新的內容，但會告訴你該往哪裡找，以及手上這篇的份量有多重。",
-    when:"找到一篇很關鍵的文章時——往前看它引了誰（找到理論源頭），往後看誰引了它（找到最新發展）。想判斷一本期刊在領域裡的位置時也用它。<br><br>💡 Scopus 另外還有 <b>Scopus AI</b>，可以用白話文提問，答案建立在它實際收錄的文獻上，並附可點回的出處；Deep research 功能還能產出學術格式的探索報告。",
+    when:"找到一篇很關鍵的文章時—往前看它引了誰（找到理論源頭），往後看誰引了它（找到最新發展）。想判斷一本期刊在領域裡的位置時也用它。<br><br>💡 Scopus 另外還有 <b><a href='https://nccu.primo.exlibrisgroup.com/permalink/886NCCU_INST/1sca1pf/alma991018099049705721' target='_blank' rel='noopener' style='color:inherit;text-decoration:underline'>Scopus AI</a></b>，可以用白話文提問，答案建立在它實際收錄的文獻上，並附可點回的出處；Deep research 功能還能產出學術格式的探索報告。",
     eg:"Scopus（含 Scopus AI）、Web of Science、Journal Citation Reports (JCR)、TCI 臺灣人文及社會科學引文索引",
-    limit:"引用次數會受年代與領域習慣影響，老文章自然累積得多，理工的引用量也天生比人文社科大。而且被引用不一定是被稱讚，也可能是被拿來反駁——數字本身不會告訴你是哪一種。"},
+    limit:"引用次數會受年代與領域習慣影響，老文章自然累積得多，理工的引用量也天生比人文社科大。而且被引用不一定是被稱讚，也可能是被拿來反駁—數字本身不會告訴你是哪一種。"},
   thes:{n:"學位論文系統",hook:"不知道研究方法怎麼設計？偷看別人的",d:"臺灣博碩士論文、政大論文系統",c:"#E03C31",icon:"論",
     hold:"碩博士論文全文，多數可以免費下載，還能依下載與被引用次數排序。",
     where:"<b>研究方法</b>與<b>文獻回顧</b>。它的方法章節寫得比期刊論文詳細很多，因為要向口試委員交代每一個步驟。",
@@ -311,16 +340,16 @@ const FAM={
     where:"<b>研究背景與問題意識</b>，以及<b>討論</b>時的時事對照。",
     when:"想知道一件事什麼時候發生、當時的人怎麼看、爭議點在哪裡、後來又怎麼發展。",
     eg:"聯合知識庫、臺灣新聞智慧網、慧科大中華新聞網、端傳媒、天下雜誌群知識庫、商業周刊、哈佛商業評論、Financial Times、The New York Times、The Economist",
-    limit:"報導有立場也可能有錯，同一件事建議對照兩家以上。而且報紙是「當時的紀錄」，不是「事後的定論」——這正是它珍貴的地方，也是要小心的地方 ⚠️"},
+    limit:"報導有立場也可能有錯，同一件事建議對照兩家以上。而且報紙是「當時的紀錄」，不是「事後的定論」—這正是它珍貴的地方，也是要小心的地方 ⚠️"},
   stat:{n:"統計資料庫",hook:"需要「有出處、附定義」的數字？在這裡",d:"統計資訊網、PRIDE、Statista",c:"#009E9E",icon:"統",
     hold:"經過整理的數據與長期數列，通常附有調查方法、定義說明與原始出處。",
     where:"<b>研究背景</b>（用數字撐起問題意識），以及<b>資料與分析</b>（直接當研究資料用）。",
     when:"想知道有多少、多久了、趨勢往哪走、跟其他國家或縣市比起來如何。",
     eg:"統計報告資料庫、政策研究指標資料庫 PRIDE、Statista、OECD iLibrary、MIC-AISP 資策會產業情報、中華民國統計資訊網（政府免費公開）",
-    limit:"記得點開「定義」與「調查方法」！同一個名詞，不同機構的算法可能不一樣——很多數據矛盾其實不是誰造假，是定義不同。跨年比較前建議先看定義有沒有換過 🔍"},
+    limit:"記得點開「定義」與「調查方法」！同一個名詞，不同機構的算法可能不一樣—很多數據矛盾其實不是誰造假，是定義不同。跨年比較前建議先看定義有沒有換過 🔍"},
   hist:{n:"史料資料庫",hook:"想看幾十年前、甚至日治時期的樣子？",d:"臺灣日日新報、臺灣文獻叢刊",c:"#F5A800",icon:"史",
     hold:"已經數位化的原始文獻、老報紙、老照片、官方檔案，有些提供全文檢索，有些只能瀏覽影像。",
-    where:"<b>研究背景</b>（長時段脈絡），以及<b>資料與分析</b>——史料本身就可以是研究材料。",
+    where:"<b>研究背景</b>（長時段脈絡），以及<b>資料與分析</b>—史料本身就可以是研究材料。",
     when:"想知道以前是什麼樣子、一個現象是什麼時候、怎麼開始的。",
     eg:"臺灣日日新報（日治時期最主要的報紙）、臺灣文獻叢刊、臺灣百年寫真、風月報／三六九小報（日治漢文刊物）、政大圖書館特藏資源、Gale Primary Sources（跨國歷史檔案）",
     limit:"被數位化的只是留存史料的一部分，OCR 辨識也未必準確，純用關鍵字檢索容易漏東西，記得搭配分類瀏覽。另外舊資料的用詞跟現在差很多（老地名、舊譯名、異體字），關鍵字要多試幾種～"},
@@ -329,7 +358,7 @@ const FAM={
     where:"<b>研究背景</b>（產業結構）與<b>資料與分析</b>（財務數據、個案）。",
     when:"想知道一個產業怎麼運作、公司靠什麼賺錢、市場規模多大、消費者長什麼樣子。",
     eg:"TEJ Pro 台灣經濟新報、Bloomberg（金融市場即時資訊）、E-ICP 東方消費者行銷資料庫、Business Source Complete、WARC（行銷個案）、MIC-AISP 資策會產業情報、LSEG Workspace（全球財經數據）、公開資訊觀測站（政府免費公開）",
-    limit:"產業報告是有商業目的的產品，數字口徑要看清楚。公司年報是法定揭露，可信度高但也最保守——想知道策略背後的想法，行銷個案通常會講得更多 💡"},
+    limit:"產業報告是有商業目的的產品，數字口徑要看清楚。公司年報是法定揭露，可信度高但也最保守—想知道策略背後的想法，行銷個案通常會講得更多 💡"},
   law:{n:"法學資料庫",hook:"想知道「法律實際上怎麼判」而不只是條文？",d:"法源、月旦、Westlaw、HeinOnline",c:"#8A4FBF",icon:"法",
     hold:"法規條文與歷次修正、法院判決全文、行政函釋，以及法學期刊論文與評釋。",
     where:"<b>研究背景</b>（制度框架）與<b>討論及政策建議</b>。",
@@ -362,7 +391,7 @@ const profCard=k=>{
 const L1={
   eyebrow:"第 1 關 · 定題",
   title:"1️⃣ AI 給的大綱看起來很專業，但你寫得出來嗎？",
-  lede:"你的報告題目是《為什麼臺灣的超商這麼多？》。丟給 AI，三秒鐘就得到一份看起來很專業的大綱👇<br><br><div style='background:#fff;border:1.5px dashed var(--muted);border-radius:10px;padding:14px 16px;font-size:14px;color:var(--ink2);line-height:1.9'><b>🤖 AI 生成的報告大綱</b><br>一、超商的歷史發展與演變<br>二、超商密集的社會文化因素<br>三、便利性與現代人生活型態的關係<br>四、超商對社區的影響與意義<br>五、結論與未來展望</div><br>看起來是不是很完整？<b>但這份大綱有個大問題：它一段都寫不出來。</b><br><br>每一項都太大、沒有可以測量的東西、也沒說證據要從哪裡來——「現代人生活型態」「社區的意義」這種題目，一個學期根本做不完。AI 很會講漂亮話，但它不知道你只有幾週、能拿到什麼資料。<br><br>🔺 這一關，我們一起把題目縮到你這學期真的做得完的樣子！",
+  lede:"你的報告題目是《為什麼臺灣的超商這麼多？》。丟給 AI，三秒鐘就得到一份看起來很專業的大綱👇<br><br><div style='background:#fff;border:1.5px dashed var(--muted);border-radius:10px;padding:14px 16px;font-size:14px;color:var(--ink2);line-height:1.9'><b>🤖 AI 生成的報告大綱</b><br>一、超商的歷史發展與演變<br>二、超商密集的社會文化因素<br>三、便利性與現代人生活型態的關係<br>四、超商對社區的影響與意義<br>五、結論與未來展望</div><br>看起來是不是很完整？<b>但這份大綱有個大問題：它一段都寫不出來。</b><br><br>每一項都太大、沒有可以測量的東西、也沒說證據要從哪裡來—「現代人生活型態」「社區的意義」這種題目，一個學期根本做不完。AI 很會講漂亮話，但它不知道你只有幾週、能拿到什麼資料。<br><br>🔺 這一關，我們一起把題目縮到你這學期真的做得完的樣子！",
   tpl:["我想研究","的","與","的關聯，並用","來取得證據。"],
   rounds:[
     {ask:"先縮範圍～你打算研究到多大呢？",
@@ -381,11 +410,11 @@ const L1={
      opts:[
        {frag:"發一份全市問卷",v:"no",why:"抽樣、發放、回收、清理資料⋯⋯一學期真的跑不完。而且你要研究的是店數密度，問卷根本問不到喔！"},
        {frag:"現成的官方統計加上歷史報紙",v:"ok",why:"很聰明～這裡的巧思是<b>用現成資料而不是自己蒐集</b>：一份大學報告的時間根本不夠做全市問卷，但官方統計早就有人整理好、報紙也躺在資料庫裡。選對資料來源，等於幫自己省下大半學期。"},
-       {frag:"訪談 8 到 10 位店長",v:"ok",why:"規模可控，而且能拿到統計看不到的東西——展店決策背後的想法。"}
+       {frag:"訪談 8 到 10 位店長",v:"ok",why:"規模可控，而且能拿到統計看不到的東西—展店決策背後的想法。"}
      ]}
   ],
   lesson:"AI 不知道你只剩幾週",
-  debrief:"AI 生成研究方向的能力真的很強，因為這類句子在它的訓練資料裡到處都是。但是它<b>不知道你能接觸到誰、還剩幾週、拿不拿得到資料</b>——而這三件事，才真正決定一個題目能不能寫出來。",
+  debrief:"AI 生成研究方向的能力真的很強，因為這類句子在它的訓練資料裡到處都是。但是它<b>不知道你能接觸到誰、還剩幾週、拿不拿得到資料</b>—而這三件事，才真正決定一個題目能不能寫出來。",
   links:["g1"],
   egg:{title:"🍙 小彩蛋：「世界數一數二」到底是第幾？",
        body:"大家常說臺灣的超商密度是「世界數一數二」，可是⋯⋯到底是第幾名呢？是用「每萬人幾家店」算的，還是「每平方公里幾家店」？資料是哪一年的？<br><br>你會發現網路上到處都有人這樣寫，但幾乎沒有人附上出處 😅 這正好是<b>統計資料庫</b>可以回答、而 AI 只會丟給你一個沒有來源的形容詞的問題。",
@@ -400,37 +429,33 @@ const L2={
     {q:"有沒有其他研究者做過類似的分析呢？他們用什麼方法、得到什麼結果？",
      right:"jour",
      ok:"期刊論文資料庫就是學術界的對話現場～華藝收中文、Scopus 與 WOS 收國際期刊，還能看到這篇被誰引用過。",
-     off:"多數期刊論文的全文躺在付費資料庫裡。Google Scholar 查得到不少書目與摘要（華藝等平台也會把資料送進 Google Scholar），但常常停在「看得到標題、下載不了全文」；中文與非英語文獻的涵蓋率也通常比英語文獻低。結果就是你可能以為「沒人做過」，其實只是全文被擋在牆後、或那一批剛好沒被索引到 😅"},
+     off:"多數期刊論文的全文躺在付費資料庫裡。現在通用 AI、Semantic Scholar 這類工具，確實找得到愈來愈多中文期刊的<b>書目與摘要</b>（華藝等平台也會把資料送進 Google Scholar），但常常就停在這裡—<b>要付費才看得到的全文，它們一樣拿不到</b>。而且這些工具主要收錄英語文獻，中文與非英語的涵蓋率通常偏低。結果就是你可能以為「沒人做過」，其實只是全文被擋在牆後、或那批剛好沒被索引到 😅"},
     {q:"我找到一篇超關鍵的文章了！想知道它後來被誰引用過、這本期刊在領域裡的份量如何。",
      right:"cite",
-     ok:"Scopus、Web of Science 與華藝 ACI 記的是「文章之間的引用關係」——往前看它引了誰，往後看誰引了它，一篇文章就能拉出一整條研究脈絡～",
+     ok:"Scopus、Web of Science 與華藝 ACI 記的是「文章之間的引用關係」—往前看它引了誰，往後看誰引了它，一篇文章就能拉出一整條研究脈絡～",
      off:"這是最容易被誤會的一類：<b>期刊論文資料庫不一定有引用紀錄</b>。很多庫給你全文就結束了，「<b>被引用幾次</b>」是引文資料庫另外建的一層資料。Google Scholar 雖然有數字，但它連預印本、投影片都算進去，跟學術界實際採用的計算方式不一樣喔 ⚠️"},
     {q:"有沒有人做過幾乎一樣題目的碩士論文？他們的研究設計長什麼樣子？",
      right:"thes",
      ok:"臺灣博碩士論文知識加值系統與政大博碩士論文系統，可以同時查論文名稱、關鍵詞、摘要，還能依下載與被引用次數排序！",
-     off:"學位論文有<b>完整的方法章節與文獻回顧</b>——這正是期刊論文為了篇幅通常會壓縮掉的部分。臺灣的學位論文系統採公開取閱，書目與摘要其實查得到，但要有系統地「跨論文比較、精準篩選、下載授權全文」，用專門的學位論文系統會比用 Google 有效率得多，也不會漏掉只授權在系統內開放的全文。"},
+     off:"學位論文有<b>完整的方法章節與文獻回顧</b>—這正是期刊論文為了篇幅通常會壓縮掉的部分。臺灣的學位論文系統採公開取閱，書目與摘要其實查得到，但要有系統地「跨論文比較、精準篩選、下載授權全文」，用專門的學位論文系統會比用 Google 有效率得多，也不會漏掉只授權在系統內開放的全文。"},
     {q:"臺灣第一家超商開幕的時候，報紙是怎麼寫的？當時的人怎麼看待這個新東西？",
      right:"news",
      ok:"聯合知識庫收錄了幾十年份的報紙全文，可以限定年份，直接讀讀看當年的版面～",
-     off:"Google 查得到「哪一年開的」這種結論，但「<b>當時的社會怎麼談它</b>」——那些字句多半只留在幾十年前的報紙版面裡，很少被完整搬上公開網路，用一般搜尋不容易系統性地找到、也難以限定年份逐日翻閱。"},
+     off:"Google 查得到「哪一年開的」這種結論，但「<b>當時的社會怎麼談它</b>」—那些字句多半只留在幾十年前的報紙版面裡，很少被完整搬上公開網路，用一般搜尋不容易系統性地找到、也難以限定年份逐日翻閱。"},
     {q:"近二十年全臺與臺北市的超商店數、人口密度、家戶可支配所得，逐年的數字。",
      right:"stat",
      ok:"中華民國統計資訊網與圖書館訂購的 PRIDE 有完整的長期數列，每個欄位都附上定義與調查方式喔！",
-     off:"網路上的數字通常沒有出處、年份不齊、定義也不明——你查到的「一家店服務 2000 人」，到底是哪一年？算的是哪一種店？統計庫給你的是完整數列，加上它是怎麼算出來的。"},
-    {q:"超商到底靠什麼賺錢？展店的密度是怎麼算出來的？鮮食的比重為什麼一直提高？",
-     right:"biz",
-     ok:"公司年報有原始財務數字，WARC 行銷個案與 MIC-AISP 產業報告會幫你拆解策略背後的邏輯。",
-     off:"完整的財報與產業報告多半是要付費的商品。網路上免費找得到的，常常是新聞轉述的二手數字，而且通常只挑了最聳動的那一個，脈絡跟原始定義容易掉失 😅"},
+     off:"網路上的數字通常沒有出處、年份不齊、定義也不明—你查到的「一家店服務 2000 人」，到底是哪一年？算的是哪一種店？統計庫給你的是完整數列，加上它是怎麼算出來的。"},
     {q:"有沒有人完整地寫過便利商店與臺灣消費社會的關係呢？",
      right:"book",
      ok:"館藏目錄與電子書平台裡有專書。一本書是一個完整的論證，不是幾段結論～",
-     off:"AI 給你的多半是拼湊出來的段落。一本專書從頭到尾的推論過程、它怎麼一步一步說服你——那個東西沒辦法被摘要，只能自己讀。"}
+     off:"AI 給你的多半是拼湊出來的段落。一本專書從頭到尾的推論過程、它怎麼一步一步說服你—那個東西沒辦法被摘要，只能自己讀。"}
   ],
   lesson:"Google 到得了門口，全文常在門後",
-  debrief:"這關最想讓你看到的是：<b>你的問題會決定資料在哪裡</b>，而圖書館採購的東西，大多是網路上系統性拿不到的。<br><br>期刊論文、引文紀錄、學位論文、老報紙、長期統計數列、數位典藏的史料、付費的財報與產業報告、判決全文、一整本書——這九類都不是「搜尋一下就有」的東西。它們要嘛沒有被數位化上網，要嘛上了網但要付費，要嘛零散到沒辦法系統性使用。<br><br>🔺 這也正是 AI 在這些題目上特別容易亂說話的原因：完整內容不在它讀得到的範圍，它就只能靠零星片段去猜～",
+  debrief:"這關最想讓你看到的是：<b>你的問題會決定資料在哪裡</b>，而圖書館採購的東西，大多是網路上系統性拿不到的。<br><br>期刊論文、引文紀錄、學位論文、老報紙、長期統計數列、數位典藏的史料、付費的財報與產業報告、判決全文、一整本書—這九類都不是「搜尋一下就有」的東西。它們要嘛沒有被數位化上網，要嘛上了網但要付費，要嘛零散到沒辦法系統性使用。<br><br>🔺 這也正是 AI 在這些題目上特別容易亂說話的原因：完整內容不在它讀得到的範圍，它就只能靠零星片段去猜～",
   links:["db","ebook","g2","elearn"],
   egg:{title:"🍙 小彩蛋：7-ELEVEN 這個名字是怎麼來的？",
-       body:"它其實是營業時間！這家店 1927 年在美國德州成立時叫做 Southland Ice Company，後來的門市叫 Tote'm Stores（客人可以「拎」著東西走）。1946 年改名為 7-Eleven，用來強調當時很了不起的營業時間——早上 7 點到晚上 11 點，一週七天 ⏰<br><br>那 24 小時是什麼時候開始的呢？公司自己的說法是 1963 年，德州一家門市因為球賽散場人潮太多、乾脆沒關門，結果生意好到後來就不關了 🏈<br><br>不過請注意：這是企業自己的敘述喔！好聽的故事不一定是完整的故事——這正好是第 5 關會談到的事。",
+       body:"它其實是營業時間！這家店 1927 年在美國德州成立時叫做 Southland Ice Company，後來的門市叫 Tote'm Stores（客人可以「拎」著東西走）。1946 年改名為 7-Eleven，用來強調當時很了不起的營業時間—早上 7 點到晚上 11 點，一週七天 ⏰<br><br>那 24 小時是什麼時候開始的呢？公司自己的說法是 1963 年，德州一家門市因為球賽散場人潮太多、乾脆沒關門，結果生意好到後來就不關了 🏈<br><br>不過請注意：這是企業自己的敘述喔！好聽的故事不一定是完整的故事—這正好是第 5 關會談到的事。",
        go:"👉 那臺灣的第一家 24 小時門市又是什麼時候呢？這種問題 AI 大概只會給你含糊的年份，但報紙資料庫可以讓你直接讀到當年的報導～"}
 };
 
@@ -466,14 +491,17 @@ const L3={
     {id:"and",label:"用 AND 串概念",desc:"不同概念之間才用 AND，這是把主題交集出來的動作。"},
     {id:"par",label:"用括號分組",desc:"沒有括號的話，資料庫的運算順序可能跟你想的不一樣喔！"}
   ],
+  answer:`(便利商店 OR 便利超商 OR "convenience store*") AND (區位 OR 空間分布 OR "spatial distribution") AND (家戶所得 OR 社經地位 OR "socioeconomic status")`,
+  answerNote:"每個<b>概念</b>用括號包起來、同義詞之間用 <b>OR</b> 展開、概念之間用 <b>AND</b> 交集，中英文都放進去。這只是<b>其中一種好答案</b>—你不一定要跟它一模一樣，只要把握「同義詞 OR、概念 AND、中英雙軌」的原則就對了。",
   lesson:"檢索是來回調整，不是一次到位",
-  debrief:"檢索結果太少的時候，大部分人的第一個念頭是「這題沒人做過」——但那通常是<b>關鍵字的問題，不是題目的問題</b>。三個最常見的漏洞：用了<b>口語</b>而不是學術用語（超商 vs 便利商店）、只放<b>一個講法</b>漏掉同義詞、只用<b>英文</b>把中文文獻整批漏掉。<br><br>⚠️ 但上面那六條規則只是<b>範例，不是標準答案</b>——條件加太多反而常常什麼都查不到 😅",
-  more:"真正的檢索是<b>來來回回調整</b>的過程：<br>· 太多筆（幾千筆）→ 加條件、限縮年代或類型<br>· 太少筆（個位數）→ 拿掉一個概念、放寬同義詞、把片語拆開<br>· 剛剛好（幾十到一兩百筆）→ 開始讀<br><br>💡 還有一個超好用的技巧：<b>先找到一篇很對味的文章，去偷它的關鍵字</b>。看它的作者關鍵字、摘要裡反覆出現的詞、被歸在哪些主題分類底下——那些就是這個領域真正在用的語言。用這些詞再查一輪，往往會打開一個全新的世界 🌏<br><br>所以別把檢索當成「一次輸入正確答案」，它比較像調收音機：轉一下、聽一下、再轉一下～",
+  debrief:"檢索結果太少的時候，大部分人的第一個念頭是「這題沒人做過」—但那通常是<b>關鍵字的問題，不是題目的問題</b>。三個最常見的漏洞：用了<b>口語</b>而不是學術用語（超商 vs 便利商店）、只放<b>一個講法</b>漏掉同義詞、只用<b>英文</b>把中文文獻整批漏掉。<br><br>⚠️ 但上面那六條規則只是<b>範例，不是標準答案</b>—條件加太多反而常常什麼都查不到 😅",
+  more:"真正的檢索是<b>來來回回調整</b>的過程：<br>· 太多筆（幾千筆）→ 加條件、限縮年代或類型<br>· 太少筆（個位數）→ 拿掉一個概念、放寬同義詞、把片語拆開<br>· 剛剛好（幾十到一兩百筆）→ 開始讀<br><br>💡 還有一個超好用的技巧：<b>先找到一篇很對味的文章，去偷它的關鍵字</b>。看它的作者關鍵字、摘要裡反覆出現的詞、被歸在哪些主題分類底下—那些就是這個領域真正在用的語言。用這些詞再查一輪，往往會打開一個全新的世界 🌏<br><br>所以別把檢索當成「一次輸入正確答案」，它比較像調收音機：轉一下、聽一下、再轉一下～",
   tool:{title:"🔎 順帶認識一個工具：Scopus AI",
-    body:`<p>如果你覺得組檢索式有點麻煩，其實還有另一條路——<b>Scopus AI 可以讓你直接用白話文問問題</b>，例如：「便利商店的密度跟社經地位有什麼關聯？」它會整理出一段回答給你。</p>
-      <p>關鍵在於：它的答案是<b>建立在 Scopus 這個引文資料庫實際收錄的文獻上</b>，每一個說法都可以點回原始文章。這跟你平常用的通用型 AI 很不一樣——通用 AI 是「憑印象生成」，所以會編出不存在的文獻；Scopus AI 則是「在一個真實的文獻庫裡找答案」，所以它引的東西是真的存在的 ✅</p>
+    body:`<p>如果你覺得組檢索式有點麻煩，其實還有另一條路—<b>Scopus AI 可以讓你直接用白話文問問題</b>，例如：「便利商店的密度跟社經地位有什麼關聯？」它會整理出一段回答給你。</p>
+      <p>關鍵在於：它的答案是<b>建立在 Scopus 這個引文資料庫實際收錄的文獻上</b>，每一個說法都可以點回原始文章。這跟你平常用的通用型 AI 不太一樣—通用 AI 是「憑印象生成」，比較容易編出不存在的文獻；Scopus AI 是「在一個明確的文獻庫裡找答案」，所以它引的東西<b>比較容易查證</b>（但這不等於它不會出錯，往下看）。</p>
       <p>它還有 <b>Deep research</b> 功能，可以針對一個主題做比較完整的探索，並產出符合學術格式的報告，很適合用來快速建立對一個陌生領域的概觀。</p>
-      <span class="warn-h">⚠️ 但是——這個「但是」非常重要</span>
+      <p style="margin-top:10px"><a href='https://nccu.primo.exlibrisgroup.com/permalink/886NCCU_INST/1sca1pf/alma991018099049705721' target='_blank' rel='noopener'>🔗 從政大圖書館進入 Scopus AI</a>　·　<a href='https://lib.video.nccu.edu.tw/media/244' target='_blank' rel='noopener'>🎬 看 Scopus AI 教學影片</a></p>
+      <span class="warn-h">⚠️ 但是—這個「但是」非常重要</span>
       <p><b>AI 摘要還是會出錯。</b>不管你用的是哪一種 AI、背後的資料庫有多權威，拿到資料之後<b>務必回到出處看原文</b>。要通過三關才算數：</p>
       <ol>
         <li><b>這筆資料真的存在嗎？</b>（點開連結，確認文章確實在那個期刊、那個卷期）</li>
@@ -483,44 +511,45 @@ const L3={
       <p style="margin-top:10px">三關都過了，才是可信、值得寫進你報告裡的資料 💪</p>`},
   links:["ailib","aitool","g3"],
   egg:{title:"🍙 小彩蛋：其實有人幫你整理好「標準用詞」了",
-       body:"你可能想問：我怎麼知道學術界都用哪個詞？<br><br>好消息是——<b>很多資料庫都有自己的索引典（Thesaurus）或主題詞表</b>，那是專門的編目人員長年整理出來的控制詞彙，會告訴你：這個概念的標準用詞是什麼、有哪些同義詞、上位詞跟下位詞是什麼 📖<br><br>這是圖書館蠻硬核的看家本領，也是 AI 目前比較缺乏的東西：AI 是用「哪些字常一起出現」來猜，索引典則是有人真的坐下來決定「這兩個詞講的是同一件事」。",
+       body:"你可能想問：我怎麼知道學術界都用哪個詞？<br><br>好消息是—<b>很多資料庫都有自己的索引典（Thesaurus）或主題詞表</b>，那是專門的編目人員長年整理出來的控制詞彙，會告訴你：這個概念的標準用詞是什麼、有哪些同義詞、上位詞跟下位詞是什麼 📖<br><br>政大訂購的資料庫裡就有現成的：<b>ProQuest Central</b> 和 <b>EBSCOhost</b> 都內建 Thesaurus／主題詞表，進去檢索介面找找看就有。<br><br>這是圖書館蠻硬核的看家本領，也是 AI 目前比較缺乏的東西：AI 是用「哪些字常一起出現」來猜，索引典則是有人真的坐下來決定「這兩個詞講的是同一件事」。",
        go:"👉 下次進資料庫時，找找看有沒有 Thesaurus、主題詞、或「關聯詞推薦」的按鈕，會替你省下大把時間～"}
 };
 
 const L4={
   eyebrow:"第 4 關 · 挑文獻",
   title:"4️⃣ 查到 218 筆，但你只讀得完三篇",
-  lede:"關鍵字修好之後，一次查到 218 筆 🎉 然後你就傻住了——時間只夠讀三篇。<br><br>這時候要看的不只是標題，還有：<b>誰寫的、哪一年、發表在哪裡、是什麼類型的東西</b>。這些資訊不是裝飾，它們是整個學術社群留下來的線索～<br><br>🔺 請選出你會<b>優先閱讀</b>的三篇（可複選）",
+  lede:"關鍵字修好之後，一次查到 218 筆 🎉 然後你就傻住了—時間只夠讀三篇。<br><br>這時候要看的不只是標題，還有：<b>誰寫的、哪一年、發表在哪裡、是什麼類型的東西</b>。這些資訊不是裝飾，它們是整個學術社群留下來的線索～<br><br>⚠️ 注意：這五篇裡有一篇是 <b>AI 提供給你的</b>，可能根本不存在！請一邊判斷相關性、一邊當心 AI 造假—<b>選出最值得優先閱讀的三篇</b>（可複選）",
   note:"以下前四筆都是真實存在、可以在資料庫裡查到的文獻（歡迎自己去查！）；第五筆則是 AI 提供給你的。",
+  warmWhy:"它的格式完美無缺—作者、年份、篇名、期刊、卷期、頁碼一應俱全，《都市與計劃》也真的是一本存在的 TSSCI 期刊。但仔細看：前面四筆你都能點進資料庫看到摘要或全文，只有這一筆，你是「聽 AI 說的」。這種違和感，就是你要練的第一層直覺 ⚠️（別擔心，下一關會真的帶你查證它）",
   papers:[
     {ti:"〈臺灣便利商店之空間分布及其區域差異：1987-2016年〉",
      au:"蘇祥慶（2017）。《環境與世界》，32 期，頁 23-59。",
-     meta:["中文期刊論文","2017 年","有 DOI","華藝可查"],hot:1,v:"ok",
-     why:"<b>該讀。</b>這是最貼近你題目的一篇：它用空間自相關與熱區分析處理 1987-2016 年全臺便利商店的分布，還討論了通路數與人口密度、年齡、職業別之間的關聯——你想做的「密度 × 人口 × 社經」，它已經先走過一遍了。<br><br>⚠️ 注意一件事：這篇是<b>中文期刊論文</b>，通用 AI 通常給不出來——這類中文文獻很少進到它的訓練資料，就算它能上網，華藝的全文也在付費牆後面。這種文獻主要還是得靠圖書館。"},
+     meta:["中文期刊論文","2017 年","有 DOI","華藝可查"],v:"ok",
+     why:"<b>該讀。</b>這是最貼近你題目的一篇：它用空間自相關與熱區分析處理 1987-2016 年全臺便利商店的分布，還討論了通路數與人口密度、年齡、職業別之間的關聯—你想做的「密度 × 人口 × 社經」，它已經先走過一遍了。<br><br>⚠️ 注意一件事：這篇是<b>中文期刊論文</b>，通用 AI 通常給不出來—這類中文文獻很少進到它的訓練資料，就算它能上網，華藝的全文也在付費牆後面。這種文獻主要還是得靠圖書館。"},
     {ti:"〈超商空間分散度與大台北地區房價之空間分析〉",
      au:"彭蒂菁（2021）。《應用經濟論叢》，110 期，頁 51-104。",
      meta:["中文期刊論文","2021 年","空間計量方法"],hot:0,v:"ok",
-     why:"<b>該讀。</b>它的依變項是房價不是所得，主題看起來偏了一點——但它處理的正是<b>大台北地區的超商密度</b>，而且用了三種空間計量模型。<br><br>你讀它主要是為了<b>研究方法</b>：怎麼操作型定義「密度」（住宅 100 公尺內的超商總數）、怎麼處理空間自相關。這種「主題稍偏、方法可借」的文獻，常常比主題一模一樣的還有用喔 🛠️"},
+     why:"<b>該讀。</b>它的依變項是房價不是所得，主題看起來偏了一點—但它處理的正是<b>大台北地區的超商密度</b>，而且用了三種空間計量模型。<br><br>你讀它主要是為了<b>研究方法</b>：怎麼操作型定義「密度」（住宅 100 公尺內的超商總數）、怎麼處理空間自相關。這種「主題稍偏、方法可借」的文獻，常常比主題一模一樣的還有用喔 🛠️"},
     {ti:"The Potential Role of Social Security: A Study on Enhancing Community Safety",
      au:"Liu, H.-R., &amp; Chen, F.-H. (2025). Buildings, 15(17), 3122.",
      meta:["國際期刊","2025 最新","開放取用 OA","同儕審查"],hot:0,v:"ok",
-     why:"<b>該讀，而且它是這批裡最新的。</b>2025 年 9 月刊出，用文獻分析加上城鄉的訪談，談臺灣便利商店怎麼變成社區的社會安全網。它替你的題目補上「密度之外，這些店還在做什麼」這一層。<br><br>兩個附加價值：第一，作者之一任職於<b>政大勞工研究所</b>，有興趣可以直接去看他的其他著作；第二，這篇是<b>開放取用（OA）</b>，任何人都能免費下載全文——這也是為什麼 AI 比較容易找到它，卻找不到上面那兩篇中文的 🔍"},
+     why:"<b>該讀，而且它是這批裡最新的。</b>2025 年 9 月刊出，用文獻分析加上城鄉的訪談，談臺灣便利商店怎麼變成社區的社會安全網。它替你的題目補上「密度之外，這些店還在做什麼」這一層。<br><br>兩個附加價值：第一，作者之一任職於<b>政大勞工研究所</b>，有興趣可以直接去看他的其他著作；第二，這篇是<b>開放取用（OA）</b>，任何人都能免費下載全文—這也是為什麼 AI 比較容易找到它，卻找不到上面那兩篇中文的 🔍"},
     {ti:"〈醫療可及性是否左右房價？機器學習之迴歸樹及隨機森林模型的應用〉",
      au:"彭蒂菁（2021）。《應用經濟論叢》，109 期，頁 115-167。",
      meta:["中文期刊論文","2021 年","同一位作者"],hot:0,v:"warn",
-     why:"<b>可以看，但不是現在。</b>這是第 2 筆那位作者的另一篇，方法上很有參考價值，但主題是醫療設施不是超商。<br><br>🔺 這裡有個很實用的技巧：當你發現某位作者跟你的題目特別合拍，就去<b>引文資料庫查他的完整著作清單</b>，常常能挖到一整串相關研究。不過也別因為作者對就照單全收——<b>相關性通常要放在其他線索前面</b>。"},
+     why:"<b>可以看，但不是現在。</b>這是第 2 筆那位作者的另一篇，方法上很有參考價值，但主題是醫療設施不是超商。<br><br>🔺 這裡有個很實用的技巧：當你發現某位作者跟你的題目特別合拍，就去<b>引文資料庫查他的完整著作清單</b>，常常能挖到一整串相關研究。不過也別因為作者對就照單全收—<b>相關性通常要放在其他線索前面</b>。"},
     {ti:"〈便利商店密度與地方社會變遷：以臺北市為例〉",
      au:"AI 推薦的一筆書目：林思穎（2022）。《都市與計劃》，48(3)，213-240。",
      meta:["來自 AI","尚未查證"],hot:0,v:"no",
-     why:"<b>先別讀，先驗！</b>格式完美——作者、年份、篇名、期刊、卷期、頁碼一應俱全，而且《都市與計劃》還真的是一本存在的 TSSCI 期刊。<br><br>但有沒有注意到：前面四筆你都可以點進資料庫看到摘要或全文，只有這一筆，你是「聽 AI 說的」⚠️<br><br>這是最狡猾的一種幻覺——<b>把虛構的文章放進真實存在的期刊裡</b>。你查期刊，期刊在；但翻到那一卷那一期的目次，就會發現沒有這一篇。下一關我們就來處理它。"}
+     why:"<b>先別讀，先驗！</b>格式完美—作者、年份、篇名、期刊、卷期、頁碼一應俱全，而且《都市與計劃》還真的是一本存在的 TSSCI 期刊。<br><br>但有沒有注意到：前面四筆你都可以點進資料庫看到摘要或全文，只有這一筆，你是「聽 AI 說的」⚠️<br><br>這是最狡猾的一種幻覺—<b>把虛構的文章放進真實存在的期刊裡</b>。你查期刊，期刊在；但翻到那一卷那一期的目次，就會發現沒有這一篇。下一關我們就來處理它。"}
   ],
   lesson:"引用，是一場已經進行很久的對話",
   debrief:"為什麼要看年代、作者、期刊、文獻類型？因為<b>學術是一場長期的公開對話</b>，這些就是它留下的痕跡：<br><br>🔺 <b>年代</b>｜新的看現況、老的看理論源頭，兩種都讀。<br>🔺 <b>作者</b>｜同一個人一直發表某題目，去看他的著作清單常有收穫。<br>🔺 <b>期刊與類型</b>｜同儕審查是第一層過濾；學位論文、產業報告、預印本都能用，但引用時要說清楚是哪一種。<br>🔺 <b>被引用次數</b>｜要去引文資料庫才查得到，別當品質分數（老文章自然多，被引用也可能是被反駁 😅）。",
-  more:"💡 <b>找到一篇很對味的文章，別只讀它一篇——用它來「滾雪球」：</b><br>🔺 <b>往回滾</b>：翻它的<b>參考文獻清單</b>，追到這個題目的理論源頭。<br>🔺 <b>往前滾</b>：到引文資料庫查<b>「被引用」</b>，找到後來更新、甚至反駁它的研究。<br><br>一往回一往前，一篇就能滾出一整串。這也是為什麼<b>第一篇要找對</b>——起點對了才滾得到對的地方。<br><br>而你引用文獻時，其實也是在說話：「我的論證站在這篇上面」或「我要挑戰這篇」。<b>引用不是裝飾，是你把自己接進這場對話的方式</b> 💬 所以引錯、或引了不存在的東西，等於在對話裡說了一句沒人聽得懂的話。",
+  more:"💡 <b>找到一篇很對味的文章，別只讀它一篇—用它來「滾雪球」：</b><br>🔺 <b>往回滾</b>：翻它的<b>參考文獻清單</b>，追到這個題目的理論源頭。<br>🔺 <b>往前滾</b>：到引文資料庫查<b>「被引用」</b>，找到後來更新、甚至反駁它的研究。<br><br>一往回一往前，一篇就能滾出一整串。這也是為什麼<b>第一篇要找對</b>—起點對了才滾得到對的地方。",
   links:["aicheck","review","g4"],
 
   egg:{title:"🍙 小彩蛋：史上被引用最多的論文，講的是什麼？",
-       body:"如果引用次數代表重要性，那你猜史上被引用最多的論文在講什麼？相對論？DNA 雙螺旋？<br><br>都不是 😲《Nature》在 2014 年做過一次統計，排在最前面的是 Lowry 等人 1951 年發表的一篇——<b>教你怎麼測量溶液裡的蛋白質濃度</b>的方法論文，被引用超過 30 萬次。<br><br>原因很單純：全世界的生化實驗室每天都要用它。所以被引用次數其實比較接近「<b>有多少人用得到</b>」，而不是「有多重要」。<br><br>這也剛好提醒我們：任何單一指標都不適合當成唯一標準，包括引用次數 🔍",
+       body:"如果引用次數代表重要性，那你猜史上被引用最多的論文在講什麼？相對論？DNA 雙螺旋？<br><br>都不是 😲《Nature》在 2014 年做過一次統計，排在最前面的是 Lowry 等人 1951 年發表的一篇—<b>教你怎麼測量溶液裡的蛋白質濃度</b>的方法論文，被引用超過 30 萬次。<br><br>原因很單純：全世界的生化實驗室每天都要用它。所以被引用次數其實比較接近「<b>有多少人用得到</b>」，而不是「有多重要」。<br><br>這也剛好提醒我們：任何單一指標都不適合當成唯一標準，包括引用次數 🔍",
        go:"👉 想看看你的領域裡誰被引用最多嗎？Scopus、Web of Science 跟華藝 ACI 都可以直接排序～"}
 };
 
@@ -534,9 +563,9 @@ const L5={
      q:"只能做一件事的話，哪一個最有效呢？",
      opts:[
        {t:"把整句篇名貼進 Google Scholar 搜尋。",v:"warn",
-        why:"值得做，十秒鐘的事而已！不過 Google Scholar 對中文期刊的收錄並不完整——查不到，不等於不存在喔。它給得起警訊，但給不起結論。"},
+        why:"值得做，十秒鐘的事而已！不過 Google Scholar 對中文期刊的收錄並不完整—查不到，不等於不存在喔。它給得起警訊，但給不起結論。"},
        {t:"先確認《都市與計畫研究學刊》這本期刊存不存在，再翻 48 卷 3 期的目次核對頁碼。",v:"ok",
-        why:"這是中文書目最硬的一步！期刊存不存在、有沒有出到 48 卷、那幾頁登的是不是這一篇——三個問題一次解決。在華藝線上圖書館直接查期刊名，就能一路下鑽到該刊的卷期目次～"},
+        why:"這是中文書目最硬的一步！期刊存不存在、有沒有出到 48 卷、那幾頁登的是不是這一篇—三個問題一次解決。在華藝線上圖書館直接查期刊名，就能一路下鑽到該刊的卷期目次～"},
        {t:"請 AI 補一個 DOI 給你。",v:"no",
         why:"它會很配合地生一個給你 😅 DOI 是一串可以被編出來的字，除非你真的點開它、看它解析到這篇文章。"},
        {t:"寫 email 問作者本人。",v:"no",
@@ -557,33 +586,33 @@ const L5={
      ]}
   ],
   lesson:"先驗最容易否證的那一格",
-  debrief:"這兩小題背後是同一個習慣：<b>先問這個宣稱屬於哪一類，再決定去哪裡驗</b>。書目可以一格一格拆開驗，從最好查的開始（期刊存不存在，遠比作者是誰好查）；「當時的人怎麼看」只有當年的報紙能作數。<br><br>⚠️ 順帶一提：中文書目的幻覺率比英文高，因為 AI 讀到的中文學術資料本來就少得多。<br><br>🔺 把第 3 關的<b>三關驗證</b>再放一次，這是整個遊戲最想讓你帶走的：<br><br><b>① 這筆資料真的存在嗎？</b><br><b>② 這位作者真的這麼說嗎？</b><br><b>③ 作者的說法本身有證據支持嗎？</b><br><br>就算用 Scopus AI 這種綁在真實文獻庫上的工具，第 ② ③ 關<b>還是得自己走一遍</b>——工具能確認文獻存在，但不保證轉述沒走樣，更不能替你判斷論證站不站得住。下一關就來看轉述怎麼悄悄走樣。",
+  debrief:"這兩小題背後是同一個習慣：<b>先問這個宣稱屬於哪一類，再決定去哪裡驗</b>。書目可以一格一格拆開驗，從最好查的開始（期刊存不存在，遠比作者是誰好查）；「當時的人怎麼看」只有當年的報紙能作數。<br><br>⚠️ 順帶一提：中文書目的幻覺率比英文高，因為 AI 讀到的中文學術資料本來就少得多。<br><br>🔺 把第 3 關的<b>三關驗證</b>再放一次，這是整個遊戲最想讓你帶走的：<br><br><b>① 這筆資料真的存在嗎？</b><br><b>② 這位作者真的這麼說嗎？</b><br><b>③ 作者的說法本身有證據支持嗎？</b><br><br>就算用 Scopus AI 這種綁在真實文獻庫上的工具，第 ② ③ 關<b>還是得自己走一遍</b>—工具能確認文獻存在，但不保證轉述沒走樣，更不能替你判斷論證站不站得住。下一關就來看轉述怎麼悄悄走樣。",
   links:["aicheck","db"],
   egg:{title:"🍙 小彩蛋：有位律師因為沒做這一步，被法院罰錢了",
-       body:"2023 年，美國紐約南區聯邦法院審理一件單純的空服車撞傷膝蓋的求償案（Mata v. Avianca）。原告律師在書狀裡引用了六件判例——結果對造律師跟法官都<b>怎麼樣都找不到</b>，因為那六件案子全部都是 ChatGPT 生出來的 😱<br><br>最讓人捏一把冷汗的是：律師其實有「查證」過。他問了 ChatGPT「這些案子是真的嗎？」而 ChatGPT 很有自信地回答「是的」。<br><br>不過法官最後裁罰 5,000 美元的理由，其實不只是用了 AI——而是<b>被指出問題之後還繼續堅持、甚至補交了同樣是編造的判決摘錄</b>。法官的重點很清楚：用什麼工具是你的自由，但每一份送進法院的文件，你都要為它負責。",
+       body:"2023 年，美國紐約南區聯邦法院審理一件單純的空服車撞傷膝蓋的求償案（Mata v. Avianca）。原告律師在書狀裡引用了六件判例—結果對造律師跟法官都<b>怎麼樣都找不到</b>，因為那六件案子全部都是 ChatGPT 生出來的 😱<br><br>最讓人捏一把冷汗的是：律師其實有「查證」過。他問了 ChatGPT「這些案子是真的嗎？」而 ChatGPT 很有自信地回答「是的」。<br><br>不過法官最後裁罰 5,000 美元的理由，其實不只是用了 AI—而是<b>被指出問題之後還繼續堅持、甚至補交了同樣是編造的判決摘錄</b>。法官的重點很清楚：用什麼工具是你的自由，但每一份送進法院的文件，你都要為它負責。",
        go:"👉 這個案子在報紙資料庫跟法學資料庫都查得到，兩邊的寫法還很不一樣，很值得對照看看喔！"}
 };
 
 const L6={
   eyebrow:"第 6 關 · 讀懂",
   title:"6️⃣ 這份摘要沒有說謊，它只是悄悄挪了一點點",
-  lede:"你決定先讀第 4 關那篇 2025 年的新論文。時間不夠，先請 AI 幫你摘要吧～<br><br>讀起來完全合理，而且正好支持你想寫的東西⋯⋯<b>這種時候其實最危險喔！</b><br><br>🔺 請對照上面的原文摘要，把<b>與原文不符</b>的句子劃出來～",
-  cite:'Liu, H.-R., &amp; Chen, F.-H. (2025). The Potential Role of Social Security: A Study on Enhancing Community Safety. <i>Buildings</i>, 15(17), 3122.　本文為開放取用（CC BY），以下為原文摘要之中譯。',
-  orig:"本研究針對社區安全的疑慮，深入檢視臺灣的便利商店作為社會安全管道的角色。透過既有文獻的分析，以及在城市與鄉村兩種場域進行的非正式對話式訪談，本研究說明這些商業據點如何在地方社區中承擔起強化社會安全網的角色。研究發現，便利商店在緊急事件與天然災害發生時提供了第一線的協助，並透過日常必要服務的提供，促成社區的凝聚感。此外，本研究也指出便利商店的既有特性如何有助於社區的永續：例如環保作為的推行與交通碳排的減少，不只提升社區韌性，也提升了地方空間的韌性。再者，便利商店在地化的僱用策略，對地方經濟與在地就業具有正面效果——它提供了離家近的工作機會，進而提升居民的安全感與經濟穩定。這些發現顯示便利商店在社區安全與發展上具有尚未被開發的潛力。本研究的貢獻在於以實證研究凸顯便利商店的多重角色，並為政策制定者提供參考，以便將零售網絡的正面特性更好地整合進社會安全體系。",
-  need:"劃出 3 句",
+  lede:"你決定先讀第 4 關那篇 2025 年的新論文。時間不夠，先請 AI 幫你摘要吧～<br><br>讀起來完全合理，而且正好支持你想寫的東西⋯⋯<b>這種時候其實最危險喔！</b><br><br>🔺 上面原文摘要裡，我已經把幾個關鍵句<u>加了底線</u>方便你對照。下面四句 AI 摘要裡，<b>只有一句是忠實反映原文的</b>—請把<b>與原文相符的那一句</b>找出來、點選它～",
+  cite:'Liu, H.-R., &amp; Chen, F.-H. (2025). The Potential Role of Social Security: A Study on Enhancing Community Safety. <i>Buildings</i>, 15(17), 3122.　本文為開放取用（CC BY），以下為原文摘要之中譯。（關鍵句已加底線）',
+  orig:"本研究針對社區安全的疑慮，深入檢視臺灣的便利商店作為社會安全管道的角色。<u>透過既有文獻的分析，以及在城市與鄉村兩種場域進行的非正式對話式訪談</u>，本研究說明這些商業據點如何在地方社區中承擔起強化社會安全網的角色。研究發現，便利商店在緊急事件與天然災害發生時提供了第一線的協助，並<u>透過日常必要服務的提供，促成社區的凝聚感</u>。此外，本研究也指出便利商店的既有特性如何有助於社區的永續：例如環保作為的推行與交通碳排的減少，不只提升社區韌性，也提升了地方空間的韌性。再者，便利商店在地化的僱用策略，對地方經濟與在地就業具有正面效果—它提供了離家近的工作機會，進而提升居民的安全感與經濟穩定。這些發現顯示便利商店在社區安全與發展上具有尚未被開發的潛力。本研究的貢獻在於以實證研究凸顯便利商店的多重角色，並<u>為政策制定者提供參考，以便將零售網絡的正面特性更好地整合進社會安全體系</u>。",
+  need:"四句裡只有一句忠實，請選出來",
   items:[
     {t:"本研究透過文獻分析與城鄉的非正式對話式訪談，探討臺灣便利商店在社會安全網中的角色，發現它們在緊急事件與天然災害時提供第一線協助。",
      bad:false,why:"這句很忠實！方法、場域、核心發現都對得上，也沒有多說什麼～"},
     {t:"研究以問卷調查 2,000 名便利商店顧客，統計分析其安全感受。",
-     bad:true,why:"<b>方法被改寫了。</b>原文用的是<u>非正式對話式訪談</u>，是質性方法；這句話卻把它說成了大樣本的量化問卷 ⚠️<br><br>而且注意：那個「2,000 名」是憑空生出來的——原文摘要根本沒有寫受訪人數。AI 遇到摘要沒交代的細節，很容易自己補一個「聽起來合理」的數字。"},
+     bad:true,why:"<b>方法被改寫了。</b>原文用的是<u>非正式對話式訪談</u>，是質性方法；這句話卻把它說成了大樣本的量化問卷 ⚠️<br><br>而且注意：那個「2,000 名」是憑空生出來的—原文摘要根本沒有寫受訪人數。AI 遇到摘要沒交代的細節，很容易自己補一個「聽起來合理」的數字。"},
     {t:"研究證實便利商店密度越高的地區，犯罪率越低。",
-     bad:true,why:"<b>憑空生出變項與因果。</b>原文從頭到尾沒有測量過犯罪率，也沒有做任何密度與犯罪的統計檢定。它談的是居民的<b>安全感</b>與社區支持功能——這跟「犯罪率」是兩件完全不同的事。"},
+     bad:true,why:"<b>憑空生出變項與因果。</b>原文從頭到尾沒有測量過犯罪率，也沒有做任何密度與犯罪的統計檢定。它談的是居民的<b>安全感</b>與社區支持功能—這跟「犯罪率」是兩件完全不同的事。"},
     {t:"研究建議政府應強制所有便利商店設置防災物資儲備點。",
      bad:true,why:"<b>強度誇大。</b>原文的政策建議方向是<u>強化並制度化</u>便利商店與公共安全機關的合作，而不是<u>強制設置</u>什麼設施。<br><br>一個「強制」，就把一份研究建議變成了它沒說過的政策主張 😳"}
   ],
   lesson:"AI 讀的可能只有摘要",
-  debrief:"這四句話裡，<b>沒有任何一句是憑空捏造的假事實</b>，所以查核工具抓不到，你也很難察覺。摘要真正的風險是幾種悄悄的位移：<b>方法失真、變項與因果被生出來、強度誇大、範圍放大</b>。<br><br>⚠️ 還有更根本的一件事：<b>AI 很多時候讀到的就只有摘要</b>。全文常在付費牆後、或是它拿不到的 PDF，於是它只能拿兩三百字的摘要去生成「這篇說了什麼」——摘要沒交代的地方，就是它最容易自己補的地方。所以摘要可以請 AI 生，但<b>方法跟結論請自己打開全文讀</b>。",
-  more:"你剛剛應該有發現：那句「2,000 名顧客」之所以會冒出來，正是因為<b>原文摘要並沒有寫受訪人數</b>（要看全文的方法章節才知道）。<br><br>🔺 這代表兩件事：<br>· <b>作者的摘要寫得好不好，會直接影響 AI 摘要的品質。</b>摘要越簡略，AI 補得越多、錯得越離譜。<br>· <b>就算摘要寫得很好，AI 本身還是會有幻覺。</b>兩個風險是疊加的，不是二選一。<br><br>這也是為什麼圖書館要花錢買全文——摘要免費，但研究真正的內容在全文裡。",
+  debrief:"這四句話裡，<b>沒有任何一句是憑空捏造的假事實</b>，所以查核工具抓不到，你也很難察覺。摘要真正的風險是幾種悄悄的位移：<b>方法失真、變項與因果被生出來、強度誇大、範圍放大</b>。<br><br>⚠️ 還有更根本的一件事：<b>AI 很多時候讀到的就只有摘要</b>。全文常在付費牆後、或是它拿不到的 PDF，於是它只能拿兩三百字的摘要去生成「這篇說了什麼」—摘要沒交代的地方，就是它最容易自己補的地方。所以摘要可以請 AI 生，但<b>方法跟結論請自己打開全文讀</b>。",
+  more:"你剛剛應該有發現：那句「2,000 名顧客」之所以會冒出來，正是因為<b>原文摘要並沒有寫受訪人數</b>（要看全文的方法章節才知道）。<br><br>🔺 這代表兩件事：<br>· <b>作者的摘要寫得好不好，會直接影響 AI 摘要的品質。</b>摘要越簡略，AI 補得越多、錯得越離譜。<br>· <b>就算摘要寫得很好，AI 本身還是會有幻覺。</b>兩個風險是疊加的，不是二選一。<br><br>這也是為什麼圖書館要花錢買全文—摘要免費，但研究真正的內容在全文裡。",
   links:["aicheck","review"]
 };
 
@@ -593,22 +622,21 @@ const L7={
   lede:"報告明天就要交了 😰 以下五件事你都想過。<br><br>🔺 請選出<b>不應該做</b>的（可複選）～",
   items:[
     {t:"請 AI 產出報告的章節架構，然後直接照著這個架構把報告寫完。",v:"warn",
-     why:"<b>這是灰區，而且比你想的更需要小心 🤔</b><br><br>政大的〈生成式人工智慧運用簡要原則〉允許用 AI 產生初步架構，但要求你重新檢視它的合宜性——關鍵就在「重新檢視」這四個字。<br><br>AI 的章節架構是<b>根據它讀過的資料歸納出來的</b>，而它讀過的資料未必涵蓋你這個題目真正的文獻樣貌（想想第 4 關講的：中文文獻與付費全文，多半不在它讀得到的範圍裡）。它給你的常常是一個「看起來很像論文」的通用骨架，而不是<b>你這批文獻真正呈現出來的樣子</b>。<br><br>更重要的是：<b>自己組織架構，本身就是一種能力</b>。把讀到的東西分類、找出彼此的關係、決定先講什麼後講什麼——這個過程就是批判性思考跟資料解讀的訓練。直接照抄架構，等於把最值得練的那一段跳過去了。<br><br>💡 建議：先自己列一版架構，再拿 AI 的版本來對照，看看它想到什麼你沒想到、你有什麼它沒有。<b>當成對照組，不要當成答案</b>。"},
+     why:"<b>這是灰區，而且比你想的更需要小心 🤔</b><br><br>政大的〈生成式人工智慧運用簡要原則〉允許用 AI 產生初步架構，但要求你重新檢視它的合宜性—關鍵就在「重新檢視」這四個字。<br><br>AI 的章節架構是<b>根據它讀過的資料歸納出來的</b>，而它讀過的資料未必涵蓋你這個題目真正的文獻樣貌（想想第 4 關講的：中文文獻與付費全文，多半不在它讀得到的範圍裡）。它給你的常常是一個「看起來很像論文」的通用骨架，而不是<b>你這批文獻真正呈現出來的樣子</b>。<br><br>更重要的是：<b>自己組織架構，本身就是一種能力</b>。把讀到的東西分類、找出彼此的關係、決定先講什麼後講什麼—這個過程就是批判性思考跟資料解讀的訓練。直接照抄架構，等於把最值得練的那一段跳過去了。<br><br>💡 建議：先自己列一版架構，再拿 AI 的版本來對照，看看它想到什麼你沒想到、你有什麼它沒有。<b>當成對照組，不要當成答案</b>。"},
     {t:"為了讓 AI 幫忙讀，一口氣把某本期刊整年份的論文 PDF 全部下載下來餵給它。",v:"no",
-     why:"<b>這是紅線 ⛔</b><br><br>資料庫廠商會<b>偵測異常的下載行為</b>：短時間內大量、連續、整卷整期地下載，系統會判定為「系統性下載（systematic downloading）」，這違反授權合約。<br><br>後果不是只有你被停權而已——出版社通常直接<b>封鎖整個學校的 IP</b>，全校師生一起被停掉，恢復要走冗長的申訴程序 😱<br><br>想用 AI 輔助閱讀，請一次處理一兩篇，並優先挑開放取用（OA）的文獻。"},
+     why:"<b>這是紅線 ⛔</b><br><br>資料庫廠商會<b>偵測異常的下載行為</b>：短時間內大量、連續、整卷整期地下載，系統會判定為「系統性下載（systematic downloading）」，這違反授權合約。<br><br>後果不是只有你被停權而已—出版社通常直接<b>封鎖整個學校的 IP</b>，全校師生一起被停掉，恢復要走冗長的申訴程序 😱<br><br>想用 AI 輔助閱讀，請一次處理一兩篇，並優先挑開放取用（OA）的文獻。<br><br>📖 想知道怎麼用資料庫才不會踩線，可以看這份說明：<a href='https://mookrue.github.io/db-use-term/' target='_blank' rel='noopener'>避免侵權的資料庫使用方式</a>"},
     {t:"把自己寫好的段落貼給 AI，請它幫忙潤飾語句。",v:"ok",
      why:"可以～這是修辭層次的協助，論證還是你的。一樣建議在報告裡揭露使用方式。"},
     {t:"把訪談逐字稿（含店長姓名與門市名稱）上傳 AI 做主題分析。",v:"no",
      why:"<b>這也是紅線 ⛔</b> 這些是他人的個人資料，而且訪談通常伴隨著研究倫理的承諾。要用 AI 協助分析，必須先完成去識別化，並確認知情同意書有涵蓋這種處理方式。"},
     {t:"直接引用一段 AI 生成的文字，並在文中標註出自 ChatGPT。",v:"warn",
-     why:"<b>這是灰區 🤔</b> APA、Chicago、MLA 都已經訂了 AI 的引用格式，所以技術上做得到。但問題不在格式——AI 生成的內容<b>沒有可追溯的來源</b>，也沒有辦法被別人重新找到、重新檢驗。用它來說明「AI 會怎麼回答這一題」是合理的，用來當事實證據就不是了。而且各科老師的規定差很多，務必先問過再用！"}
+     why:"<b>這是灰區 🤔</b> APA、Chicago、MLA 都已經訂了 AI 的引用格式，所以技術上做得到。但問題不在格式—AI 生成的內容<b>沒有可追溯的來源</b>，也沒有辦法被別人重新找到、重新檢驗。用它來說明「AI 會怎麼回答這一題」是合理的，用來當事實證據就不是了。而且各科老師的規定差很多，務必先問過再用！"}
   ],
   lesson:"授權與個資是紅線，其餘要自己把關",
-  debrief:"大部分「能不能用 AI」的爭議，其實都是<b>揭露</b>問題——說清楚哪裡用了、怎麼用的，通常就沒事了。<br><br>但有兩條線跟揭不揭露無關：<b>資料庫的授權</b>（尤其是大量下載）與<b>他人的個人資料</b>。這兩件事一旦做了，事後補說明也救不回來 ⛔<br><br>🔺 至於架構與文字這種灰區，判斷標準很單純：<b>這件事如果由 AI 代勞，我會失去什麼？</b>潤飾句子，失去的只是幾分鐘；決定整份報告怎麼組織，失去的是這門課最值得學的東西。",
-  more:"🔺 建議這樣收尾：在報告最後附一小段 AI 使用說明，寫下工具與版本、使用時間、用在哪些任務、以及完整的指令。花你五分鐘，但爭議發生的時候，它就是你的證據～<br><br>📌 <b>還有一件請務必做到：不同課程、不同指導老師對 AI 的規定差異很大</b>，有的完全開放、有的只允許用在特定環節、有的明文禁止。學校的原則是最低標準，<b>課堂老師或指導教授的規定才是你要遵守的那一條線</b>。動筆前先問清楚，比事後解釋省力太多。<br><br>💡 至於引用格式、揭露段落怎麼寫，圖書館的<b>生成式 AI 使用指引</b>有專門的〈AI 學術倫理〉一頁，點下面的連結就能看～",
+  debrief:"大部分「能不能用 AI」的爭議，其實都是<b>揭露</b>問題—說清楚哪裡用了、怎麼用的，通常就沒事了。<br><br>但有兩條線跟揭不揭露無關：<b>資料庫的授權</b>（尤其是大量下載）與<b>他人的個人資料</b>。這兩件事一旦做了，事後補說明也救不回來 ⛔<br><br>🔺 至於架構與文字這種灰區，判斷標準很單純：<b>這件事如果由 AI 代勞，我會失去什麼？</b>潤飾句子，失去的只是幾分鐘；決定整份報告怎麼組織，失去的是這門課最值得學的東西。<br><br>🔺 建議這樣收尾：在報告最後附一小段 AI 使用說明，寫下工具與版本、使用時間、用在哪些任務、以及完整的指令。花你五分鐘，但爭議發生的時候，它就是你的證據～<br><br>📌 <b>還有一件請務必做到：不同課程、不同指導老師對 AI 的規定差異很大</b>，有的完全開放、有的只允許用在特定環節、有的明文禁止。學校的原則是最低標準，<b>課堂老師或指導教授的規定才是你要遵守的那一條線</b>。動筆前先問清楚，比事後解釋省力太多。<br><br>💡 至於引用格式、揭露段落怎麼寫，圖書館的<b>生成式 AI 使用指引</b>有專門的〈AI 學術倫理〉一頁，點下面的連結就能看～",
   links:["aiethic","g5","course"],
   egg:{title:"🍙 小彩蛋：AI 想當共同作者，被期刊退貨了",
-       body:"2022 年底到 2023 年初，陸續有幾篇論文真的把 ChatGPT 列為共同作者，學術界一陣譁然。2023 年 1 月，《Nature》與《Science》幾乎同時表態：<b>AI 不能掛名作者</b>。<br><br>《Nature》給的理由，跟這整個遊戲想講的事情一模一樣——<b>「作者身分本身就意味著要為這份研究負責，而 AI 工具沒有辦法承擔這種責任。」</b><br><br>它不會被追究、不會被撤稿、不會失去學術聲譽。所以那份責任，最後還是回到你身上 💪<br><br>（《Nature》同時也說：用了 LLM 沒關係，但要在方法或誌謝裡寫清楚。這跟我們剛剛講的「揭露」是同一件事～）",
+       body:"2022 年底到 2023 年初，陸續有幾篇論文真的把 ChatGPT 列為共同作者，學術界一陣譁然。2023 年 1 月，《Nature》與《Science》幾乎同時表態：<b>AI 不能掛名作者</b>。<br><br>《Nature》給的理由，跟這整個遊戲想講的事情一模一樣—<b>「作者身分本身就意味著要為這份研究負責，而 AI 工具沒有辦法承擔這種責任。」</b><br><br>它不會被追究、不會被撤稿、不會失去學術聲譽。所以那份責任，最後還是回到你身上 💪<br><br>（《Nature》同時也說：用了 LLM 沒關係，但要在方法或誌謝裡寫清楚。這跟我們剛剛講的「揭露」是同一件事～）",
        go:"👉 想看各家期刊的實際規定嗎？到期刊官網的 Author Guidelines 或投稿須知裡都找得到喔～"}
 };
 
@@ -678,7 +706,7 @@ function renderIntro(){
   <div class="tally"><span>1️⃣ 定題</span><span>2️⃣ 找證據</span><span>3️⃣ 關鍵字</span><span class="half">上半場 ⌇ 下半場</span><span>4️⃣ 挑文獻</span><span>5️⃣ 查證</span><span>6️⃣ 讀懂</span><span>7️⃣ 交件</span></div>
   <p class="hint">🔺 七個關卡、每關 20 分，滿分 140。<br>
   🔺 完整玩一輪大約 <b>50 分鐘</b>，不用一次玩完！<b>進度會自動存在這台裝置的瀏覽器裡</b>，關掉頁面之後回來，可以從上次完成的關卡接著玩 💾<br>
-  🔺 分成兩個半場：<b>上半場（1～3 關）</b>學怎麼找資料，<b>下半場（4～7 關）</b>學怎麼識破 AI 造假的文獻、動過手腳的摘要——想分兩次玩的話，第 3 關結束是最好的中場休息點 ☕<br>
+  🔺 分成兩個半場：<b>上半場（1～3 關）</b>學怎麼找資料，<b>下半場（4～7 關）</b>學怎麼識破 AI 造假的文獻、動過手腳的摘要—想分兩次玩的話，第 3 關結束是最好的中場休息點 ☕<br>
   🔺 每一關結束都有一個超商小彩蛋 🍙，最後還有一份專屬於你的研究體質分析！<br>
   🔺 不管你是哪個系的，這九種資料以後你都會用到其中好幾種～</p>
   ${linkBox(["course","elearn","guide","aiguide"],"✳️ 先收藏這幾個連結，等一下會用到")}
@@ -745,7 +773,10 @@ function renderL1(){
 
 /* ================= 02 證據 ================= */
 function renderL2(){
-  const L=L2;let idx=0,hit=0;const keys=Object.keys(FAM);const wrong=[];
+  const L=L2;let idx=0,hit=0;
+  // 選項只放這關會問到的類型，不放永遠不是答案的干擾項
+  const keys=[...new Set(L.needs.map(n=>n.right))];
+  const wrong=[];
   el.innerHTML=head(L)+`<div class="l2bar" id="prog"></div><div id="body"></div>`;
   step();
   function prog(){
@@ -757,11 +788,15 @@ function renderL2(){
     if(idx>=L.needs.length){
       const g=Math.round(hit/L.needs.length*20);add(g);
       document.getElementById("body").innerHTML=
-        `<div class="card card--a"><span class="src">✅ 你這份報告會用到的九個地方</span>
-          <p style="margin:0 0 4px;font-size:15px;color:var(--ink2)">九題你答對了 <b>${hit}</b> 題～下面這九張檔案卡，是每一類資源的速查表：</p></div>
+        `<div class="card card--a"><span class="src">✅ 你這份報告會用到的地方</span>
+          <p style="margin:0 0 4px;font-size:15px;color:var(--ink2)">${L.needs.length} 題你答對了 <b>${hit}</b> 題～下面這幾張檔案卡，是每一類資源的速查表：</p></div>
          <div class="profs">${keys.map(k=>profCard(k)).join("")}</div>
+         <div class="egg" style="border-color:var(--accent);background:#FFF7ED"><span class="lb">➕ 還有三類「進階資源」，看主題再用</span>
+          <p>上面六類幾乎每份報告都會用到。另外還有三類比較看主題—如果你的題目剛好碰到，它們會非常關鍵：</p>
+          <div style="margin-top:10px">${profCard("biz")}${profCard("hist")}${profCard("law")}</div>
+          <p class="go" style="margin-top:10px">👉 例如這份超商報告，想算「展店的獲利模式」就要用商學、想寫「超商出現前的雜貨店」就要用史料、想寫「店員工時爭議」就要用法學～</p></div>
          <div class="egg" style="border-color:var(--ink)"><span class="lb">📢 這些都只是舉例喔！</span>
-          <p>這關的分類只是想幫你養成「先想證據長什麼樣子」的習慣，不是要你背哪個庫屬於哪一類。很多資料庫其實同時橫跨好幾類——同一個華藝，可以查期刊、學位論文，也能查電子書 😊</p>
+          <p>這關的分類只是想幫你養成「先想證據長什麼樣子」的習慣，不是要你背哪個庫屬於哪一類。很多資料庫其實同時橫跨好幾類—同一個華藝，可以查期刊、學位論文，也能查電子書 😊</p>
           <p class="go">👉 直接去資料庫總覽逛逛，用學科或類型篩選，你會發現還有超多好東西！</p></div>`
         +debrief(L,g,1)+`<button class="btn" onclick="next()">來擬關鍵字 →</button>`;
       return;
@@ -835,9 +870,12 @@ function renderL3(){
       `<div class="card"><span class="src">檢查結果 ${hit} / 6</span>`+
       L.rules.map(r=>`<div class="rule-row ${res[r.id]?"hit":"no"}"><span class="mk">${res[r.id]?"✓":"✕"}</span>
         <span><b>${r.label}</b><small>${r.desc}</small></span></div>`).join("")+`</div>`
+      +`<div class="card card--a"><span class="src">✅ 參考答案：一組組好的檢索式</span>
+        <div class="query-ans">${L.answer}</div>
+        <p style="margin:10px 0 0;font-size:14px;color:var(--muted);line-height:1.8">${L.answerNote}</p></div>`
       +debrief(L,g,2)
       +`<div class="egg" style="border-color:var(--green);background:#EBFAF4"><span class="lb" style="color:var(--green)">☕ 上半場結束！中場休息一下</span>
-        <p>你已經走完「怎麼找資料」的三關了 👏 你的進度已經自動存好，<b>現在關掉頁面、改天再回來也沒問題</b>。<br><br>下半場（4～7 關）是這個遊戲最精采的部分——你要開始<b>抓 AI 說謊</b>：假的文獻、動過手腳的摘要、看起來很專業其實不存在的引用⋯⋯準備好了就繼續吧！</p></div>`
+        <p>你已經走完「怎麼找資料」的三關了 👏 你的進度已經自動存好，<b>現在關掉頁面、改天再回來也沒問題</b>。<br><br>下半場（4～7 關）是這個遊戲最精采的部分—你要開始<b>抓 AI 說謊</b>：假的文獻、動過手腳的摘要、看起來很專業其實不存在的引用⋯⋯準備好了就繼續吧！</p></div>`
       +`<button class="btn" onclick="next()">進入下半場，開始抓包 →</button>`;
   };
 }
@@ -846,7 +884,6 @@ function renderL3(){
 function renderL4(){
   const L=L4;const picked=new Set();
   el.innerHTML=head(L)+`
-    <div class="note" style="border-style:solid;border-color:var(--line);background:#F7F6FC;color:var(--ink2)">📌 ${L.note}</div>
     <div class="papers" id="p">${L.papers.map((p,i)=>
       `<button class="paper" data-i="${i}"><span class="ti">${p.ti}</span><span class="au">${p.au}</span>
         <span class="meta">${p.meta.map((m,j)=>`<span class="${p.hot&&j===1?"hot":""}">${m}</span>`).join("")}</span></button>`).join("")}
@@ -878,33 +915,36 @@ function renderL4(){
 
 /* ================= 05 查證 ================= */
 function renderL5(){
-  const L=L5;let s=0,pts=0;
-  el.innerHTML=head(L)+`<div id="body"></div>`;
-  step();
-  function step(){
-    if(s>=L.subs.length){
-      const g=Math.round(pts/(L.subs.length*10)*20);add(g);
-      document.getElementById("body").innerHTML=debrief(L,g,4)+`<button class="btn" onclick="next()">開始讀文獻 →</button>`;
-      return;
-    }
-    const S=L.subs[s];
-    document.getElementById("body").innerHTML=`
-      <div class="card card--a"><span class="src">${S.head} · ${s+1} / ${L.subs.length}</span>
-        <p style="margin:0;font-size:16px">${S.quote}</p></div>
-      <div class="card"><span class="src">${S.q}</span>
-        <div class="opts" id="o">${S.opts.map((o,i)=>
-          `<button class="opt" data-i="${i}"><span class="k">${AB[i]}</span><span>${o.t}</span></button>`).join("")}</div>
-      </div><div id="fb"></div>`;
-    document.querySelectorAll("#o .opt").forEach(b=>b.onclick=()=>{
+  const L=L5;let pts=0;const answered=L.subs.map(()=>false);
+  el.innerHTML=head(L)
+    +L.subs.map((S,s)=>`
+      <div class="card card--a" data-s="${s}"><span class="src">${S.head} · ${s+1} / ${L.subs.length}</span>
+        <p style="margin:0 0 10px;font-size:16px">${S.quote}</p>
+        <div class="card" style="margin:0"><span class="src">${S.q}</span>
+          <div class="opts" id="o${s}">${S.opts.map((o,i)=>
+            `<button class="opt" data-i="${i}"><span class="k">${AB[i]}</span><span>${o.t}</span></button>`).join("")}</div>
+        </div>
+        <div id="fb${s}"></div>
+      </div>`).join("")
+    +`<div id="done"></div>`;
+  L.subs.forEach((S,s)=>{
+    document.querySelectorAll(`#o${s} .opt`).forEach(b=>b.onclick=()=>{
+      if(answered[s])return;
+      answered[s]=true;
       const i=+b.dataset.i,o=S.opts[i];
-      document.querySelectorAll("#o .opt").forEach((x,j)=>{
+      document.querySelectorAll(`#o${s} .opt`).forEach((x,j)=>{
         x.disabled=true;x.classList.add(S.opts[j].v==="ok"?"good":S.opts[j].v==="warn"?"warn":"bad");});
       pts+=o.v==="ok"?10:o.v==="warn"?6:2;
-      document.getElementById("fb").innerHTML=
-        explain(S.opts,AB,`🤔 你選了 ${AB[i]}，一起看看每個選項`)
-        +`<button class="btn" id="nx">${s+1<L.subs.length?"下一樣東西 →":"兩樣都驗完囉 →"}</button>`;
-      document.getElementById("nx").onclick=()=>{s++;step();};
+      document.getElementById(`fb${s}`).innerHTML=
+        explain(S.opts,AB,`🤔 你選了 ${AB[i]}，一起看看每個選項`);
+      if(answered.every(Boolean))finish();
     });
+  });
+  function finish(){
+    const g=Math.round(pts/(L.subs.length*10)*20);add(g);
+    document.getElementById("done").innerHTML=
+      debrief(L,g,4)+`<button class="btn" onclick="next()">開始讀文獻 →</button>`;
+    document.getElementById("done").scrollIntoView&&document.getElementById("done").scrollIntoView({behavior:"smooth",block:"nearest"});
   }
 }
 
@@ -915,28 +955,30 @@ function renderL6(){
     <div class="card"><span class="src">📄 原文摘要</span>
       <p style="font-size:13.5px;color:var(--muted);margin:0 0 12px;line-height:1.7">${L.cite}</p>
       <div class="orig">${L.orig}</div></div>
-    <div class="card card--a"><span class="src">🤖 AI 生成的摘要 · 點句子就能劃線</span><div id="st"></div></div>
-    <p class="hint" id="cnt">已劃 0 句 · ${L.need}</p>
+    <div class="card card--a"><span class="src">🤖 AI 生成的摘要 · 點出「與原文相符」的那一句</span><div id="st"></div></div>
+    <p class="hint" id="cnt">${L.need}</p>
     <button class="btn" id="go" disabled>提交</button><div id="out"></div>`;
   const box=document.getElementById("st");
   box.innerHTML=L.items.map((it,i)=>`<button class="stmt" data-i="${i}"><b style="font-family:'IBM Plex Mono',monospace;color:var(--muted);margin-right:8px">${AB[i]}</b>${it.t}</button>`).join("");
   const go=document.getElementById("go");
   box.querySelectorAll(".stmt").forEach(b=>b.onclick=()=>{
     const i=+b.dataset.i;
-    picked.has(i)?(picked.delete(i),b.classList.remove("marked")):(picked.add(i),b.classList.add("marked"));
-    document.getElementById("cnt").textContent=`已劃 ${picked.size} 句 · ${L.need}`;
-    go.disabled=picked.size===0;});
+    // 單選：點一句就取代前一句
+    picked.clear();box.querySelectorAll(".stmt").forEach(x=>x.classList.remove("marked"));
+    picked.add(i);b.classList.add("marked");
+    document.getElementById("cnt").textContent=`已選 ${AB[i]} · ${L.need}`;
+    go.disabled=false;});
   go.onclick=()=>{
-    let hit=0,miss=0;
+    const chosen=[...picked][0];
     box.querySelectorAll(".stmt").forEach(b=>{
       const i=+b.dataset.i,it=L.items[i];b.disabled=true;b.classList.remove("marked");
-      if(picked.has(i)&&it.bad){b.classList.add("marked");hit++;}
-      else if(picked.has(i)&&!it.bad){b.classList.add("miss","marked");miss++;}
-      else if(!picked.has(i)&&it.bad){b.classList.add("missed");}});
-    const bad=L.items.filter(x=>x.bad).length;
-    const g=Math.max(0,Math.round((hit-miss*.5)/bad*20));add(g);go.remove();
+      if(!it.bad)b.classList.add("good");                 // 相符的用綠色標出
+      else if(picked.has(i))b.classList.add("miss");});   // 選錯的用紅色
+    const right=!L.items[chosen].bad;
+    const g=right?20:0;add(g);go.remove();
     document.getElementById("out").innerHTML=
-      explain(L.items,AB,`🤔 你劃了 ${[...picked].sort().map(i=>AB[i]).join("、")||"（沒有劃）"}，一起逐句對照`)
+      `<div class="fb ${right?"good":"bad"}"><div class="lesson">${right?"✅ 答對了！這句最忠實":`這句其實被動過手腳～相符的是 ${AB[L.items.findIndex(x=>!x.bad)]}`}</div></div>`
+      +explain(L.items.map(it=>({t:it.t,v:it.bad?"no":"ok",why:it.why})),AB,`🤔 一起逐句對照（綠色＝相符、其餘都被悄悄改過）`)
       +debrief(L,g,5)+`<button class="btn" onclick="next()">準備收尾 →</button>`;
   };
 }
@@ -973,16 +1015,16 @@ const FORM="https://docs.google.com/forms/d/e/1FAIpQLSfBRo1vsptXgR7PPzUmug9ZyXdp
 const STG=["定題","找證據","關鍵字","挑文獻","查證","讀懂","交件"];
 const PERSONA=[
  {n:"提問型玩家",e:"🧭",d:"你很擅長把一團模糊的好奇心，磨成一個真的問得出口、也答得出來的問題。這是研究裡最難教、也最值錢的一步。"},
- {n:"地圖型玩家",e:"🗺️",d:"你腦中有一張資源地圖——聽到一個問題，你會先想「這種東西住在哪裡」，而不是急著打開搜尋框。"},
+ {n:"地圖型玩家",e:"🗺️",d:"你腦中有一張資源地圖—聽到一個問題，你會先想「這種東西住在哪裡」，而不是急著打開搜尋框。"},
  {n:"檢索型玩家",e:"🔑",d:"你懂得用資料庫聽得懂的語言講話，也知道結果太少的時候該回頭調整關鍵字，而不是下結論說沒人做過。"},
  {n:"鑑定型玩家",e:"💎",d:"面對一長串搜尋結果，你看得出哪幾篇值得花時間。你不會被漂亮的數字牽著走，也不會忽略一篇不起眼的學位論文。"},
  {n:"查核型玩家",e:"🔍",d:"格式漂亮的東西騙不了你。你知道要從最容易否證的那一格開始驗，也知道一手資料也可能有立場。"},
- {n:"校對型玩家",e:"📐",d:"你對文字的敏感度很高，抓得到轉述裡那些悄悄的位移——強度、範圍、方法、因果。這是很少人具備的能力。"},
+ {n:"校對型玩家",e:"📐",d:"你對文字的敏感度很高，抓得到轉述裡那些悄悄的位移—強度、範圍、方法、因果。這是很少人具備的能力。"},
  {n:"倫理型玩家",e:"🛡️",d:"你分得清楚哪些是紅線、哪些只是揭露問題。這代表你不只想把報告寫完，還想把它寫得站得住腳。"}
 ];
 const FIXUP=[
  {t:"題目再縮一點",d:"下次動筆前，先問自己三個問題：研究對象是誰？什麼跟什麼有關？證據從哪裡來？三題都答得出來，才算定題完成。",k:"g1"},
- {t:"多逛幾種資源",d:"下次卡住的時候，先想想你要的證據長什麼樣子——是一段書中的文字、一張有出處的統計圖、一份判決，還是一篇同儕審查論文？答案會決定你該去哪裡。",k:"g2"},
+ {t:"多逛幾種資源",d:"下次卡住的時候，先想想你要的證據長什麼樣子—是一段書中的文字、一張有出處的統計圖、一份判決，還是一篇同儕審查論文？答案會決定你該去哪裡。",k:"g2"},
  {t:"關鍵字多試幾組",d:"記得檢索是來回調整的過程。太多筆就加條件、太少筆就放寬同義詞，也可以從一篇很對味的文章去偷它的關鍵字。",k:"g3"},
  {t:"練習判斷文獻",d:"下次看到搜尋結果，先看年代、作者、期刊與文獻類型，再決定要不要花時間讀。也別忘了去引文資料庫看看它被誰引用過。",k:"g4"},
  {t:"養成查證的順序",d:"拿到任何一筆 AI 給的資料，先問三件事：這筆資料真的存在嗎？作者真的這麼說嗎？他的說法有證據支持嗎？",k:"aicheck"},
@@ -992,22 +1034,46 @@ const FIXUP=[
 function loyaltyCard(){
   const done=got.filter(Boolean).length;
   const full=done===7;
+  const total=lvScore.reduce((a,b)=>a+(b||0),0);
+  // 甜甜圈圓餅圖：每關一段弧，長度 = 該關得分佔滿分140的比例
+  const R=52,C=2*Math.PI*R,MAX=140;
+  let acc=0;
+  const segs=STG.map((nm,i)=>{
+    const val=lvScore[i]||0;
+    const frac=val/MAX;
+    const len=frac*C, gap=C-len;
+    const off=-acc*C;
+    acc+=frac;
+    return val>0
+      ? `<circle cx="70" cy="70" r="${R}" fill="none" stroke="${HUE[i]}" stroke-width="20"
+           stroke-dasharray="${len} ${gap}" stroke-dashoffset="${off}" transform="rotate(-90 70 70)"></circle>`
+      : "";
+  }).join("");
+  const legend=STG.map((nm,i)=>{
+    const val=lvScore[i]||0;
+    return `<div class="pie-leg-row">
+      <span class="pie-dot" style="background:${val>0?HUE[i]:'var(--line)'}"></span>
+      <span class="pie-leg-nm">${i+1}·${nm}</span>
+      <span class="pie-leg-val">${got[i]?val:"—"}<i>/20</i></span></div>`;
+  }).join("");
   return `<div class="loyalty">
     <div class="loyalty-top">
       <div>
-        <div class="loyalty-brand">🏪 集點卡 · LOYALTY CARD</div>
+        <div class="loyalty-brand">🏪 集點卡 · SCORE CARD</div>
         <div class="loyalty-sub">政大圖書館　叮咚！歡迎光臨資料庫</div>
       </div>
       <div class="loyalty-no">DATE<br><b>${todayStr}</b></div>
     </div>
-    <div class="loyalty-grid">${STG.map((nm,i)=>
-      got[i]
-        ? `<div class="cell filled"><span class="ink" style="--c:${HUE[i]}"><b>${lvScore[i]||0}</b><i>分</i></span><span class="cell-nm">${i+1}·${nm}</span></div>`
-        : `<div class="cell"><span class="ink-empty">${i+1}</span><span class="cell-nm">${nm}</span></div>`
-      ).join("")}
-      <div class="cell reward ${full?"win":""}">
-        <span class="ink-reward">${full?"🎁":"？"}</span>
-        <span class="cell-nm">${full?"集滿囉":"集滿有禮"}</span>
+    <div class="pie-wrap">
+      <div class="pie-chart">
+        <svg viewBox="0 0 140 140" width="180" height="180">
+          <circle cx="70" cy="70" r="52" fill="none" stroke="var(--line)" stroke-width="20"></circle>
+          ${segs}
+        </svg>
+        <div class="pie-center"><b>${total}</b><i>/ 140</i></div>
+      </div>
+      <div class="pie-legend">${legend}
+        <div class="pie-leg-row pie-leg-total"><span class="pie-dot" style="background:${full?'var(--accent)':'var(--muted)'}"></span><span class="pie-leg-nm">${full?"🎁 七關集滿":"已完成 "+done+" / 7 關"}</span><span class="pie-leg-val"><b>${total}</b></span></div>
       </div>
     </div>
     <div class="loyalty-foot">
@@ -1037,7 +1103,7 @@ function renderEnd(){
   const t=[
     {min:124,s:"這份報告寫得出來！",e:"🎯",x:"七個卡點你都知道怎麼過了～剩下的只是時間跟咖啡而已 ☕"},
     {min:96,s:"再修一輪就能交",e:"📎",x:"判斷大致上很穩！最常失分的地方通常是：太晚才發現關鍵字或題目還沒調到位～"},
-    {min:62,s:"目前卡在中間",e:"🧩",x:"方向抓對了！不過查證的順序還可以更省時間——記得盡量從最容易否證的那一格開始喔～"},
+    {min:62,s:"目前卡在中間",e:"🧩",x:"方向抓對了！不過查證的順序還可以更省時間—記得盡量從最容易否證的那一格開始喔～"},
     {min:0,s:"歡迎先來一趟圖書館",e:"🚪",x:"沒關係的，這七關本來就是設計來讓人卡的 😄 再走一次看看，這次每一步都先問自己：我要的證據長什麼樣子？"}
   ].find(x=>score>=x.min);
   el.innerHTML=`
@@ -1053,39 +1119,39 @@ function renderEnd(){
     <p class="lede" style="font-size:14px;color:var(--muted);text-align:center;margin-top:18px">↓ 想再多帶走一點的話，下面三塊可以展開看 ↓</p>
 
     <details class="fold"><summary>🤖 那 AI 到底好用在哪？</summary>
-    <p class="lede">這個遊戲一直在提醒你「對 AI 保持警覺」，但這不代表要你別用它——<b>剛好相反</b>。查證之所以重要，正是因為 AI 真的好用、你真的會想用它。<br><br>下面這幾種用法，是<b>台灣（教育部學術倫理資源中心彙整臺大、臺師大、中山、暨南、臺科大等校）與國際頂尖大學（哈佛、MIT、牛津、劍橋）的 AI 指引，都明確列為「學生可以用 AI 輔助學習」的方向</b>——也就是說，這些用法在國內外多數學校都算 OK。不過每一項指引也都附了但書，我一起寫在後面 👇</p>
+    <p class="lede">這個遊戲一直在提醒你「對 AI 保持警覺」，但這不代表要你別用它—<b>剛好相反</b>。查證之所以重要，正是因為 AI 真的好用、你真的會想用它。<br><br>下面這幾種用法，是<b>台灣（教育部學術倫理資源中心彙整臺大、臺師大、中山、暨南、臺科大等校）與國際頂尖大學（哈佛、MIT、牛津、劍橋）的 AI 指引，都明確列為「學生可以用 AI 輔助學習」的方向</b>—也就是說，這些用法在國內外多數學校都算 OK。不過每一項指引也都附了但書，我一起寫在後面 👇</p>
     <div class="ai-good">
-      <div class="ai-row"><span class="ai-ic">💡</span><div><b>發想議題與靈感</b>｜卡在不知道要研究什麼的時候，把問題情境、關鍵字、你的需求丟給 AI，讓它給你多元觀點來刺激想法——研究題目、寫作切入點的<b>腦力激盪</b>是它的強項。<br><span class="ai-but">但書：它給的是靈感的起點，不是結論。真正的題目還是要你自己收斂、自己判斷可不可行。</span></div></div>
-      <div class="ai-row"><span class="ai-ic">🧠</span><div><b>練習批判思考</b>｜把 AI 當成一個「跟你看法不同的人」，請它從別的角度回應你的論點，練習換位思考、也練習「問對問題」。你會在來回問答中把自己的想法講得更清楚。<br><span class="ai-but">但書：AI 的回答取決於你怎麼問，問錯方向就會得到有偏見或錯誤的答案——它是陪練，不是裁判。</span></div></div>
-      <div class="ai-row"><span class="ai-ic">🗂️</span><div><b>整理與摘要資料</b>｜把<b>你自己找到、讀過</b>的資料交給 AI，請它幫你重新整理、分段、摘要，建立你的個人筆記庫，確實能省時間。<br><span class="ai-but">但書：官方特別提醒——AI 整理過的內容通常不附來源、也不一定正確，一定要放回其他工具或原始網站<b>交叉比對</b>再用。</span></div></div>
+      <div class="ai-row"><span class="ai-ic">💡</span><div><b>發想議題與靈感</b>｜卡在不知道要研究什麼的時候，把問題情境、關鍵字、你的需求丟給 AI，讓它給你多元觀點來刺激想法—研究題目、寫作切入點的<b>腦力激盪</b>是它的強項。<br><span class="ai-but">但書：它給的是靈感的起點，不是結論。真正的題目還是要你自己收斂、自己判斷可不可行。</span></div></div>
+      <div class="ai-row"><span class="ai-ic">🧠</span><div><b>練習批判思考</b>｜把 AI 當成一個「跟你看法不同的人」，請它從別的角度回應你的論點，練習換位思考、也練習「問對問題」。你會在來回問答中把自己的想法講得更清楚。<br><span class="ai-but">但書：AI 的回答取決於你怎麼問，問錯方向就會得到有偏見或錯誤的答案—它是陪練，不是裁判。</span></div></div>
+      <div class="ai-row"><span class="ai-ic">🗂️</span><div><b>整理與摘要資料</b>｜把<b>你自己找到、讀過</b>的資料交給 AI，請它幫你重新整理、分段、摘要，建立你的個人筆記庫，確實能省時間。<br><span class="ai-but">但書：官方特別提醒—AI 整理過的內容通常不附來源、也不一定正確，一定要放回其他工具或原始網站<b>交叉比對</b>再用。</span></div></div>
       <div class="ai-row"><span class="ai-ic">🔤</span><div><b>翻譯與潤飾文字</b>｜你自己寫好的段落，請 AI 幫你翻譯、潤飾語氣、修文法，特別是用非母語寫作的時候。這是各校指引都明確認可的用法。<br><span class="ai-but">但書：語意和情感用詞 AI 未必到位，專業術語也容易翻錯，<b>用字、文法、語意都要你自己再檢查一遍</b>。</span></div></div>
-      <div class="ai-row"><span class="ai-ic">✏️</span><div><b>練習改寫與除錯</b>｜把一段文獻丟給 AI 生成一個版本，再跟你自己的改寫版<b>對照</b>，分析差異優缺點——這是官方建議的「練習改寫摘寫技巧」的方法。程式碼的除錯與校對同理。<br><span class="ai-but">但書：這是拿來<b>練習與對照</b>的，不是直接把 AI 改出來的當成你的作業交出去。最終內容你要親自讀過、負起責任。</span></div></div>
-      <div class="ai-row"><span class="ai-ic">🔒</span><div><b>（國際共同紅線）別餵它機密與個資</b>｜哈佛、MIT、牛津的指引都特別強調同一件事：<b>不要把機密資料、還沒發表的研究、別人的個人資料輸入公開的 AI 工具</b>。你打進去的東西，在預設設定下並不是私密的。這一點呼應第 7 關——訪談逐字稿要去識別化後才能用。<br><span class="ai-but">但書：這不是「小心就好」，而是多數學校的明確規定；牽涉他人個資時，先確認你的知情同意書涵蓋這種處理方式。</span></div></div>
+      <div class="ai-row"><span class="ai-ic">✏️</span><div><b>練習改寫與除錯</b>｜把一段文獻丟給 AI 生成一個版本，再跟你自己的改寫版<b>對照</b>，分析差異優缺點—這是官方建議的「練習改寫摘寫技巧」的方法。程式碼的除錯與校對同理。<br><span class="ai-but">但書：這是拿來<b>練習與對照</b>的，不是直接把 AI 改出來的當成你的作業交出去。最終內容你要親自讀過、負起責任。</span></div></div>
+      <div class="ai-row"><span class="ai-ic">🔒</span><div><b>（國際共同紅線）別餵它機密與個資</b>｜哈佛、MIT、牛津的指引都特別強調同一件事：<b>不要把機密資料、還沒發表的研究、別人的個人資料輸入公開的 AI 工具</b>。你打進去的東西，在預設設定下並不是私密的。這一點呼應第 7 關—訪談逐字稿要去識別化後才能用。<br><span class="ai-but">但書：這不是「小心就好」，而是多數學校的明確規定；牽涉他人個資時，先確認你的知情同意書涵蓋這種處理方式。</span></div></div>
     </div>
-    <p class="lede" style="font-size:15px;color:var(--muted);margin-top:16px">看得出來這些用法有個共同點：<b>AI 負責發想、陪練、整理、修潤，你負責查證、判斷、拍板、負責</b>。它幫你把過程變快，但最後、也最關鍵的一步——確認什麼是對的、為結論負責——始終是你的工作。<br><br>牛津和許多大學的指引，把這件事濃縮成一個你隨時可以問自己的問題：<b>「這份作品，我還是它的作者嗎？」</b>只要答案是肯定的，你就走在安全的線上。<br><br>📌 再提醒一次：以上是「國內外多數學校認可的方向」，但<b>每位老師、每門課的規定仍可能不同</b>，動筆前務必先確認你的課堂規範，並照實揭露你怎麼用了 AI。</p>
+    <p class="lede" style="color:var(--muted);margin-top:16px">看得出來這些用法有個共同點：<b>AI 負責發想、陪練、整理、修潤，你負責查證、判斷、拍板、負責</b>。它幫你把過程變快，但最後、也最關鍵的一步—確認什麼是對的、為結論負責—始終是你的工作。<br><br>牛津和許多大學的指引，把這件事濃縮成一個你隨時可以問自己的問題：<b>「這份作品，我還是它的作者嗎？」</b>只要答案是肯定的，你就走在安全的線上。<br><br>📌 再提醒一次：以上是「國內外多數學校認可的方向」，但<b>每位老師、每門課的規定仍可能不同</b>，動筆前務必先確認你的課堂規範，並照實揭露你怎麼用了 AI。</p>
     </details>
 
     <details class="fold"><summary>💡 七個卡點，其實在練七種判斷力</summary>
     <ol class="list">
-      <li><b>問題是自己問出來的。</b>研究不是找答案，是把一個模糊的好奇心磨成一個真的問得出口、答得出來的問題——而這件事沒有人能代勞。</li>
+      <li><b>問題是自己問出來的。</b>研究不是找答案，是把一個模糊的好奇心磨成一個真的問得出口、答得出來的問題—而這件事沒有人能代勞。</li>
       <li><b>資訊的形狀決定它住在哪裡。</b>老報紙、統計數列、判決、財報、專書各有各的生產方式，先想清楚你要的證據長什麼樣子，路就出現了。</li>
-      <li><b>檢索是探索，不是輸入正確答案。</b>來回調整、從一篇好文章偷關鍵字、順著參考文獻與引用往前往後滾雪球、太多就限縮太少就放寬——這是一個逛的過程。</li>
+      <li><b>檢索是探索，不是輸入正確答案。</b>來回調整、從一篇好文章偷關鍵字、順著參考文獻與引用往前往後滾雪球、太多就限縮太少就放寬—這是一個逛的過程。</li>
       <li><b>權威是被建構出來的，也是看場合的。</b>期刊排名、同儕審查、被引用次數都是線索而不是分數；預印本、學位論文、產業報告各有各的適用場合。而相關性永遠優先。</li>
       <li><b>每一個宣稱都可以被拆開來驗。</b>先驗最容易否證的那一格，別從最難的開始。</li>
-      <li><b>轉述會位移，而位移讀起來最順。</b>方法、範圍、強度、因果——這四個地方最容易被悄悄挪動。</li>
+      <li><b>轉述會位移，而位移讀起來最順。</b>方法、範圍、強度、因果—這四個地方最容易被悄悄挪動。</li>
       <li><b>資訊是有價值的，而價值意味著責任。</b>授權、個資、引用歸屬，都是因為有人付出過代價，才有你現在拿到的東西。</li>
     </ol>
-    <p class="lede" style="font-size:15px;color:var(--muted);margin-top:18px">而貫穿這七件事的是同一句話：<b>學術是一場長期的公開對話</b>。你查文獻，是在聽別人說了什麼；你引用，是在說「我站在這裡」；你標明出處，是讓下一個人能接著往下走。AI 是很好的助手，可以幫你加速、發想、整理，但它沒辦法「替你」進入這場對話——因為<b>能為說出口的話負責的，只有你</b>。而這，也正是它幫不了、卻最值得你自己練的部分。</p>
+    <p class="lede" style="color:var(--muted);margin-top:18px">而貫穿這七件事的是同一句話：<b>學術是一場長期的公開對話</b>。你查文獻，是在聽別人說了什麼；你引用，是在說「我站在這裡」；你標明出處，是讓下一個人能接著往下走。AI 是很好的助手，可以幫你加速、發想、整理，但它沒辦法「替你」進入這場對話—因為<b>能為說出口的話負責的，只有你</b>。而這，也正是它幫不了、卻最值得你自己練的部分。</p>
     </details>
 
     <details class="fold"><summary>🏪 你剛剛逛過的九個地方（資源速查表）</summary>
-    <p class="lede">同一份報告，九種完全不同的資料。它們的完整內容，多半沒辦法用一般 Google 搜尋系統性地取得——有的還沒被數位化、有的需要付費授權、有的雖然查得到書目卻下載不了全文～<br><br>🔺 這九張檔案卡建議截圖存起來！下次寫報告卡住的時候，看看你缺的是哪一段，就知道該往哪裡走了 📎</p>
+    <p class="lede">同一份報告，九種完全不同的資料。它們的完整內容，多半沒辦法用一般 Google 搜尋系統性地取得—有的還沒被數位化、有的需要付費授權、有的雖然查得到書目卻下載不了全文～<br><br>🔺 這九張檔案卡建議截圖存起來！下次寫報告卡住的時候，看看你缺的是哪一段，就知道該往哪裡走了 📎</p>
     <div class="profs">${Object.keys(FAM).map(k=>profCard(k)).join("")}
     </div>
     </details>
 
     <hr class="rule">
-    <p class="lede" style="font-size:14.5px">📢 圖書館每學期都有開設講習課程喔！時間上無法參加的話，也歡迎到 e 學習網自學，多數講習都會錄影～</p>
+    <p class="lede">📢 圖書館每學期都有開設講習課程喔！時間上無法參加的話，也歡迎到 e 學習網自學，多數講習都會錄影～</p>
     ${linkBox(["course","elearn","aiguide","review","guide","db","ebook"],"✳️ 帶著走的連結")}
     <p class="hint" style="margin-top:26px;padding-top:16px;border-top:1px dotted var(--line)">本遊戲的關卡設計，參考了 ACRL《高等教育資訊素養框架》的精神。<br>內容由政大圖書館推廣諮詢組企劃，並在 Anthropic Claude Opus 4.8 的協助下製作。</p>
     <button class="btn" onclick="wipe();renderIntro();window.scrollTo(0,0)">再走一次</button>`;
